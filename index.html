@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matemáticas - Figuras Planas</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#3B82F6">
+    <style>
+        .view {
+            display: none;
+        }
+        .view.active {
+            display: block;
+        }
+        .module-card {
+            transition: transform 0.2s ease-in-out;
+        }
+        .module-card:hover {
+            transform: translateY(-2px);
+        }
+        .tab-button {
+            transition: all 0.2s ease-in-out;
+        }
+        .tab-button.active {
+            background-color: #3B82F6;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div id="app" class="min-h-screen">
+        <!-- Home View -->
+        <div id="homeView" class="view active">
+            <div class="container mx-auto px-4 py-8">
+                <header class="text-center mb-8">
+                    <h1 class="text-4xl font-bold text-blue-600 mb-2">Matemáticas</h1>
+                    <h2 class="text-2xl text-gray-700">Figuras Planas - 6º Grado</h2>
+                </header>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                    <!-- Module Cards will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Module View -->
+        <div id="moduleView" class="view">
+            <div class="container mx-auto px-4 py-8">
+                <!-- Header with back button -->
+                <div class="flex items-center mb-6">
+                    <button id="backButton" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg mr-4 transition-colors">
+                        ← Regresar
+                    </button>
+                    <h1 id="moduleTitle" class="text-3xl font-bold text-blue-600"></h1>
+                </div>
+
+                <!-- Tab Navigation -->
+                <div class="flex mb-6 bg-white rounded-lg shadow-sm overflow-hidden">
+                    <button class="tab-button flex-1 py-3 px-6 text-center font-medium active" data-tab="teoria">
+                        Teoría
+                    </button>
+                    <button class="tab-button flex-1 py-3 px-6 text-center font-medium" data-tab="practica">
+                        Práctica
+                    </button>
+                    <button class="tab-button flex-1 py-3 px-6 text-center font-medium" data-tab="evaluacion">
+                        Evaluación
+                    </button>
+                </div>
+
+                <!-- Content Area -->
+                <div id="moduleContent" class="bg-white rounded-lg shadow-lg p-6 min-h-96">
+                    <!-- Content will be loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Content object structure for all five modules
+        const content = {
+            'suma-angulos': {
+                title: 'Suma de Ángulos',
+                description: 'Aprende sobre la suma de ángulos en triángulos y cuadriláteros',
+                color: 'bg-red-500',
+                teoria: `
+                    <div class="space-y-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Suma de Ángulos Internos</h3>
+                        
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <h4 class="text-xl font-medium text-blue-800 mb-3">Triángulos</h4>
+                            <p class="text-gray-700 mb-3">
+                                La suma de los ángulos internos de cualquier triángulo siempre es <strong>180°</strong>.
+                            </p>
+                            <div class="bg-white p-4 rounded border-l-4 border-blue-500">
+                                <p class="font-medium">Fórmula: α + β + γ = 180°</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-green-50 p-6 rounded-lg">
+                            <h4 class="text-xl font-medium text-green-800 mb-3">Cuadriláteros</h4>
+                            <p class="text-gray-700 mb-3">
+                                La suma de los ángulos internos de cualquier cuadrilátero siempre es <strong>360°</strong>.
+                            </p>
+                            <div class="bg-white p-4 rounded border-l-4 border-green-500">
+                                <p class="font-medium">Fórmula: α + β + γ + δ = 360°</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-yellow-50 p-6 rounded-lg">
+                            <h4 class="text-xl font-medium text-yellow-800 mb-3">¿Por qué es importante?</h4>
+                            <ul class="list-disc list-inside text-gray-700 space-y-2">
+                                <li>Nos ayuda a encontrar ángulos desconocidos</li>
+                                <li>Es fundamental para entender las propiedades de las figuras</li>
+                                <li>Se aplica en construcción y diseño</li>
+                            </ul>
+                        </div>
+                    </div>
+                `,
+                practica: `
+                    <div class="space-y-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Práctica Interactiva</h3>
+                        <p class="text-gray-600">Arrastra los vértices del triángulo para ver cómo cambian los ángulos.</p>
+                        
+                        <div class="flex justify-center mb-4">
+                            <button id="toggleShape" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition-colors">
+                                Cambiar a Cuadrilátero
+                            </button>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <svg id="angleSvg" width="100%" height="400" viewBox="0 0 500 400" class="border border-gray-300 rounded">
+                                <!-- Interactive triangle/quadrilateral will be rendered here -->
+                            </svg>
+                        </div>
+                        
+                        <div id="angleDisplay" class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                            <!-- Angle values will be displayed here -->
+                        </div>
+                    </div>
+                `,
+                evaluacion: function() {
+                    return `
+                        <div class="space-y-6">
+                            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Evaluación</h3>
+                            <div id="evaluationContent">
+                                <p class="text-gray-600 mb-4">Resuelve los siguientes problemas sobre suma de ángulos.</p>
+                                <div id="questionContainer" class="bg-gray-50 p-6 rounded-lg">
+                                    <!-- Dynamic questions will be generated here -->
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            },
+            'circunferencia': {
+                title: 'Circunferencia y sus Elementos',
+                description: 'Explora los elementos de la circunferencia de manera interactiva',
+                color: 'bg-green-500',
+                teoria: `
+                    <div class="space-y-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Elementos de la Circunferencia</h3>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="space-y-4">
+                                <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
+                                    <h4 class="font-semibold text-red-800">Centro</h4>
+                                    <p class="text-gray-700">Punto interior equidistante de todos los puntos de la circunferencia.</p>
+                                </div>
+                                
+                                <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                                    <h4 class="font-semibold text-green-800">Radio</h4>
+                                    <p class="text-gray-700">Segmento que une el centro con cualquier punto de la circunferencia.</p>
+                                </div>
+                                
+                                <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                                    <h4 class="font-semibold text-blue-800">Diámetro</h4>
+                                    <p class="text-gray-700">Segmento que pasa por el centro y une dos puntos de la circunferencia. Es el doble del radio.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-4">
+                                <div class="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-500">
+                                    <h4 class="font-semibold text-yellow-800">Cuerda</h4>
+                                    <p class="text-gray-700">Segmento que une dos puntos cualesquiera de la circunferencia.</p>
+                                </div>
+                                
+                                <div class="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-500">
+                                    <h4 class="font-semibold text-purple-800">Arco</h4>
+                                    <p class="text-gray-700">Porción de la circunferencia comprendida entre dos puntos.</p>
+                                </div>
+                                
+                                <div class="bg-indigo-50 p-4 rounded-lg border-l-4 border-indigo-500">
+                                    <h4 class="font-semibold text-indigo-800">Tangente</h4>
+                                    <p class="text-gray-700">Recta que toca la circunferencia en un solo punto.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                practica: `
+                    <div class="space-y-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Explora los Elementos</h3>
+                        <p class="text-gray-600">Pasa el mouse sobre los diferentes elementos para identificarlos.</p>
+                        
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <svg id="circleSvg" width="100%" height="400" viewBox="0 0 500 400" class="border border-gray-300 rounded">
+                                <!-- Interactive circle elements will be rendered here -->
+                            </svg>
+                        </div>
+                        
+                        <div id="elementLabel" class="text-center p-4 bg-blue-50 rounded-lg">
+                            <p class="text-lg font-medium text-blue-800">Pasa el mouse sobre los elementos para identificarlos</p>
+                        </div>
+                    </div>
+                `,
+                evaluacion: function() {
+                    return `
+                        <div class="space-y-6">
+                            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Evaluación</h3>
+                            <div id="evaluationContent">
+                                <p class="text-gray-600 mb-4">Identifica los elementos de la circunferencia.</p>
+                                <div id="questionContainer" class="bg-gray-50 p-6 rounded-lg">
+                                    <!-- Dynamic questions will be generated here -->
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            },
+            'numero-pi': {
+                title: 'El Número π',
+                description: 'Descubre el número π y aprende a calcular la longitud de circunferencias',
+                color: 'bg-purple-500',
+                teoria: `
+                    <div class="space-y-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">El Número π (Pi)</h3>
+                        
+                        <div class="bg-purple-50 p-6 rounded-lg">
+                            <h4 class="text-xl font-medium text-purple-800 mb-3">¿Qué es π?</h4>
+                            <p class="text-gray-700 mb-4">
+                                π (pi) es la relación entre la longitud de una circunferencia y su diámetro. 
+                                Su valor aproximado es <strong>3.14</strong>.
+                            </p>
+                            <div class="bg-white p-4 rounded border-l-4 border-purple-500">
+                                <p class="font-medium">π = Longitud de la circunferencia ÷ Diámetro</p>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-blue-50 p-6 rounded-lg">
+                                <h4 class="text-xl font-medium text-blue-800 mb-3">Fórmulas</h4>
+                                <div class="space-y-3">
+                                    <div class="bg-white p-3 rounded border-l-4 border-blue-500">
+                                        <p class="font-medium">L = π × d</p>
+                                        <p class="text-sm text-gray-600">Longitud = pi × diámetro</p>
+                                    </div>
+                                    <div class="bg-white p-3 rounded border-l-4 border-blue-500">
+                                        <p class="font-medium">L = 2 × π × r</p>
+                                        <p class="text-sm text-gray-600">Longitud = 2 × pi × radio</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-green-50 p-6 rounded-lg">
+                                <h4 class="text-xl font-medium text-green-800 mb-3">Ejemplo</h4>
+                                <p class="text-gray-700 mb-2">Si el radio es 5 cm:</p>
+                                <div class="bg-white p-3 rounded">
+                                    <p>L = 2 × 3.14 × 5</p>
+                                    <p>L = 31.4 cm</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                practica: `
+                    <div class="space-y-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Visualiza π</h3>
+                        
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <div class="flex justify-center mb-4">
+                                <button id="playAnimation" class="bg-purple-500 hover:bg-purple-600 text-white px-6 py-2 rounded-lg transition-colors">
+                                    ▶ Reproducir Animación
+                                </button>
+                            </div>
+                            
+                            <svg id="piAnimationSvg" width="100%" height="300" viewBox="0 0 600 300" class="border border-gray-300 rounded">
+                                <!-- Pi animation will be rendered here -->
+                            </svg>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg border">
+                            <h4 class="text-lg font-semibold mb-4">Calculadora de Circunferencia</h4>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Radio (cm)</label>
+                                    <input type="number" id="radiusInput" class="w-full p-2 border border-gray-300 rounded-lg" placeholder="Ingresa el radio">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Diámetro (cm)</label>
+                                    <input type="number" id="diameterInput" class="w-full p-2 border border-gray-300 rounded-lg" placeholder="Ingresa el diámetro">
+                                </div>
+                            </div>
+                            <div id="circumferenceResult" class="mt-4 p-4 bg-purple-50 rounded-lg">
+                                <p class="text-lg font-medium text-purple-800">Longitud de la circunferencia: --</p>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                evaluacion: function() {
+                    return `
+                        <div class="space-y-6">
+                            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Evaluación</h3>
+                            <div id="evaluationContent">
+                                <p class="text-gray-600 mb-4">Resuelve los problemas de cálculo de circunferencia.</p>
+                                <div id="questionContainer" class="bg-gray-50 p-6 rounded-lg">
+                                    <!-- Dynamic questions will be generated here -->
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            },
+            'circulo-figuras': {
+                title: 'Círculo y Figuras Circulares',
+                description: 'Distingue entre círculo y circunferencia, y reconoce figuras circulares',
+                color: 'bg-yellow-500',
+                teoria: `
+                    <div class="space-y-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Círculo vs Circunferencia</h3>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-blue-50 p-6 rounded-lg">
+                                <h4 class="text-xl font-medium text-blue-800 mb-3">Circunferencia</h4>
+                                <p class="text-gray-700 mb-3">
+                                    Es la <strong>línea curva cerrada</strong> que forma el borde del círculo.
+                                </p>
+                                <div class="bg-white p-3 rounded">
+                                    <p class="text-sm text-gray-600">Solo el contorno, sin interior</p>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-green-50 p-6 rounded-lg">
+                                <h4 class="text-xl font-medium text-green-800 mb-3">Círculo</h4>
+                                <p class="text-gray-700 mb-3">
+                                    Es la <strong>superficie completa</strong> limitada por la circunferencia.
+                                </p>
+                                <div class="bg-white p-3 rounded">
+                                    <p class="text-sm text-gray-600">Incluye el interior y el borde</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-yellow-50 p-6 rounded-lg">
+                            <h4 class="text-xl font-medium text-yellow-800 mb-4">Figuras Circulares</h4>
+                            <div class="grid md:grid-cols-3 gap-4">
+                                <div class="bg-white p-4 rounded border-l-4 border-red-500">
+                                    <h5 class="font-semibold text-red-800">Sector Circular</h5>
+                                    <p class="text-sm text-gray-700">Porción del círculo limitada por dos radios y un arco.</p>
+                                </div>
+                                <div class="bg-white p-4 rounded border-l-4 border-blue-500">
+                                    <h5 class="font-semibold text-blue-800">Segmento Circular</h5>
+                                    <p class="text-sm text-gray-700">Porción del círculo limitada por una cuerda y un arco.</p>
+                                </div>
+                                <div class="bg-white p-4 rounded border-l-4 border-green-500">
+                                    <h5 class="font-semibold text-green-800">Corona Circular</h5>
+                                    <p class="text-sm text-gray-700">Región entre dos circunferencias concéntricas.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                practica: `
+                    <div class="space-y-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Juego de Identificación</h3>
+                        <p class="text-gray-600">Identifica la figura circular que se muestra.</p>
+                        
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <svg id="figureGameSvg" width="100%" height="300" viewBox="0 0 400 300" class="border border-gray-300 rounded">
+                                <!-- Figure identification game will be rendered here -->
+                            </svg>
+                        </div>
+                        
+                        <div id="gameOptions" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <!-- Game options will be populated here -->
+                        </div>
+                        
+                        <div id="gameScore" class="text-center p-4 bg-yellow-50 rounded-lg">
+                            <p class="text-lg font-medium text-yellow-800">Puntuación: 0</p>
+                        </div>
+                    </div>
+                `,
+                evaluacion: function() {
+                    return `
+                        <div class="space-y-6">
+                            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Evaluación</h3>
+                            <div id="evaluationContent">
+                                <p class="text-gray-600 mb-4">Identifica las figuras circulares en las siguientes imágenes.</p>
+                                <div id="questionContainer" class="bg-gray-50 p-6 rounded-lg">
+                                    <!-- Dynamic questions will be generated here -->
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            },
+            'posiciones-rectas': {
+                title: 'Posiciones de Rectas',
+                description: 'Explora las diferentes posiciones de rectas respecto a circunferencias',
+                color: 'bg-indigo-500',
+                teoria: `
+                    <div class="space-y-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Posiciones de Rectas y Circunferencias</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="bg-red-50 p-6 rounded-lg">
+                                <h4 class="text-xl font-medium text-red-800 mb-3">Recta Exterior</h4>
+                                <p class="text-gray-700 mb-3">
+                                    La recta <strong>no toca</strong> la circunferencia en ningún punto.
+                                </p>
+                                <div class="bg-white p-3 rounded border-l-4 border-red-500">
+                                    <p class="text-sm">La distancia del centro a la recta es mayor que el radio.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-yellow-50 p-6 rounded-lg">
+                                <h4 class="text-xl font-medium text-yellow-800 mb-3">Recta Tangente</h4>
+                                <p class="text-gray-700 mb-3">
+                                    La recta <strong>toca</strong> la circunferencia en exactamente <strong>un punto</strong>.
+                                </p>
+                                <div class="bg-white p-3 rounded border-l-4 border-yellow-500">
+                                    <p class="text-sm">La distancia del centro a la recta es igual al radio.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-green-50 p-6 rounded-lg">
+                                <h4 class="text-xl font-medium text-green-800 mb-3">Recta Secante</h4>
+                                <p class="text-gray-700 mb-3">
+                                    La recta <strong>cruza</strong> la circunferencia en <strong>dos puntos</strong>.
+                                </p>
+                                <div class="bg-white p-3 rounded border-l-4 border-green-500">
+                                    <p class="text-sm">La distancia del centro a la recta es menor que el radio.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                practica: `
+                    <div class="space-y-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Práctica Interactiva</h3>
+                        <p class="text-gray-600">Arrastra la línea para cambiar su posición respecto a la circunferencia.</p>
+                        
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <svg id="linePositionSvg" width="100%" height="400" viewBox="0 0 500 400" class="border border-gray-300 rounded">
+                                <!-- Interactive line position will be rendered here -->
+                            </svg>
+                        </div>
+                        
+                        <div id="positionStatus" class="text-center p-4 bg-indigo-50 rounded-lg">
+                            <p class="text-xl font-bold text-indigo-800">Posición: Exterior</p>
+                        </div>
+                    </div>
+                `,
+                evaluacion: function() {
+                    return `
+                        <div class="space-y-6">
+                            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Evaluación</h3>
+                            <div id="evaluationContent">
+                                <p class="text-gray-600 mb-4">Identifica la posición de las rectas en las siguientes imágenes.</p>
+                                <div id="questionContainer" class="bg-gray-50 p-6 rounded-lg">
+                                    <!-- Dynamic questions will be generated here -->
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+        };
+
+        // Current state
+        let currentModule = null;
+        let currentTab = 'teoria';
+
+        // Initialize the application
+        function initApp() {
+            renderModuleCards();
+            setupEventListeners();
+        }
+
+        // Render module cards in home view
+        function renderModuleCards() {
+            const container = document.querySelector('#homeView .grid');
+            container.innerHTML = '';
+
+            Object.keys(content).forEach(moduleId => {
+                const module = content[moduleId];
+                const card = document.createElement('div');
+                card.className = `module-card ${module.color} text-white p-6 rounded-lg shadow-lg cursor-pointer`;
+                card.innerHTML = `
+                    <h3 class="text-xl font-bold mb-2">${module.title}</h3>
+                    <p class="text-sm opacity-90">${module.description}</p>
+                `;
+                card.addEventListener('click', () => loadTopicContent(moduleId));
+                container.appendChild(card);
+            });
+        }
+
+        // Load topic content function
+        function loadTopicContent(moduleId) {
+            currentModule = moduleId;
+            const module = content[moduleId];
+            
+            // Update module title
+            document.getElementById('moduleTitle').textContent = module.title;
+            
+            // Reset to theory tab
+            currentTab = 'teoria';
+            updateTabButtons();
+            
+            // Load content
+            loadTabContent();
+            
+            // Show module view
+            showView('moduleView');
+        }
+
+        // Load content for current tab
+        function loadTabContent() {
+            const contentArea = document.getElementById('moduleContent');
+            const module = content[currentModule];
+            
+            // Clean up previous interactive instances
+            angleTriangleInstance = null;
+            angleEvaluationInstance = null;
+            
+            if (currentTab === 'evaluacion' && typeof module[currentTab] === 'function') {
+                contentArea.innerHTML = module[currentTab]();
+            } else {
+                contentArea.innerHTML = module[currentTab];
+            }
+            
+            // Initialize interactive elements based on current module and tab
+            if (currentModule === 'suma-angulos') {
+                if (currentTab === 'practica') {
+                    setTimeout(() => initAngleTriangle(), 100);
+                } else if (currentTab === 'evaluacion') {
+                    setTimeout(() => initAngleEvaluation(), 100);
+                }
+            }
+        }
+
+        // Update tab button states
+        function updateTabButtons() {
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+                if (button.dataset.tab === currentTab) {
+                    button.classList.add('active');
+                }
+            });
+        }
+
+        // Show specific view
+        function showView(viewName) {
+            document.querySelectorAll('.view').forEach(view => {
+                view.classList.remove('active');
+            });
+            document.getElementById(viewName).classList.add('active');
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Back button
+            document.getElementById('backButton').addEventListener('click', () => {
+                showView('homeView');
+                currentModule = null;
+            });
+
+            // Tab buttons
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    currentTab = button.dataset.tab;
+                    updateTabButtons();
+                    loadTabContent();
+                    
+                    // Initialize interactive elements based on current module and tab
+                    if (currentModule === 'suma-angulos' && currentTab === 'practica') {
+                        setTimeout(() => initAngleTriangle(), 100);
+                    }
+                });
+            });
+        }
+
+        // Interactive Triangle for Suma de Ángulos module
+        class AngleTriangle {
+            constructor(svgElement) {
+                this.svg = svgElement;
+                this.isQuadrilateral = false;
+                this.isDragging = false;
+                this.dragVertex = null;
+                
+                // Initial triangle vertices
+                this.vertices = [
+                    { x: 250, y: 100, id: 'A' },
+                    { x: 150, y: 300, id: 'B' },
+                    { x: 350, y: 300, id: 'C' }
+                ];
+                
+                this.angles = [0, 0, 0];
+                this.init();
+            }
+            
+            init() {
+                this.render();
+                this.calculateAngles();
+                this.updateDisplay();
+                this.setupEventListeners();
+            }
+            
+            render() {
+                this.svg.innerHTML = '';
+                
+                // Draw triangle/quadrilateral
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                let pathData = `M ${this.vertices[0].x} ${this.vertices[0].y}`;
+                
+                for (let i = 1; i < this.vertices.length; i++) {
+                    pathData += ` L ${this.vertices[i].x} ${this.vertices[i].y}`;
+                }
+                pathData += ' Z';
+                
+                path.setAttribute('d', pathData);
+                path.setAttribute('fill', 'rgba(59, 130, 246, 0.3)');
+                path.setAttribute('stroke', '#3B82F6');
+                path.setAttribute('stroke-width', '2');
+                this.svg.appendChild(path);
+                
+                // Draw vertices
+                this.vertices.forEach((vertex, index) => {
+                    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    circle.setAttribute('cx', vertex.x);
+                    circle.setAttribute('cy', vertex.y);
+                    circle.setAttribute('r', '8');
+                    circle.setAttribute('fill', '#EF4444');
+                    circle.setAttribute('stroke', '#DC2626');
+                    circle.setAttribute('stroke-width', '2');
+                    circle.setAttribute('cursor', 'grab');
+                    circle.setAttribute('data-vertex', index);
+                    this.svg.appendChild(circle);
+                    
+                    // Add vertex labels
+                    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    text.setAttribute('x', vertex.x + 15);
+                    text.setAttribute('y', vertex.y - 10);
+                    text.setAttribute('fill', '#1F2937');
+                    text.setAttribute('font-size', '14');
+                    text.setAttribute('font-weight', 'bold');
+                    text.textContent = vertex.id;
+                    this.svg.appendChild(text);
+                });
+                
+                // Draw angle arcs and labels
+                this.drawAngleArcs();
+            }
+            
+            drawAngleArcs() {
+                this.vertices.forEach((vertex, index) => {
+                    const angle = this.angles[index];
+                    if (angle > 0) {
+                        // Create angle arc
+                        const arc = this.createAngleArc(vertex, index, angle);
+                        if (arc) this.svg.appendChild(arc);
+                        
+                        // Add angle label
+                        const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                        const labelPos = this.getAngleLabelPosition(vertex, index);
+                        label.setAttribute('x', labelPos.x);
+                        label.setAttribute('y', labelPos.y);
+                        label.setAttribute('fill', '#059669');
+                        label.setAttribute('font-size', '12');
+                        label.setAttribute('font-weight', 'bold');
+                        label.setAttribute('text-anchor', 'middle');
+                        label.textContent = `${Math.round(angle)}°`;
+                        this.svg.appendChild(label);
+                    }
+                });
+            }
+            
+            createAngleArc(vertex, vertexIndex, angle) {
+                const radius = 30;
+                const prevVertex = this.vertices[(vertexIndex - 1 + this.vertices.length) % this.vertices.length];
+                const nextVertex = this.vertices[(vertexIndex + 1) % this.vertices.length];
+                
+                // Calculate vectors
+                const v1 = { x: prevVertex.x - vertex.x, y: prevVertex.y - vertex.y };
+                const v2 = { x: nextVertex.x - vertex.x, y: nextVertex.y - vertex.y };
+                
+                // Calculate angles
+                const angle1 = Math.atan2(v1.y, v1.x);
+                const angle2 = Math.atan2(v2.y, v2.x);
+                
+                // Calculate arc points
+                const startX = vertex.x + radius * Math.cos(angle1);
+                const startY = vertex.y + radius * Math.sin(angle1);
+                const endX = vertex.x + radius * Math.cos(angle2);
+                const endY = vertex.y + radius * Math.sin(angle2);
+                
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                const largeArcFlag = angle > 180 ? 1 : 0;
+                const pathData = `M ${startX} ${startY} A ${radius} ${radius} 0 ${largeArcFlag} 1 ${endX} ${endY}`;
+                
+                path.setAttribute('d', pathData);
+                path.setAttribute('fill', 'none');
+                path.setAttribute('stroke', '#059669');
+                path.setAttribute('stroke-width', '2');
+                
+                return path;
+            }
+            
+            getAngleLabelPosition(vertex, vertexIndex) {
+                const radius = 40;
+                const prevVertex = this.vertices[(vertexIndex - 1 + this.vertices.length) % this.vertices.length];
+                const nextVertex = this.vertices[(vertexIndex + 1) % this.vertices.length];
+                
+                // Calculate bisector direction
+                const v1 = { x: prevVertex.x - vertex.x, y: prevVertex.y - vertex.y };
+                const v2 = { x: nextVertex.x - vertex.x, y: nextVertex.y - vertex.y };
+                
+                // Normalize vectors
+                const len1 = Math.sqrt(v1.x * v1.x + v1.y * v1.y);
+                const len2 = Math.sqrt(v2.x * v2.x + v2.y * v2.y);
+                v1.x /= len1; v1.y /= len1;
+                v2.x /= len2; v2.y /= len2;
+                
+                // Bisector direction
+                const bisector = { x: v1.x + v2.x, y: v1.y + v2.y };
+                const bisectorLen = Math.sqrt(bisector.x * bisector.x + bisector.y * bisector.y);
+                if (bisectorLen > 0) {
+                    bisector.x /= bisectorLen;
+                    bisector.y /= bisectorLen;
+                }
+                
+                return {
+                    x: vertex.x + radius * bisector.x,
+                    y: vertex.y + radius * bisector.y
+                };
+            }
+            
+            calculateAngles() {
+                for (let i = 0; i < this.vertices.length; i++) {
+                    const current = this.vertices[i];
+                    const prev = this.vertices[(i - 1 + this.vertices.length) % this.vertices.length];
+                    const next = this.vertices[(i + 1) % this.vertices.length];
+                    
+                    // Calculate vectors
+                    const v1 = { x: prev.x - current.x, y: prev.y - current.y };
+                    const v2 = { x: next.x - current.x, y: next.y - current.y };
+                    
+                    // Calculate angle using dot product and cross product
+                    const dot = v1.x * v2.x + v1.y * v2.y;
+                    const cross = v1.x * v2.y - v1.y * v2.x;
+                    let angle = Math.atan2(cross, dot) * (180 / Math.PI);
+                    
+                    // Ensure positive angle
+                    if (angle < 0) angle += 360;
+                    if (angle > 180) angle = 360 - angle;
+                    
+                    this.angles[i] = angle;
+                }
+            }
+            
+            updateDisplay() {
+                const displayContainer = document.getElementById('angleDisplay');
+                if (!displayContainer) return;
+                
+                const totalAngles = this.isQuadrilateral ? 4 : 3;
+                const expectedSum = this.isQuadrilateral ? 360 : 180;
+                const actualSum = this.angles.slice(0, totalAngles).reduce((sum, angle) => sum + angle, 0);
+                
+                displayContainer.innerHTML = '';
+                
+                // Create angle displays
+                for (let i = 0; i < totalAngles; i++) {
+                    const angleDiv = document.createElement('div');
+                    angleDiv.className = 'bg-white p-4 rounded-lg border-2 border-blue-200';
+                    angleDiv.innerHTML = `
+                        <div class="text-lg font-bold text-blue-600">Ángulo ${this.vertices[i].id}</div>
+                        <div class="text-2xl font-bold text-gray-800">${Math.round(this.angles[i])}°</div>
+                    `;
+                    displayContainer.appendChild(angleDiv);
+                }
+                
+                // Add sum display
+                const sumDiv = document.createElement('div');
+                sumDiv.className = 'bg-green-50 p-4 rounded-lg border-2 border-green-200 md:col-span-3';
+                sumDiv.innerHTML = `
+                    <div class="text-lg font-bold text-green-600">Suma Total</div>
+                    <div class="text-2xl font-bold text-gray-800">${Math.round(actualSum)}°</div>
+                    <div class="text-sm text-gray-600">Esperado: ${expectedSum}°</div>
+                `;
+                displayContainer.appendChild(sumDiv);
+            }
+            
+            setupEventListeners() {
+                let startX, startY;
+                
+                this.svg.addEventListener('mousedown', (e) => {
+                    const target = e.target;
+                    if (target.hasAttribute('data-vertex')) {
+                        this.isDragging = true;
+                        this.dragVertex = parseInt(target.getAttribute('data-vertex'));
+                        startX = e.clientX;
+                        startY = e.clientY;
+                        target.style.cursor = 'grabbing';
+                        e.preventDefault();
+                    }
+                });
+                
+                document.addEventListener('mousemove', (e) => {
+                    if (this.isDragging && this.dragVertex !== null) {
+                        const rect = this.svg.getBoundingClientRect();
+                        const scaleX = this.svg.viewBox.baseVal.width / rect.width;
+                        const scaleY = this.svg.viewBox.baseVal.height / rect.height;
+                        
+                        const newX = (e.clientX - rect.left) * scaleX;
+                        const newY = (e.clientY - rect.top) * scaleY;
+                        
+                        // Constrain to SVG bounds
+                        const constrainedX = Math.max(20, Math.min(480, newX));
+                        const constrainedY = Math.max(20, Math.min(380, newY));
+                        
+                        this.vertices[this.dragVertex].x = constrainedX;
+                        this.vertices[this.dragVertex].y = constrainedY;
+                        
+                        this.calculateAngles();
+                        this.render();
+                        this.updateDisplay();
+                    }
+                });
+                
+                document.addEventListener('mouseup', () => {
+                    if (this.isDragging) {
+                        this.isDragging = false;
+                        this.dragVertex = null;
+                        this.svg.style.cursor = 'default';
+                    }
+                });
+                
+                // Touch events for mobile
+                this.svg.addEventListener('touchstart', (e) => {
+                    const target = e.target;
+                    if (target.hasAttribute('data-vertex')) {
+                        this.isDragging = true;
+                        this.dragVertex = parseInt(target.getAttribute('data-vertex'));
+                        const touch = e.touches[0];
+                        startX = touch.clientX;
+                        startY = touch.clientY;
+                        e.preventDefault();
+                    }
+                });
+                
+                document.addEventListener('touchmove', (e) => {
+                    if (this.isDragging && this.dragVertex !== null) {
+                        const touch = e.touches[0];
+                        const rect = this.svg.getBoundingClientRect();
+                        const scaleX = this.svg.viewBox.baseVal.width / rect.width;
+                        const scaleY = this.svg.viewBox.baseVal.height / rect.height;
+                        
+                        const newX = (touch.clientX - rect.left) * scaleX;
+                        const newY = (touch.clientY - rect.top) * scaleY;
+                        
+                        // Constrain to SVG bounds
+                        const constrainedX = Math.max(20, Math.min(480, newX));
+                        const constrainedY = Math.max(20, Math.min(380, newY));
+                        
+                        this.vertices[this.dragVertex].x = constrainedX;
+                        this.vertices[this.dragVertex].y = constrainedY;
+                        
+                        this.calculateAngles();
+                        this.render();
+                        this.updateDisplay();
+                        e.preventDefault();
+                    }
+                });
+                
+                document.addEventListener('touchend', () => {
+                    if (this.isDragging) {
+                        this.isDragging = false;
+                        this.dragVertex = null;
+                    }
+                });
+            }
+            
+            toggleShape() {
+                this.isQuadrilateral = !this.isQuadrilateral;
+                
+                if (this.isQuadrilateral) {
+                    // Add fourth vertex
+                    this.vertices.push({ x: 400, y: 150, id: 'D' });
+                    this.angles.push(0);
+                } else {
+                    // Remove fourth vertex
+                    this.vertices = this.vertices.slice(0, 3);
+                    this.angles = this.angles.slice(0, 3);
+                }
+                
+                this.calculateAngles();
+                this.render();
+                this.updateDisplay();
+            }
+        }
+        
+        // Initialize angle triangle when suma-angulos practice tab is loaded
+        let angleTriangleInstance = null;
+        
+        function initAngleTriangle() {
+            const svg = document.getElementById('angleSvg');
+            const toggleButton = document.getElementById('toggleShape');
+            
+            if (svg && !angleTriangleInstance) {
+                angleTriangleInstance = new AngleTriangle(svg);
+                
+                if (toggleButton) {
+                    toggleButton.addEventListener('click', () => {
+                        angleTriangleInstance.toggleShape();
+                        toggleButton.textContent = angleTriangleInstance.isQuadrilateral ? 
+                            'Cambiar a Triángulo' : 'Cambiar a Cuadrilátero';
+                    });
+                }
+            }
+        }
+
+        // Evaluation System for Suma de Ángulos
+        class AngleEvaluation {
+            constructor() {
+                this.currentQuestion = 0;
+                this.score = 0;
+                this.questions = [];
+                this.totalQuestions = 5;
+            }
+            
+            generateQuestions() {
+                this.questions = [];
+                
+                for (let i = 0; i < this.totalQuestions; i++) {
+                    const questionType = Math.random() < 0.5 ? 'triangle' : 'quadrilateral';
+                    
+                    if (questionType === 'triangle') {
+                        this.questions.push(this.generateTriangleQuestion());
+                    } else {
+                        this.questions.push(this.generateQuadrilateralQuestion());
+                    }
+                }
+            }
+            
+            generateTriangleQuestion() {
+                // Generate two random angles, calculate the third
+                const angle1 = Math.floor(Math.random() * 80) + 20; // 20-100°
+                const angle2 = Math.floor(Math.random() * (140 - angle1)) + 20; // Ensure sum < 180
+                const angle3 = 180 - angle1 - angle2;
+                
+                const angles = [angle1, angle2, angle3];
+                const hiddenIndex = Math.floor(Math.random() * 3);
+                const hiddenAngle = angles[hiddenIndex];
+                
+                // Create question text
+                const visibleAngles = angles.filter((_, index) => index !== hiddenIndex);
+                const questionText = `En un triángulo, dos de los ángulos miden ${visibleAngles[0]}° y ${visibleAngles[1]}°. ¿Cuánto mide el tercer ángulo?`;
+                
+                // Generate wrong answers
+                const wrongAnswers = [
+                    hiddenAngle + Math.floor(Math.random() * 20) + 10,
+                    hiddenAngle - Math.floor(Math.random() * 20) - 10,
+                    Math.floor(Math.random() * 90) + 30
+                ].filter(angle => angle > 0 && angle < 180 && angle !== hiddenAngle);
+                
+                // Ensure we have exactly 3 wrong answers
+                while (wrongAnswers.length < 3) {
+                    const wrongAngle = Math.floor(Math.random() * 120) + 20;
+                    if (wrongAngle !== hiddenAngle && !wrongAnswers.includes(wrongAngle)) {
+                        wrongAnswers.push(wrongAngle);
+                    }
+                }
+                
+                const options = [hiddenAngle, ...wrongAnswers.slice(0, 3)];
+                this.shuffleArray(options);
+                
+                return {
+                    type: 'triangle',
+                    question: questionText,
+                    options: options.map(angle => `${angle}°`),
+                    correctAnswer: `${hiddenAngle}°`,
+                    explanation: `La suma de los ángulos internos de un triángulo es 180°. Por lo tanto: 180° - ${visibleAngles[0]}° - ${visibleAngles[1]}° = ${hiddenAngle}°`
+                };
+            }
+            
+            generateQuadrilateralQuestion() {
+                // Generate three random angles, calculate the fourth
+                const angle1 = Math.floor(Math.random() * 80) + 30; // 30-110°
+                const angle2 = Math.floor(Math.random() * 80) + 30;
+                const angle3 = Math.floor(Math.random() * (200 - angle1 - angle2)) + 30;
+                const angle4 = 360 - angle1 - angle2 - angle3;
+                
+                const angles = [angle1, angle2, angle3, angle4];
+                const hiddenIndex = Math.floor(Math.random() * 4);
+                const hiddenAngle = angles[hiddenIndex];
+                
+                // Create question text
+                const visibleAngles = angles.filter((_, index) => index !== hiddenIndex);
+                const questionText = `En un cuadrilátero, tres de los ángulos miden ${visibleAngles[0]}°, ${visibleAngles[1]}° y ${visibleAngles[2]}°. ¿Cuánto mide el cuarto ángulo?`;
+                
+                // Generate wrong answers
+                const wrongAnswers = [
+                    hiddenAngle + Math.floor(Math.random() * 30) + 15,
+                    hiddenAngle - Math.floor(Math.random() * 30) - 15,
+                    Math.floor(Math.random() * 120) + 60
+                ].filter(angle => angle > 0 && angle < 180 && angle !== hiddenAngle);
+                
+                // Ensure we have exactly 3 wrong answers
+                while (wrongAnswers.length < 3) {
+                    const wrongAngle = Math.floor(Math.random() * 150) + 30;
+                    if (wrongAngle !== hiddenAngle && !wrongAnswers.includes(wrongAngle)) {
+                        wrongAnswers.push(wrongAngle);
+                    }
+                }
+                
+                const options = [hiddenAngle, ...wrongAnswers.slice(0, 3)];
+                this.shuffleArray(options);
+                
+                return {
+                    type: 'quadrilateral',
+                    question: questionText,
+                    options: options.map(angle => `${angle}°`),
+                    correctAnswer: `${hiddenAngle}°`,
+                    explanation: `La suma de los ángulos internos de un cuadrilátero es 360°. Por lo tanto: 360° - ${visibleAngles[0]}° - ${visibleAngles[1]}° - ${visibleAngles[2]}° = ${hiddenAngle}°`
+                };
+            }
+            
+            shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+            }
+            
+            start() {
+                this.currentQuestion = 0;
+                this.score = 0;
+                this.generateQuestions();
+                this.showQuestion();
+            }
+            
+            showQuestion() {
+                const container = document.getElementById('questionContainer');
+                if (!container) return;
+                
+                if (this.currentQuestion >= this.questions.length) {
+                    this.showResults();
+                    return;
+                }
+                
+                const question = this.questions[this.currentQuestion];
+                
+                container.innerHTML = `
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <h4 class="text-lg font-semibold text-gray-800">Pregunta ${this.currentQuestion + 1} de ${this.totalQuestions}</h4>
+                            <div class="text-sm text-gray-600">Puntuación: ${this.score}/${this.currentQuestion}</div>
+                        </div>
+                        
+                        <div class="bg-white p-4 rounded-lg border-l-4 border-blue-500">
+                            <p class="text-gray-800 font-medium">${question.question}</p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            ${question.options.map((option, index) => `
+                                <button class="option-btn bg-white hover:bg-blue-50 border-2 border-gray-200 hover:border-blue-300 p-3 rounded-lg text-left transition-colors" data-answer="${option}">
+                                    ${String.fromCharCode(65 + index)}. ${option}
+                                </button>
+                            `).join('')}
+                        </div>
+                        
+                        <div id="feedback" class="hidden"></div>
+                    </div>
+                `;
+                
+                // Add event listeners to option buttons
+                container.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => this.checkAnswer(e.target.dataset.answer, question));
+                });
+            }
+            
+            checkAnswer(selectedAnswer, question) {
+                const isCorrect = selectedAnswer === question.correctAnswer;
+                const feedbackDiv = document.getElementById('feedback');
+                const optionButtons = document.querySelectorAll('.option-btn');
+                
+                // Disable all buttons
+                optionButtons.forEach(btn => {
+                    btn.disabled = true;
+                    btn.classList.remove('hover:bg-blue-50', 'hover:border-blue-300');
+                    
+                    if (btn.dataset.answer === question.correctAnswer) {
+                        btn.classList.add('bg-green-100', 'border-green-500', 'text-green-800');
+                    } else if (btn.dataset.answer === selectedAnswer && !isCorrect) {
+                        btn.classList.add('bg-red-100', 'border-red-500', 'text-red-800');
+                    }
+                });
+                
+                if (isCorrect) {
+                    this.score++;
+                    feedbackDiv.innerHTML = `
+                        <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded">
+                            <div class="flex items-center">
+                                <span class="text-green-600 font-bold text-lg">✓ ¡Correcto!</span>
+                            </div>
+                            <p class="text-green-700 mt-2">${question.explanation}</p>
+                        </div>
+                    `;
+                } else {
+                    feedbackDiv.innerHTML = `
+                        <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+                            <div class="flex items-center">
+                                <span class="text-red-600 font-bold text-lg">✗ Incorrecto</span>
+                            </div>
+                            <p class="text-red-700 mt-2">La respuesta correcta es: <strong>${question.correctAnswer}</strong></p>
+                            <p class="text-red-700 mt-1">${question.explanation}</p>
+                        </div>
+                    `;
+                }
+                
+                feedbackDiv.classList.remove('hidden');
+                
+                // Add next button
+                setTimeout(() => {
+                    const nextBtn = document.createElement('button');
+                    nextBtn.className = 'bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg mt-4 transition-colors';
+                    nextBtn.textContent = this.currentQuestion < this.questions.length - 1 ? 'Siguiente Pregunta' : 'Ver Resultados';
+                    nextBtn.addEventListener('click', () => {
+                        this.currentQuestion++;
+                        this.showQuestion();
+                    });
+                    feedbackDiv.appendChild(nextBtn);
+                }, 1000);
+            }
+            
+            showResults() {
+                const container = document.getElementById('questionContainer');
+                const percentage = Math.round((this.score / this.totalQuestions) * 100);
+                let message = '';
+                let colorClass = '';
+                
+                if (percentage >= 80) {
+                    message = '¡Excelente trabajo!';
+                    colorClass = 'text-green-600';
+                } else if (percentage >= 60) {
+                    message = '¡Buen trabajo!';
+                    colorClass = 'text-blue-600';
+                } else {
+                    message = 'Sigue practicando';
+                    colorClass = 'text-yellow-600';
+                }
+                
+                container.innerHTML = `
+                    <div class="text-center space-y-6">
+                        <div class="bg-white p-8 rounded-lg border-2 border-gray-200">
+                            <h3 class="text-2xl font-bold ${colorClass} mb-4">${message}</h3>
+                            <div class="text-4xl font-bold text-gray-800 mb-2">${this.score}/${this.totalQuestions}</div>
+                            <div class="text-xl text-gray-600 mb-4">${percentage}% correcto</div>
+                            
+                            <div class="bg-gray-200 rounded-full h-4 mb-4">
+                                <div class="bg-blue-500 h-4 rounded-full transition-all duration-1000" style="width: ${percentage}%"></div>
+                            </div>
+                        </div>
+                        
+                        <button id="restartEvaluation" class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-medium transition-colors">
+                            Intentar de Nuevo
+                        </button>
+                    </div>
+                `;
+                
+                document.getElementById('restartEvaluation').addEventListener('click', () => {
+                    this.start();
+                });
+            }
+        }
+        
+        // Initialize angle evaluation when suma-angulos evaluation tab is loaded
+        let angleEvaluationInstance = null;
+        
+        function initAngleEvaluation() {
+            const container = document.getElementById('questionContainer');
+            if (container && !angleEvaluationInstance) {
+                angleEvaluationInstance = new AngleEvaluation();
+                angleEvaluationInstance.start();
+            }
+        }
+
+        // Initialize app when DOM is loaded
+        // Unit Tests for Angle Calculations
+        // To run tests manually, open browser console and execute: runAngleTests()
+        // Tests cover vector-based angle calculations and sum validation logic
+        class AngleCalculationTests {
+            constructor() {
+                this.testResults = [];
+                this.totalTests = 0;
+                this.passedTests = 0;
+            }
+
+            // Test helper to create a test triangle instance
+            createTestTriangle(vertices) {
+                const mockSvg = { 
+                    getBoundingClientRect: () => ({ left: 0, top: 0, width: 500, height: 400 })
+                };
+                const triangle = new AngleTriangle(mockSvg);
+                triangle.vertices = vertices;
+                return triangle;
+            }
+
+            // Test helper to assert equality with tolerance
+            assertAlmostEqual(actual, expected, tolerance = 1, testName) {
+                this.totalTests++;
+                const diff = Math.abs(actual - expected);
+                const passed = diff <= tolerance;
+                
+                if (passed) {
+                    this.passedTests++;
+                    console.log(`✓ ${testName}: ${actual} ≈ ${expected} (diff: ${diff.toFixed(2)})`);
+                } else {
+                    console.error(`✗ ${testName}: ${actual} ≠ ${expected} (diff: ${diff.toFixed(2)})`);
+                }
+                
+                this.testResults.push({
+                    name: testName,
+                    passed,
+                    actual,
+                    expected,
+                    difference: diff
+                });
+                
+                return passed;
+            }
+
+            // Test helper to assert exact equality
+            assertEqual(actual, expected, testName) {
+                this.totalTests++;
+                const passed = actual === expected;
+                
+                if (passed) {
+                    this.passedTests++;
+                    console.log(`✓ ${testName}: ${actual} === ${expected}`);
+                } else {
+                    console.error(`✗ ${testName}: ${actual} !== ${expected}`);
+                }
+                
+                this.testResults.push({
+                    name: testName,
+                    passed,
+                    actual,
+                    expected,
+                    difference: Math.abs(actual - expected)
+                });
+                
+                return passed;
+            }
+
+            // Test vector-based angle calculation for right triangle
+            testRightTriangleAngles() {
+                console.log('\n--- Testing Right Triangle Angles ---');
+                
+                // Create a right triangle with vertices at (0,0), (100,0), (0,100)
+                const vertices = [
+                    { x: 0, y: 0, id: 'A' },
+                    { x: 100, y: 0, id: 'B' },
+                    { x: 0, y: 100, id: 'C' }
+                ];
+                
+                const triangle = this.createTestTriangle(vertices);
+                triangle.calculateAngles();
+                
+                // Right triangle should have angles: 90°, 45°, 45°
+                this.assertAlmostEqual(triangle.angles[0], 90, 2, 'Right angle at vertex A');
+                this.assertAlmostEqual(triangle.angles[1], 45, 2, 'Angle at vertex B');
+                this.assertAlmostEqual(triangle.angles[2], 45, 2, 'Angle at vertex C');
+                
+                // Test sum validation
+                const sum = triangle.angles[0] + triangle.angles[1] + triangle.angles[2];
+                this.assertAlmostEqual(sum, 180, 2, 'Right triangle angle sum');
+            }
+
+            // Test vector-based angle calculation for equilateral triangle
+            testEquilateralTriangleAngles() {
+                console.log('\n--- Testing Equilateral Triangle Angles ---');
+                
+                // Create an equilateral triangle
+                const side = 100;
+                const height = side * Math.sqrt(3) / 2;
+                const vertices = [
+                    { x: 0, y: 0, id: 'A' },
+                    { x: side, y: 0, id: 'B' },
+                    { x: side / 2, y: height, id: 'C' }
+                ];
+                
+                const triangle = this.createTestTriangle(vertices);
+                triangle.calculateAngles();
+                
+                // Equilateral triangle should have all angles = 60°
+                this.assertAlmostEqual(triangle.angles[0], 60, 2, 'Angle at vertex A');
+                this.assertAlmostEqual(triangle.angles[1], 60, 2, 'Angle at vertex B');
+                this.assertAlmostEqual(triangle.angles[2], 60, 2, 'Angle at vertex C');
+                
+                // Test sum validation
+                const sum = triangle.angles[0] + triangle.angles[1] + triangle.angles[2];
+                this.assertAlmostEqual(sum, 180, 2, 'Equilateral triangle angle sum');
+            }
+
+            // Test vector-based angle calculation for obtuse triangle
+            testObtuseTriangleAngles() {
+                console.log('\n--- Testing Obtuse Triangle Angles ---');
+                
+                // Create an obtuse triangle
+                const vertices = [
+                    { x: 0, y: 0, id: 'A' },
+                    { x: 150, y: 0, id: 'B' },
+                    { x: 20, y: 50, id: 'C' }
+                ];
+                
+                const triangle = this.createTestTriangle(vertices);
+                triangle.calculateAngles();
+                
+                // Verify that one angle is greater than 90°
+                const hasObtuseAngle = triangle.angles.some(angle => angle > 90);
+                this.assertEqual(hasObtuseAngle, true, 'Has obtuse angle (>90°)');
+                
+                // Test sum validation
+                const sum = triangle.angles[0] + triangle.angles[1] + triangle.angles[2];
+                this.assertAlmostEqual(sum, 180, 2, 'Obtuse triangle angle sum');
+            }
+
+            // Test quadrilateral angle calculations
+            testQuadrilateralAngles() {
+                console.log('\n--- Testing Quadrilateral Angles ---');
+                
+                // Create a rectangle
+                const vertices = [
+                    { x: 0, y: 0, id: 'A' },
+                    { x: 100, y: 0, id: 'B' },
+                    { x: 100, y: 80, id: 'C' },
+                    { x: 0, y: 80, id: 'D' }
+                ];
+                
+                const quadrilateral = this.createTestTriangle(vertices);
+                quadrilateral.isQuadrilateral = true;
+                quadrilateral.angles = [0, 0, 0, 0]; // Initialize 4 angles
+                quadrilateral.calculateAngles();
+                
+                // Rectangle should have all angles = 90°
+                this.assertAlmostEqual(quadrilateral.angles[0], 90, 2, 'Rectangle angle at vertex A');
+                this.assertAlmostEqual(quadrilateral.angles[1], 90, 2, 'Rectangle angle at vertex B');
+                this.assertAlmostEqual(quadrilateral.angles[2], 90, 2, 'Rectangle angle at vertex C');
+                this.assertAlmostEqual(quadrilateral.angles[3], 90, 2, 'Rectangle angle at vertex D');
+                
+                // Test sum validation
+                const sum = quadrilateral.angles[0] + quadrilateral.angles[1] + quadrilateral.angles[2] + quadrilateral.angles[3];
+                this.assertAlmostEqual(sum, 360, 2, 'Rectangle angle sum');
+            }
+
+            // Test edge cases and error conditions
+            testEdgeCases() {
+                console.log('\n--- Testing Edge Cases ---');
+                
+                // Test degenerate triangle (collinear points)
+                const degenerateVertices = [
+                    { x: 0, y: 0, id: 'A' },
+                    { x: 50, y: 0, id: 'B' },
+                    { x: 100, y: 0, id: 'C' }
+                ];
+                
+                const degenerateTriangle = this.createTestTriangle(degenerateVertices);
+                degenerateTriangle.calculateAngles();
+                
+                // Degenerate triangle should have angles close to 0° and 180°
+                const hasZeroAngle = degenerateTriangle.angles.some(angle => angle < 5);
+                const hasStraightAngle = degenerateTriangle.angles.some(angle => angle > 175);
+                
+                this.assertEqual(hasZeroAngle, true, 'Degenerate triangle has near-zero angle');
+                this.assertEqual(hasStraightAngle, true, 'Degenerate triangle has near-straight angle');
+            }
+
+            // Test sum validation logic
+            testSumValidation() {
+                console.log('\n--- Testing Sum Validation Logic ---');
+                
+                // Test triangle sum validation
+                const triangleAngles = [60, 60, 60];
+                const triangleSum = triangleAngles.reduce((sum, angle) => sum + angle, 0);
+                this.assertEqual(triangleSum, 180, 'Valid triangle angle sum');
+                
+                // Test quadrilateral sum validation
+                const quadrilateralAngles = [90, 90, 90, 90];
+                const quadrilateralSum = quadrilateralAngles.reduce((sum, angle) => sum + angle, 0);
+                this.assertEqual(quadrilateralSum, 360, 'Valid quadrilateral angle sum');
+                
+                // Test invalid sums
+                const invalidTriangleAngles = [90, 90, 90];
+                const invalidSum = invalidTriangleAngles.reduce((sum, angle) => sum + angle, 0);
+                const isValidTriangleSum = Math.abs(invalidSum - 180) < 2;
+                this.assertEqual(isValidTriangleSum, false, 'Invalid triangle sum detection');
+            }
+
+            // Test vector calculation accuracy
+            testVectorCalculations() {
+                console.log('\n--- Testing Vector Calculations ---');
+                
+                // Test dot product calculation
+                const v1 = { x: 1, y: 0 };
+                const v2 = { x: 0, y: 1 };
+                const dotProduct = v1.x * v2.x + v1.y * v2.y;
+                this.assertEqual(dotProduct, 0, 'Perpendicular vectors dot product');
+                
+                // Test cross product calculation
+                const crossProduct = v1.x * v2.y - v1.y * v2.x;
+                this.assertEqual(crossProduct, 1, 'Perpendicular vectors cross product');
+                
+                // Test angle calculation from vectors
+                const angle = Math.atan2(crossProduct, dotProduct) * (180 / Math.PI);
+                this.assertAlmostEqual(Math.abs(angle), 90, 1, 'Perpendicular vectors angle');
+            }
+
+            // Test angle normalization
+            testAngleNormalization() {
+                console.log('\n--- Testing Angle Normalization ---');
+                
+                // Test negative angle normalization
+                let angle = -45;
+                if (angle < 0) angle += 360;
+                this.assertEqual(angle, 315, 'Negative angle normalization');
+                
+                // Test angle > 180° normalization
+                angle = 270;
+                if (angle > 180) angle = 360 - angle;
+                this.assertEqual(angle, 90, 'Large angle normalization');
+            }
+
+            // Run all tests
+            runAllTests() {
+                console.log('🧪 Starting Angle Calculation Unit Tests...\n');
+                
+                this.testResults = [];
+                this.totalTests = 0;
+                this.passedTests = 0;
+                
+                try {
+                    this.testRightTriangleAngles();
+                    this.testEquilateralTriangleAngles();
+                    this.testObtuseTriangleAngles();
+                    this.testQuadrilateralAngles();
+                    this.testEdgeCases();
+                    this.testSumValidation();
+                    this.testVectorCalculations();
+                    this.testAngleNormalization();
+                } catch (error) {
+                    console.error('Test execution error:', error);
+                }
+                
+                this.printTestSummary();
+            }
+
+            // Print test summary
+            printTestSummary() {
+                console.log('\n📊 Test Summary:');
+                console.log(`Total Tests: ${this.totalTests}`);
+                console.log(`Passed: ${this.passedTests}`);
+                console.log(`Failed: ${this.totalTests - this.passedTests}`);
+                console.log(`Success Rate: ${((this.passedTests / this.totalTests) * 100).toFixed(1)}%`);
+                
+                if (this.passedTests === this.totalTests) {
+                    console.log('🎉 All tests passed!');
+                } else {
+                    console.log('❌ Some tests failed. Check the details above.');
+                }
+                
+                // Return test results for potential integration
+                return {
+                    total: this.totalTests,
+                    passed: this.passedTests,
+                    failed: this.totalTests - this.passedTests,
+                    successRate: (this.passedTests / this.totalTests) * 100,
+                    results: this.testResults
+                };
+            }
+        }
+
+        // Initialize and run tests when the page loads (for development)
+        // Uncomment the following lines to run tests automatically:
+        // window.angleTests = new AngleCalculationTests();
+        // window.addEventListener('load', () => {
+        //     setTimeout(() => window.angleTests.runAllTests(), 1000);
+        // });
+
+        // Expose test runner for manual execution
+        window.runAngleTests = function() {
+            const testRunner = new AngleCalculationTests();
+            return testRunner.runAllTests();
+        };
+
+        document.addEventListener('DOMContentLoaded', initApp);
+
+        // Register service worker for PWA functionality
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
