@@ -1,8 +1,10 @@
-const CACHE_NAME = 'matematicas-figuras-planas-v1';
+const CACHE_NAME = 'matematicas-figuras-planas-v2';
 const urlsToCache = [
     './',
     './index.html',
-    './manifest.json'
+    './manifest.json',
+    // Cache external dependencies for offline use
+    'https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css'
 ];
 
 // Install event - cache resources
@@ -22,18 +24,53 @@ self.addEventListener('install', event => {
 
 // Fetch event - serve from cache when offline
 self.addEventListener('fetch', event => {
-    // Only handle same-origin requests
-    if (event.request.url.startsWith(self.location.origin)) {
+    // Handle all requests (including external resources like Tailwind CSS)
+    if (event.request.url.startsWith(self.location.origin) || 
+        event.request.url.includes('tailwindcss') ||
+        event.request.url.includes('cdn.jsdelivr.net')) {
+        
         event.respondWith(
             caches.match(event.request)
                 .then(response => {
-                    // Return cached version or fetch from network
-                    return response || fetch(event.request).catch(() => {
-                        // If both cache and network fail, return a basic response for HTML requests
-                        if (event.request.headers.get('accept').includes('text/html')) {
-                            return caches.match('./index.html');
-                        }
-                    });
+                    // Return cached version if available
+                    if (response) {
+                        return response;
+                    }
+                    
+                    // Try to fetch from network
+                    return fetch(event.request)
+                        .then(networkResponse => {
+                            // Cache successful responses for future offline use
+                            if (networkResponse && networkResponse.status === 200) {
+                                const responseClone = networkResponse.clone();
+                                caches.open(CACHE_NAME)
+                                    .then(cache => {
+                                        cache.put(event.request, responseClone);
+                                    });
+                            }
+                            return networkResponse;
+                        })
+                        .catch(() => {
+                            // If both cache and network fail, return appropriate fallback
+                            if (event.request.headers.get('accept') && 
+                                event.request.headers.get('accept').includes('text/html')) {
+                                return caches.match('./index.html');
+                            }
+                            
+                            // For CSS requests, return a minimal fallback
+                            if (event.request.url.includes('.css') || 
+                                event.request.url.includes('tailwindcss')) {
+                                return new Response('/* Offline fallback CSS */', {
+                                    headers: { 'Content-Type': 'text/css' }
+                                });
+                            }
+                            
+                            // For other requests, return a generic error response
+                            return new Response('Offline - Resource not available', {
+                                status: 503,
+                                statusText: 'Service Unavailable'
+                            });
+                        });
                 })
         );
     }
