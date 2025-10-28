@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Figuras Circulares - Figuras Planas</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Estilos personalizados -->
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-size: 18px;
+        }
+
+        .main-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            margin: 1rem;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .content-section {
+            padding: 2rem;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border-left: 5px solid #f59e0b;
+        }
+
+        .interactive-area {
+            background: #f8fafc;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border: 2px dashed #cbd5e1;
+        }
+
+        .figure-svg {
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .figure-svg:hover {
+            border-color: #f59e0b;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.2);
+        }
+
+        .btn-fun {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-fun:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+            color: white;
+        }
+
+        .exercise-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 1rem 0;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-top: 4px solid #10b981;
+        }
+
+        .fun-fact {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 5px solid #10b981;
+        }
+
+        .game-area {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border: 2px solid #0ea5e9;
+        }
+
+        .figure-info {
+            background: #1e293b;
+            color: #f59e0b;
+            padding: 1rem;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .back-btn {
+            background: #6b7280;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #4b5563;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .score-display {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 1rem;
+            }
+            
+            .concept-box, .interactive-area, .exercise-card, .game-area {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <!-- Header -->
+        <div class="header">
+            <a href="index.html" class="back-btn">← Volver al inicio</a>
+            <h1>🍕 Figuras Circulares</h1>
+            <p class="mb-0 fs-4">¡Círculos, sectores y mucho más!</p>
+        </div>
+
+        <div class="content-section">
+            <!-- Concepto principal -->
+            <div class="concept-box">
+                <h2>🤔 ¿Círculo o Circunferencia?</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>⭕ Circunferencia</h4>
+                        <p>Es solo la <strong>línea curva</strong> que forma el borde. ¡Como el aro de una rueda!</p>
+                        
+                        <h4>🔴 Círculo</h4>
+                        <p>Es toda la <strong>superficie</strong> incluyendo el interior. ¡Como una pizza completa!</p>
+                    </div>
+                    <div class="col-md-6">
+                        <svg width="200" height="150" viewBox="0 0 200 150" class="mx-auto d-block">
+                            <!-- Circunferencia -->
+                            <circle cx="60" cy="75" r="40" fill="none" stroke="#ef4444" stroke-width="3"/>
+                            <text x="60" y="125" text-anchor="middle" font-size="12" fill="#ef4444" font-weight="bold">Circunferencia</text>
+                            
+                            <!-- Círculo -->
+                            <circle cx="140" cy="75" r="40" fill="rgba(59, 130, 246, 0.3)" stroke="#3b82f6" stroke-width="3"/>
+                            <text x="140" y="125" text-anchor="middle" font-size="12" fill="#3b82f6" font-weight="bold">Círculo</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tipos de figuras circulares -->
+            <div class="interactive-area">
+                <h3>🎯 Tipos de figuras circulares</h3>
+                <p>Haz clic en cada figura para conocerla mejor:</p>
+                
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5 class="text-center">🍕 Sector Circular</h5>
+                        <svg class="figure-svg w-100" height="200" viewBox="0 0 200 200" onclick="showFigureInfo('sector')">
+                            <circle cx="100" cy="100" r="70" fill="none" stroke="#e5e7eb" stroke-width="1"/>
+                            <path d="M 100 100 L 100 30 A 70 70 0 0 1 160.62 150 Z" 
+                                  fill="rgba(245, 158, 11, 0.4)" stroke="#f59e0b" stroke-width="3"/>
+                            <circle cx="100" cy="100" r="3" fill="#f59e0b"/>
+                            <text x="100" y="180" text-anchor="middle" font-size="12" fill="#f59e0b" font-weight="bold">
+                                Como una rebanada de pizza
+                            </text>
+                        </svg>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <h5 class="text-center">🌙 Segmento Circular</h5>
+                        <svg class="figure-svg w-100" height="200" viewBox="0 0 200 200" onclick="showFigureInfo('segmento')">
+                            <circle cx="100" cy="100" r="70" fill="none" stroke="#e5e7eb" stroke-width="1"/>
+                            <path d="M 50 70 A 70 70 0 0 1 150 70 Z" 
+                                  fill="rgba(59, 130, 246, 0.4)" stroke="#3b82f6" stroke-width="3"/>
+                            <line x1="50" y1="70" x2="150" y2="70" stroke="#3b82f6" stroke-width="3"/>
+                            <text x="100" y="180" text-anchor="middle" font-size="12" fill="#3b82f6" font-weight="bold">
+                                Parte cortada por una cuerda
+                            </text>
+                        </svg>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <h5 class="text-center">💍 Corona Circular</h5>
+                        <svg class="figure-svg w-100" height="200" viewBox="0 0 200 200" onclick="showFigureInfo('corona')">
+                            <circle cx="100" cy="100" r="70" fill="rgba(16, 185, 129, 0.4)" stroke="#10b981" stroke-width="3"/>
+                            <circle cx="100" cy="100" r="40" fill="white" stroke="#10b981" stroke-width="3"/>
+                            <circle cx="100" cy="100" r="3" fill="#10b981"/>
+                            <text x="100" y="180" text-anchor="middle" font-size="12" fill="#10b981" font-weight="bold">
+                                Como un anillo o dona
+                            </text>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div id="figureInfo" class="figure-info mt-3" style="display: none;">
+                    <div id="figureDetails"></div>
+                </div>
+            </div>
+
+            <!-- Juego de identificación -->
+            <div class="game-area">
+                <h3>🎮 Juego: ¡Identifica la figura!</h3>
+                <p>¿Puedes reconocer qué tipo de figura circular es?</p>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <svg id="gameCanvas" class="figure-svg w-100" height="250" viewBox="0 0 300 250">
+                            <!-- La figura del juego se generará aquí -->
+                        </svg>
+                        
+                        <div class="text-center mt-3">
+                            <button class="btn btn-fun" onclick="newGameRound()">🎲 Nueva Figura</button>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div id="gameQuestion" class="figure-info">
+                            <h5>🎯 ¿Qué figura es?</h5>
+                            <p>Haz clic en "Nueva Figura" para empezar</p>
+                        </div>
+                        
+                        <div id="gameOptions" class="d-grid gap-2 mt-3" style="display: none;">
+                            <button class="btn btn-outline-warning" onclick="guessAnswer('sector')">🍕 Sector Circular</button>
+                            <button class="btn btn-outline-primary" onclick="guessAnswer('segmento')">🌙 Segmento Circular</button>
+                            <button class="btn btn-outline-success" onclick="guessAnswer('corona')">💍 Corona Circular</button>
+                            <button class="btn btn-outline-info" onclick="guessAnswer('circulo')">🔴 Círculo Completo</button>
+                        </div>
+                        
+                        <div class="score-display mt-3">
+                            <div>Puntuación: <span id="gameScore">0</span> / <span id="gameTotal">0</span></div>
+                            <div class="mt-2">
+                                <div class="progress">
+                                    <div id="gameProgress" class="progress-bar bg-warning" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ejercicios prácticos -->
+            <div class="exercise-card">
+                <h3>🎯 ¡Practica lo que aprendiste!</h3>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Ejercicio 1: Verdadero o Falso</h5>
+                        
+                        <div class="mb-3">
+                            <p><strong>1.</strong> Un sector circular es como una rebanada de pizza.</p>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q1" id="q1v" value="true">
+                                <label class="form-check-label" for="q1v">Verdadero</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q1" id="q1f" value="false">
+                                <label class="form-check-label" for="q1f">Falso</label>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <p><strong>2.</strong> Una corona circular tiene un agujero en el centro.</p>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q2" id="q2v" value="true">
+                                <label class="form-check-label" for="q2v">Verdadero</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q2" id="q2f" value="false">
+                                <label class="form-check-label" for="q2f">Falso</label>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-fun" onclick="checkTrueFalse()">Comprobar</button>
+                        <div id="resultTF" class="mt-2"></div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h5>Ejercicio 2: Relaciona</h5>
+                        
+                        <div class="mb-3">
+                            <p><strong>1.</strong> ¿Qué figura parece una dona?</p>
+                            <select id="match1" class="form-select">
+                                <option value="">Selecciona</option>
+                                <option value="sector">Sector circular</option>
+                                <option value="segmento">Segmento circular</option>
+                                <option value="corona">Corona circular</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <p><strong>2.</strong> ¿Qué figura se forma al cortar un círculo con una cuerda?</p>
+                            <select id="match2" class="form-select">
+                                <option value="">Selecciona</option>
+                                <option value="sector">Sector circular</option>
+                                <option value="segmento">Segmento circular</option>
+                                <option value="corona">Corona circular</option>
+                            </select>
+                        </div>
+                        
+                        <button class="btn btn-fun" onclick="checkMatching()">Comprobar</button>
+                        <div id="resultMatch" class="mt-2"></div>
+                    </div>
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <h5>Ejercicio 3: Problema práctico</h5>
+                        <p>María quiere hacer galletas. Corta la masa circular en 8 partes iguales. 
+                        ¿Cómo se llama cada parte?</p>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <svg width="200" height="150" viewBox="0 0 200 150" class="mx-auto d-block">
+                                    <circle cx="100" cy="75" r="60" fill="rgba(245, 158, 11, 0.2)" stroke="#f59e0b" stroke-width="2"/>
+                                    <!-- Líneas divisorias -->
+                                    <line x1="100" y1="75" x2="100" y2="15" stroke="#6b7280" stroke-width="1"/>
+                                    <line x1="100" y1="75" x2="142.4" y2="32.6" stroke="#6b7280" stroke-width="1"/>
+                                    <line x1="100" y1="75" x2="160" y2="75" stroke="#6b7280" stroke-width="1"/>
+                                    <line x1="100" y1="75" x2="142.4" y2="117.4" stroke="#6b7280" stroke-width="1"/>
+                                    <line x1="100" y1="75" x2="100" y2="135" stroke="#6b7280" stroke-width="1"/>
+                                    <line x1="100" y1="75" x2="57.6" y2="117.4" stroke="#6b7280" stroke-width="1"/>
+                                    <line x1="100" y1="75" x2="40" y2="75" stroke="#6b7280" stroke-width="1"/>
+                                    <line x1="100" y1="75" x2="57.6" y2="32.6" stroke="#6b7280" stroke-width="1"/>
+                                    <circle cx="100" cy="75" r="3" fill="#f59e0b"/>
+                                </svg>
+                            </div>
+                            <div class="col-md-6">
+                                <select id="practical" class="form-select mb-3">
+                                    <option value="">Selecciona la respuesta</option>
+                                    <option value="sector">Sectores circulares</option>
+                                    <option value="segmento">Segmentos circulares</option>
+                                    <option value="corona">Coronas circulares</option>
+                                    <option value="cuerda">Cuerdas</option>
+                                </select>
+                                <button class="btn btn-fun" onclick="checkPractical()">Comprobar</button>
+                                <div id="resultPractical" class="mt-2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aplicaciones en la vida real -->
+            <div class="fun-fact">
+                <h4>🌍 ¡Figuras circulares en la vida real!</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>🍕 Sectores circulares:</h6>
+                        <ul>
+                            <li>Rebanadas de pizza</li>
+                            <li>Porciones de pastel</li>
+                            <li>Gráficos de torta</li>
+                            <li>Abanicos</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>💍 Coronas circulares:</h6>
+                        <ul>
+                            <li>Anillos y pulseras</li>
+                            <li>Donas y rosquillas</li>
+                            <li>CDs y DVDs</li>
+                            <li>Arandelas</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botón de completar -->
+            <div class="text-center mt-4">
+                <button class="btn btn-fun btn-lg" onclick="completeLesson()">
+                    🎉 ¡Domino las figuras circulares!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Variables del juego
+        let gameScore = 0;
+        let gameTotal = 0;
+        let currentGameFigure = '';
+        let exercisesCompleted = 0;
+
+        // Figuras del juego
+        const gameFigures = [
+            {
+                name: 'sector',
+                svg: `
+                    <circle cx="150" cy="125" r="80" fill="none" stroke="#e5e7eb" stroke-width="1"/>
+                    <path d="M 150 125 L 150 45 A 80 80 0 0 1 220 175 Z" 
+                          fill="rgba(245, 158, 11, 0.4)" stroke="#f59e0b" stroke-width="3"/>
+                    <circle cx="150" cy="125" r="3" fill="#f59e0b"/>
+                `,
+                hint: 'Parece una rebanada de pizza 🍕'
+            },
+            {
+                name: 'segmento',
+                svg: `
+                    <circle cx="150" cy="125" r="80" fill="none" stroke="#e5e7eb" stroke-width="1"/>
+                    <path d="M 90 90 A 80 80 0 0 1 210 90 Z" 
+                          fill="rgba(59, 130, 246, 0.4)" stroke="#3b82f6" stroke-width="3"/>
+                    <line x1="90" y1="90" x2="210" y2="90" stroke="#3b82f6" stroke-width="3"/>
+                `,
+                hint: 'Es la parte que queda al cortar con una línea recta 🌙'
+            },
+            {
+                name: 'corona',
+                svg: `
+                    <circle cx="150" cy="125" r="80" fill="rgba(16, 185, 129, 0.4)" stroke="#10b981" stroke-width="3"/>
+                    <circle cx="150" cy="125" r="45" fill="white" stroke="#10b981" stroke-width="3"/>
+                    <circle cx="150" cy="125" r="3" fill="#10b981"/>
+                `,
+                hint: 'Parece una dona o un anillo 💍'
+            },
+            {
+                name: 'circulo',
+                svg: `
+                    <circle cx="150" cy="125" r="80" fill="rgba(139, 92, 246, 0.4)" stroke="#8b5cf6" stroke-width="3"/>
+                    <circle cx="150" cy="125" r="3" fill="#8b5cf6"/>
+                `,
+                hint: 'Es un círculo completo 🔴'
+            }
+        ];
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animaciones de entrada
+            const elements = document.querySelectorAll('.concept-box, .interactive-area, .exercise-card, .game-area');
+            elements.forEach((element, index) => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    element.style.transition = 'all 0.6s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+
+        // Mostrar información de figuras
+        function showFigureInfo(figureType) {
+            const info = {
+                sector: {
+                    title: '🍕 Sector Circular',
+                    description: 'Es una porción del círculo limitada por dos radios y un arco. ¡Como una rebanada de pizza! Se forma desde el centro hacia afuera.',
+                    examples: 'Ejemplos: rebanadas de pizza, porciones de pastel, gráficos de torta.'
+                },
+                segmento: {
+                    title: '🌙 Segmento Circular',
+                    description: 'Es la parte del círculo que queda entre una cuerda y el arco correspondiente. ¡Como si cortaras un trozo con una línea recta!',
+                    examples: 'Ejemplos: la parte superior de una ventana arqueada, un trozo cortado de una galleta redonda.'
+                },
+                corona: {
+                    title: '💍 Corona Circular',
+                    description: 'Es la región entre dos círculos concéntricos (que tienen el mismo centro). ¡Como una dona o un anillo!',
+                    examples: 'Ejemplos: donas, anillos, CDs, arandelas, marcos circulares.'
+                }
+            };
+            
+            const figureData = info[figureType];
+            if (figureData) {
+                document.getElementById('figureDetails').innerHTML = `
+                    <h5>${figureData.title}</h5>
+                    <p>${figureData.description}</p>
+                    <p><strong>${figureData.examples}</strong></p>
+                `;
+                document.getElementById('figureInfo').style.display = 'block';
+            }
+        }
+
+        // Nuevo round del juego
+        function newGameRound() {
+            const randomFigure = gameFigures[Math.floor(Math.random() * gameFigures.length)];
+            currentGameFigure = randomFigure.name;
+            
+            // Mostrar figura en el canvas
+            document.getElementById('gameCanvas').innerHTML = randomFigure.svg;
+            
+            // Mostrar pregunta
+            document.getElementById('gameQuestion').innerHTML = `
+                <h5>🎯 ¿Qué figura es?</h5>
+                <p>${randomFigure.hint}</p>
+            `;
+            
+            document.getElementById('gameOptions').style.display = 'block';
+        }
+
+        // Verificar respuesta del juego
+        function guessAnswer(answer) {
+            gameTotal++;
+            const isCorrect = answer === currentGameFigure;
+            
+            if (isCorrect) {
+                gameScore++;
+                document.getElementById('gameQuestion').innerHTML = `
+                    <div class="alert alert-success">🎉 ¡Correcto! Es un ${getFigureName(answer)}</div>
+                `;
+            } else {
+                document.getElementById('gameQuestion').innerHTML = `
+                    <div class="alert alert-danger">❌ Incorrecto. Era un ${getFigureName(currentGameFigure)}</div>
+                `;
+            }
+            
+            // Actualizar puntuación
+            document.getElementById('gameScore').textContent = gameScore;
+            document.getElementById('gameTotal').textContent = gameTotal;
+            
+            const percentage = gameTotal > 0 ? (gameScore / gameTotal) * 100 : 0;
+            document.getElementById('gameProgress').style.width = percentage + '%';
+            
+            document.getElementById('gameOptions').style.display = 'none';
+            
+            // Nueva figura después de 2 segundos
+            setTimeout(() => {
+                newGameRound();
+            }, 2000);
+        }
+
+        function getFigureName(figureType) {
+            const names = {
+                'sector': 'sector circular',
+                'segmento': 'segmento circular',
+                'corona': 'corona circular',
+                'circulo': 'círculo completo'
+            };
+            return names[figureType] || figureType;
+        }
+
+        // Ejercicios
+        function checkTrueFalse() {
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            const q2 = document.querySelector('input[name="q2"]:checked');
+            const result = document.getElementById('resultTF');
+            
+            let correct = 0;
+            let feedback = [];
+            
+            if (q1 && q1.value === 'true') {
+                correct++;
+                feedback.push('✅ Pregunta 1: Correcto, un sector SÍ es como una rebanada de pizza');
+            } else {
+                feedback.push('❌ Pregunta 1: Un sector circular SÍ es como una rebanada de pizza');
+            }
+            
+            if (q2 && q2.value === 'true') {
+                correct++;
+                feedback.push('✅ Pregunta 2: Correcto, una corona SÍ tiene un agujero en el centro');
+            } else {
+                feedback.push('❌ Pregunta 2: Una corona circular SÍ tiene un agujero en el centro');
+            }
+            
+            if (correct === 2) {
+                exercisesCompleted++;
+                result.innerHTML = `<div class="alert alert-success">${feedback.join('<br>')}</div>`;
+            } else {
+                result.innerHTML = `<div class="alert alert-warning">${feedback.join('<br>')}</div>`;
+            }
+        }
+
+        function checkMatching() {
+            const match1 = document.getElementById('match1').value;
+            const match2 = document.getElementById('match2').value;
+            const result = document.getElementById('resultMatch');
+            
+            let correct = 0;
+            let feedback = [];
+            
+            if (match1 === 'corona') {
+                correct++;
+                feedback.push('✅ Pregunta 1: Correcto, la corona circular parece una dona');
+            } else {
+                feedback.push('❌ Pregunta 1: La corona circular es la que parece una dona');
+            }
+            
+            if (match2 === 'segmento') {
+                correct++;
+                feedback.push('✅ Pregunta 2: Correcto, el segmento se forma al cortar con una cuerda');
+            } else {
+                feedback.push('❌ Pregunta 2: El segmento circular se forma al cortar con una cuerda');
+            }
+            
+            if (correct === 2) {
+                exercisesCompleted++;
+                result.innerHTML = `<div class="alert alert-success">${feedback.join('<br>')}</div>`;
+            } else {
+                result.innerHTML = `<div class="alert alert-warning">${feedback.join('<br>')}</div>`;
+            }
+        }
+
+        function checkPractical() {
+            const answer = document.getElementById('practical').value;
+            const result = document.getElementById('resultPractical');
+            
+            if (answer === 'sector') {
+                exercisesCompleted++;
+                result.innerHTML = '<div class="alert alert-success">🎉 ¡Perfecto! Cada parte es un sector circular, como las rebanadas de pizza</div>';
+            } else {
+                result.innerHTML = '<div class="alert alert-danger">❌ Cuando cortas un círculo desde el centro, cada parte es un sector circular</div>';
+            }
+        }
+
+        function completeLesson() {
+            if (exercisesCompleted >= 2 || gameScore >= 3) {
+                // Marcar como completado en el sistema principal
+                if (window.parent && window.parent.markTopicCompleted) {
+                    window.parent.markTopicCompleted('figuras-circulares.html');
+                }
+                
+                alert('🎉 ¡Fantástico! Has dominado las figuras circulares. ¡Ahora puedes reconocer sectores, segmentos y coronas en todas partes!');
+                window.location.href = 'index.html';
+            } else {
+                alert('💪 ¡Casi lo tienes! Completa al menos 2 ejercicios o consigue 3 puntos en el juego antes de terminar.');
+            }
+        }
+    </script>
+</body>
+</html>
