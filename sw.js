@@ -1,8 +1,10 @@
-const CACHE_NAME = 'matematicas-figuras-planas-v2';
+const CACHE_NAME = 'matematicas-figuras-planas-v6';
 const urlsToCache = [
     './',
     './index.html',
     './manifest.json',
+    './icon-192.png',
+    './icon-512.png',
     // Cache external dependencies for offline use
     'https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css'
 ];

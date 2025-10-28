@@ -205,6 +205,95 @@
             transform: translateY(0);
         }
 
+        /* Home hero and practice enhancements */
+        body.bg-gray-100 {
+            background: linear-gradient(180deg, #eff6ff 0%, #f8fafc 50%, #fefce8 100%);
+        }
+
+        .home-hero {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.92), rgba(56, 189, 248, 0.85));
+            color: white;
+        }
+
+        .home-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.35), transparent 55%);
+            opacity: 0.9;
+        }
+
+        .home-hero > div {
+            position: relative;
+            z-index: 1;
+        }
+
+        .practice-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 15px 30px rgba(15, 23, 42, 0.08);
+            border: 1px solid rgba(148, 163, 184, 0.15);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .practice-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 35px rgba(59, 130, 246, 0.18);
+        }
+
+        .practice-option {
+            transition: all 0.2s ease-in-out;
+        }
+
+        .practice-option.active {
+            background-color: #3B82F6;
+            color: white;
+            border-color: rgba(59, 130, 246, 0.9);
+            box-shadow: 0 12px 25px rgba(59, 130, 246, 0.35);
+        }
+
+        .install-button {
+            background-color: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .install-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.25);
+        }
+
+        .practice-feedback {
+            border-radius: 0.75rem;
+            padding: 1rem;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .practice-feedback.success {
+            background-color: #dcfce7;
+            color: #166534;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .practice-feedback.error {
+            background-color: #fee2e2;
+            color: #b91c1c;
+            border: 1px solid rgba(248, 113, 113, 0.35);
+        }
+
+        @media (max-width: 768px) {
+            .home-hero {
+                text-align: center;
+            }
+
+            .home-hero .install-button {
+                width: 100%;
+            }
+        }
+
         /* Loading states */
         .loading {
             position: relative;
@@ -457,10 +546,258 @@
         <!-- Home View -->
         <div id="homeView" class="view active">
             <div class="container mx-auto px-4 py-8">
-                <header class="text-center mb-8">
-                    <h1 class="text-4xl font-bold text-blue-600 mb-2">Matemáticas</h1>
-                    <h2 class="text-2xl text-gray-700">Figuras Planas - 6º Grado</h2>
+                <header class="home-hero rounded-3xl mb-8 p-8 sm:p-10 shadow-xl">
+                    <div class="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start lg:items-center">
+                        <div class="flex-1 space-y-3">
+                            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white bg-opacity-20 text-sm font-semibold tracking-wide uppercase">
+                                <span class="text-white text-lg">📘</span>
+                                Matemáticas · Figuras Planas
+                            </span>
+                            <h1 class="text-4xl sm:text-5xl font-bold tracking-tight">Figuras Planas — 6.º Primaria</h1>
+                            <p class="text-base sm:text-lg text-blue-50 leading-relaxed">
+                                Reforzamos los aprendizajes clave de la SEP con teoría, prácticas guiadas y evaluaciones
+                                interactivas para trabajar perímetros, áreas, elementos y clasificación de figuras.
+                            </p>
+                        </div>
+                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
+                            <button id="installAppButton"
+                                class="hidden install-button rounded-2xl px-6 py-3 font-semibold flex items-center justify-center gap-2 touch-target interactive-element">
+                                <span>⬇️</span>
+                                Instalar aplicación
+                            </button>
+                            <p class="text-sm text-blue-100 max-w-xs">
+                                Funciona sin conexión y puedes activarla desde cualquier dispositivo escolar.
+                            </p>
+                        </div>
+                    </div>
                 </header>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-8 space-y-6">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Figuras Planas — 6.º Primaria (SEP)</h3>
+                        <p class="text-gray-700">
+                            Las figuras planas se estudian dentro de un mismo plano con dos dimensiones: largo y ancho.
+                            En sexto grado se revisan sus características y se introducen los cálculos básicos de perímetro y área.
+                            <span class="block mt-2 text-sm text-gray-500">Fuente: SEP – Desarrollo de habilidades. Matemáticas. Fase 5. Parte 2.</span>
+                        </p>
+                    </div>
+
+                    <section class="space-y-3">
+                        <h4 class="text-xl font-semibold text-blue-700">1. Introducción</h4>
+                        <p class="text-gray-700 leading-relaxed">
+                            Las figuras planas están contenidas en un solo plano, no presentan grosor y se describen a partir de su largo y ancho.
+                            En 6.º de primaria se analizan con mayor detalle para comprender sus atributos y comenzar a calcular perímetros y áreas.
+                        </p>
+                    </section>
+
+                    <section class="space-y-3">
+                        <h4 class="text-xl font-semibold text-blue-700">2. Elementos de las figuras planas</h4>
+                        <ul class="list-disc list-inside text-gray-700 space-y-1">
+                            <li><strong>Lado:</strong> segmento recto que delimita la figura.</li>
+                            <li><strong>Vértice:</strong> punto donde se encuentran dos lados.</li>
+                            <li><strong>Ángulo:</strong> abertura formada por dos lados que comparten vértice.</li>
+                        </ul>
+                        <p class="text-gray-700">
+                            Para las figuras curvas, como el círculo, se usan los conceptos de <strong>radio</strong>, <strong>diámetro</strong> y <strong>circunferencia</strong>.
+                        </p>
+                    </section>
+
+                    <section class="space-y-3">
+                        <h4 class="text-xl font-semibold text-blue-700">3. Clasificación básica</h4>
+                        <p class="text-gray-700">
+                            Según el número de lados (en polígonos) podemos distinguir:
+                        </p>
+                        <ul class="list-disc list-inside text-gray-700 space-y-1">
+                            <li>Triángulo: 3 lados.</li>
+                            <li>Cuadrilátero: 4 lados.</li>
+                            <li>Pentágono: 5 lados.</li>
+                            <li>Hexágono: 6 lados.</li>
+                            <li>...</li>
+                        </ul>
+                        <p class="text-gray-700">
+                            También se diferencia entre figuras de líneas rectas (polígonos) y figuras con curvas, como el círculo.
+                        </p>
+                        <p class="text-sm text-gray-500">
+                            Fuente: SEP – Desarrollo de habilidades. Matemáticas. Fase 5. Parte 2.
+                        </p>
+                    </section>
+
+                    <section class="space-y-3">
+                        <h4 class="text-xl font-semibold text-blue-700">4. Perímetro y área</h4>
+                        <p class="text-gray-700">
+                            Se introduce el cálculo de perímetro y área en figuras simples:
+                        </p>
+                        <ul class="list-disc list-inside text-gray-700 space-y-1">
+                            <li><strong>Perímetro:</strong> longitud del contorno. Para un cuadrado <code>P = 4a</code> y para un rectángulo <code>P = 2(l + w)</code>.</li>
+                            <li><strong>Área:</strong> superficie interna. En el cuadrado <code>A = a²</code> y en el rectángulo <code>A = l × w</code>.</li>
+                        </ul>
+                        <p class="text-gray-700">
+                            Estas fórmulas sirven para que el alumnado practique con figuras básicas antes de avanzar a casos más complejos.
+                        </p>
+                    </section>
+
+                    <section class="space-y-3">
+                        <h4 class="text-xl font-semibold text-blue-700">5. Actividades sugeridas</h4>
+                        <ul class="list-disc list-inside text-gray-700 space-y-1">
+                            <li>Identificar figuras planas en objetos cotidianos o ilustraciones.</li>
+                            <li>Contar lados y vértices para distinguir polígonos de figuras con curvas.</li>
+                            <li>En la app, ingresar valores de lado, base o altura y calcular perímetros y áreas.</li>
+                            <li>Realizar un mini-proyecto fotográfico describiendo objetos como figuras planas.</li>
+                        </ul>
+                    </section>
+
+                    <section class="space-y-3">
+                        <h4 class="text-xl font-semibold text-blue-700">6. Bibliografía / Fuentes</h4>
+                        <p class="text-gray-700">
+                            Secretaría de Educación Pública. <em>Desarrollo de habilidades. Matemáticas. Fase 5. Parte 2.</em> México.
+                        </p>
+                        <a href="https://educacionbasica.sep.gob.mx/wp-content/uploads/2024/10/Desarrollo-de-habilidades-Matematicas-Fase-5-Parte-2.pdf"
+                           class="inline-flex items-center text-blue-600 hover:text-blue-800 underline break-all"
+                           target="_blank" rel="noopener noreferrer">
+                            https://educacionbasica.sep.gob.mx/wp-content/uploads/2024/10/Desarrollo-de-habilidades-Matematicas-Fase-5-Parte-2.pdf
+                        </a>
+                    </section>
+                </div>
+
+                <section class="mb-10 space-y-6">
+                    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+                        <div>
+                            <h3 class="text-2xl font-semibold text-gray-800">Prácticas interactivas alineadas a SEP</h3>
+                            <p class="text-gray-600">
+                                Refuerza la identificación de figuras, el cálculo de perímetro y área, y la clasificación de polígonos tal como lo propone la guía oficial.
+                            </p>
+                        </div>
+                        <span class="inline-flex items-center gap-2 text-sm text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                                <path d="M10 2a1 1 0 01.894.553l1.382 2.763 3.05.443a1 1 0 01.554 1.705l-2.206 2.151.521 3.033a1 1 0 01-1.451 1.054L10 12.347l-2.744 1.442a1 1 0 01-1.451-1.054l.521-3.033-2.206-2.151a1 1 0 01.554-1.705l3.05-.443 1.382-2.763A1 1 0 0110 2z" />
+                            </svg>
+                            Actividades SEP Fase 5 · Parte 2
+                        </span>
+                    </div>
+
+                    <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+                        <article class="practice-card p-6 space-y-4">
+                            <div class="flex items-center gap-3">
+                                <span class="text-3xl" aria-hidden="true">🔍</span>
+                                <h4 class="text-xl font-semibold text-gray-800">Reto de observación</h4>
+                            </div>
+                            <p class="text-gray-600">
+                                Mira a tu alrededor, fotografía un objeto y explica por qué corresponde a una figura plana. Considera sus lados,
+                                vértices o si presenta curvas.
+                            </p>
+                            <button id="observationPromptBtn"
+                                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-3 rounded-xl touch-target interactive-element">
+                                Generar nuevo reto
+                            </button>
+                            <div id="observationPromptOutput"
+                                class="practice-feedback mt-2 text-sm text-gray-700 bg-slate-50 border border-dashed border-blue-200">
+                                Describe un objeto cotidiano y señálalo en casa o en la escuela.
+                            </div>
+                        </article>
+
+                        <article class="practice-card p-6 space-y-5">
+                            <div class="flex items-center gap-3">
+                                <span class="text-3xl" aria-hidden="true">📐</span>
+                                <h4 class="text-xl font-semibold text-gray-800">Calculadora de perímetro y área</h4>
+                            </div>
+                            <p class="text-gray-600">
+                                Aplica las fórmulas básicas para un cuadrado o rectángulo tal como se sugiere en el programa. Ingresa los valores y comprueba tus cálculos.
+                            </p>
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="practiceShapeSelect" class="block text-sm font-medium text-gray-700 mb-1">
+                                        Selecciona una figura
+                                    </label>
+                                    <select id="practiceShapeSelect"
+                                        class="w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        <option value="cuadrado">Cuadrado</option>
+                                        <option value="rectangulo">Rectángulo</option>
+                                    </select>
+                                </div>
+                                <div id="squareFields">
+                                    <label for="squareSideInput" class="block text-sm font-medium text-gray-700 mb-1">
+                                        Lado (cm)
+                                    </label>
+                                    <input id="squareSideInput" type="number" min="0" step="0.1"
+                                        class="w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        placeholder="Ej. 6.5">
+                                </div>
+                                <div id="rectangleFields" class="grid grid-cols-1 sm:grid-cols-2 gap-3 hidden">
+                                    <div>
+                                        <label for="rectangleLengthInput" class="block text-sm font-medium text-gray-700 mb-1">
+                                            Largo (cm)
+                                        </label>
+                                        <input id="rectangleLengthInput" type="number" min="0" step="0.1"
+                                            class="w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            placeholder="Ej. 8">
+                                    </div>
+                                    <div>
+                                        <label for="rectangleWidthInput" class="block text-sm font-medium text-gray-700 mb-1">
+                                            Ancho (cm)
+                                        </label>
+                                        <input id="rectangleWidthInput" type="number" min="0" step="0.1"
+                                            class="w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            placeholder="Ej. 4.5">
+                                    </div>
+                                </div>
+                                <button id="calculatePracticeBtn"
+                                    class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-4 py-3 rounded-xl touch-target interactive-element">
+                                    Calcular
+                                </button>
+                                <div id="calculationResult" class="practice-feedback hidden text-sm"></div>
+                            </div>
+                        </article>
+
+                        <article class="practice-card p-6 space-y-5">
+                            <div class="flex items-center gap-3">
+                                <span class="text-3xl" aria-hidden="true">🧠</span>
+                                <h4 class="text-xl font-semibold text-gray-800">Clasificador de polígonos</h4>
+                            </div>
+                            <p class="text-gray-600">
+                                Nombra el polígono según su número de lados y verifica tu respuesta. Practica la clasificación recomendada por el libro de la SEP.
+                            </p>
+                            <div class="bg-blue-50 border border-blue-100 rounded-2xl p-4 text-center">
+                                <p class="text-sm text-blue-700">¿Qué figura tiene</p>
+                                <p class="text-3xl font-bold text-blue-900">
+                                    <span id="polygonQuestionNumber">4</span> lados?
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <button type="button"
+                                    class="practice-option border border-blue-200 rounded-xl px-4 py-2 font-semibold text-gray-700 touch-target interactive-element"
+                                    data-polygon-option="Triángulo">
+                                    Triángulo
+                                </button>
+                                <button type="button"
+                                    class="practice-option border border-blue-200 rounded-xl px-4 py-2 font-semibold text-gray-700 touch-target interactive-element"
+                                    data-polygon-option="Cuadrilátero">
+                                    Cuadrilátero
+                                </button>
+                                <button type="button"
+                                    class="practice-option border border-blue-200 rounded-xl px-4 py-2 font-semibold text-gray-700 touch-target interactive-element"
+                                    data-polygon-option="Pentágono">
+                                    Pentágono
+                                </button>
+                                <button type="button"
+                                    class="practice-option border border-blue-200 rounded-xl px-4 py-2 font-semibold text-gray-700 touch-target interactive-element"
+                                    data-polygon-option="Hexágono">
+                                    Hexágono
+                                </button>
+                            </div>
+                            <div class="flex flex-col sm:flex-row gap-3">
+                                <button id="verifyPolygonAnswer"
+                                    class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-3 rounded-xl touch-target interactive-element">
+                                    Verificar respuesta
+                                </button>
+                                <button id="newPolygonQuestion"
+                                    class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold px-4 py-3 rounded-xl touch-target interactive-element">
+                                    Nueva pregunta
+                                </button>
+                            </div>
+                            <div id="polygonFeedback" class="practice-feedback hidden text-sm"></div>
+                        </article>
+                    </div>
+                </section>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
                     <!-- Module Cards will be populated by JavaScript -->
@@ -546,6 +883,8 @@
     </div>
 
     <script>
+        let deferredInstallPrompt = null;
+
         // Content object structure for all five modules
         const content = {
             'suma-angulos': {
@@ -1045,6 +1384,250 @@
             }
         };
 
+        const observationPrompts = [
+            'Encuentra un objeto rectangular en tu entorno, mídelo con una regla y anota su largo y ancho.',
+            'Identifica una figura circular en casa o en la escuela y explica qué representa su radio y su diámetro.',
+            'Fotografía un objeto triangular y describe cuántos lados y vértices observas.',
+            'Busca una ventana o puerta en forma de rectángulo y calcula su perímetro aproximado.',
+            'Localiza una señal o letrero con forma de pentágono u octágono e identifica sus lados.',
+            'Encuentra dos objetos con formas distintas (polígono y figura curva) y compara sus características.'
+        ];
+
+        const polygonCatalogue = [
+            { sides: 3, name: 'Triángulo', explanation: 'Tiene 3 lados y 3 vértices. Es el polígono más sencillo.' },
+            { sides: 4, name: 'Cuadrilátero', explanation: 'Se compone de 4 lados y 4 vértices. Puede ser cuadrado, rectángulo o rombo.' },
+            { sides: 5, name: 'Pentágono', explanation: 'Presenta 5 lados y 5 vértices. Cada ángulo interno supera los 90°.' },
+            { sides: 6, name: 'Hexágono', explanation: 'Cuenta con 6 lados y 6 vértices. Se usa para representar panales o mosaicos.' }
+        ];
+
+        function initHomePractices() {
+            initObservationPractice();
+            initPerimeterAreaPractice();
+            initPolygonClassifierPractice();
+        }
+
+        function initObservationPractice() {
+            const promptButton = document.getElementById('observationPromptBtn');
+            const promptOutput = document.getElementById('observationPromptOutput');
+            if (!promptButton || !promptOutput) return;
+
+            promptButton.addEventListener('click', () => {
+                const randomPrompt = observationPrompts[Math.floor(Math.random() * observationPrompts.length)];
+                promptOutput.textContent = randomPrompt;
+                promptOutput.classList.remove('success', 'error');
+            });
+        }
+
+        function initPerimeterAreaPractice() {
+            const shapeSelect = document.getElementById('practiceShapeSelect');
+            const squareFields = document.getElementById('squareFields');
+            const rectangleFields = document.getElementById('rectangleFields');
+            const squareSideInput = document.getElementById('squareSideInput');
+            const rectangleLengthInput = document.getElementById('rectangleLengthInput');
+            const rectangleWidthInput = document.getElementById('rectangleWidthInput');
+            const calculateBtn = document.getElementById('calculatePracticeBtn');
+            const resultContainer = document.getElementById('calculationResult');
+            
+            if (!shapeSelect || !squareFields || !rectangleFields || !calculateBtn || !resultContainer) return;
+
+            const numberFormatter = new Intl.NumberFormat('es-MX', { maximumFractionDigits: 2 });
+
+            function resetInputs() {
+                squareSideInput.value = '';
+                rectangleLengthInput.value = '';
+                rectangleWidthInput.value = '';
+            }
+
+            function hideResult() {
+                resultContainer.classList.add('hidden');
+                resultContainer.classList.remove('success', 'error');
+                resultContainer.innerHTML = '';
+            }
+
+            function toggleFields() {
+                if (shapeSelect.value === 'rectangulo') {
+                    rectangleFields.classList.remove('hidden');
+                    squareFields.classList.add('hidden');
+                } else {
+                    rectangleFields.classList.add('hidden');
+                    squareFields.classList.remove('hidden');
+                }
+                hideResult();
+            }
+
+            function showPracticeError(message) {
+                resultContainer.classList.remove('hidden', 'success');
+                resultContainer.classList.add('error');
+                resultContainer.innerHTML = `
+                    <p class="font-semibold mb-1">Revisa tus datos</p>
+                    <p>${message}</p>
+                `;
+            }
+
+            function showPracticeSuccess(perimeter, area, explanation) {
+                resultContainer.classList.remove('hidden', 'error');
+                resultContainer.classList.add('success');
+                resultContainer.innerHTML = `
+                    <p class="text-sm font-semibold">Resultados</p>
+                    <p class="text-lg font-bold mt-1">Perímetro: ${numberFormatter.format(perimeter)} cm</p>
+                    <p class="text-lg font-bold">Área: ${numberFormatter.format(area)} cm²</p>
+                    <p class="text-xs text-emerald-700 mt-2">${explanation}</p>
+                `;
+            }
+
+            shapeSelect.addEventListener('change', () => {
+                toggleFields();
+                resetInputs();
+            });
+
+            calculateBtn.addEventListener('click', () => {
+                const figure = shapeSelect.value;
+                hideResult();
+
+                if (figure === 'cuadrado') {
+                    const side = parseFloat(squareSideInput.value);
+                    if (!Number.isFinite(side) || side <= 0) {
+                        showPracticeError('Ingresa un valor mayor que cero para el lado del cuadrado.');
+                        return;
+                    }
+                    const perimeter = 4 * side;
+                    const area = side * side;
+                    showPracticeSuccess(perimeter, area, 'Se aplicó P = 4a y A = a².');
+                } else if (figure === 'rectangulo') {
+                    const length = parseFloat(rectangleLengthInput.value);
+                    const width = parseFloat(rectangleWidthInput.value);
+                    if (!Number.isFinite(length) || !Number.isFinite(width) || length <= 0 || width <= 0) {
+                        showPracticeError('Ingresa valores mayores que cero para el largo y el ancho del rectángulo.');
+                        return;
+                    }
+                    const perimeter = 2 * (length + width);
+                    const area = length * width;
+                    showPracticeSuccess(perimeter, area, 'Se aplicó P = 2(l + w) y A = l × w.');
+                }
+            });
+
+            toggleFields();
+        }
+
+        function initPolygonClassifierPractice() {
+            const questionNumber = document.getElementById('polygonQuestionNumber');
+            const verifyButton = document.getElementById('verifyPolygonAnswer');
+            const newQuestionButton = document.getElementById('newPolygonQuestion');
+            const feedbackContainer = document.getElementById('polygonFeedback');
+            const optionButtons = Array.from(document.querySelectorAll('[data-polygon-option]'));
+
+            if (!questionNumber || !verifyButton || !newQuestionButton || !feedbackContainer || optionButtons.length === 0) {
+                return;
+            }
+
+            let currentPolygon = null;
+            let selectedName = null;
+
+            function hideFeedback() {
+                feedbackContainer.classList.add('hidden');
+                feedbackContainer.classList.remove('success', 'error');
+                feedbackContainer.innerHTML = '';
+            }
+
+            function setFeedback(isCorrect, message, extra = '') {
+                feedbackContainer.classList.remove('hidden');
+                feedbackContainer.classList.toggle('success', isCorrect);
+                feedbackContainer.classList.toggle('error', !isCorrect);
+                feedbackContainer.innerHTML = `
+                    <p class="font-semibold mb-1">${isCorrect ? '¡Excelente!' : 'Inténtalo de nuevo'}</p>
+                    <p>${message}</p>
+                    ${extra ? `<p class="mt-2 text-xs text-slate-600">${extra}</p>` : ''}
+                `;
+            }
+
+            function markSelection(button) {
+                optionButtons.forEach(option => option.classList.remove('active'));
+                if (button) {
+                    button.classList.add('active');
+                    selectedName = button.dataset.polygonOption;
+                }
+            }
+
+            optionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    markSelection(button);
+                    hideFeedback();
+                });
+            });
+
+            function generateQuestion() {
+                currentPolygon = polygonCatalogue[Math.floor(Math.random() * polygonCatalogue.length)];
+                questionNumber.textContent = currentPolygon.sides;
+                selectedName = null;
+                markSelection(null);
+                hideFeedback();
+            }
+
+            verifyButton.addEventListener('click', () => {
+                if (!selectedName) {
+                    setFeedback(false, 'Selecciona el nombre del polígono antes de verificar.');
+                    return;
+                }
+
+                const isCorrect = currentPolygon && selectedName === currentPolygon.name;
+                if (isCorrect) {
+                    setFeedback(true, `Correcto, ${currentPolygon.name.toLowerCase()} tiene ${currentPolygon.sides} lados.`, currentPolygon.explanation);
+                } else if (currentPolygon) {
+                    setFeedback(false, `Recuerda que ${currentPolygon.name.toLowerCase()} posee ${currentPolygon.sides} lados.`, currentPolygon.explanation);
+                }
+            });
+
+            newQuestionButton.addEventListener('click', () => {
+                generateQuestion();
+            });
+
+            generateQuestion();
+        }
+
+        function setupInstallPrompt() {
+            const installButton = document.getElementById('installAppButton');
+            if (!installButton) return;
+
+            window.addEventListener('beforeinstallprompt', (event) => {
+                event.preventDefault();
+                deferredInstallPrompt = event;
+                installButton.classList.remove('hidden');
+            });
+
+            installButton.addEventListener('click', async () => {
+                if (!deferredInstallPrompt) {
+                    showNotification('La instalación no está disponible en este momento.', 'info', 3000);
+                    return;
+                }
+
+                try {
+                    installButton.disabled = true;
+                    installButton.classList.add('opacity-80');
+                    deferredInstallPrompt.prompt();
+                    const { outcome } = await deferredInstallPrompt.userChoice;
+                    if (outcome === 'accepted') {
+                        showNotification('¡Gracias por instalar la aplicación!', 'success', 4000);
+                    } else {
+                        showNotification('Podrás instalar la aplicación más tarde desde este botón.', 'info', 4000);
+                    }
+                } catch (error) {
+                    console.error('Error durante la instalación de la PWA:', error);
+                    showNotification('No se pudo completar la instalación. Inténtalo nuevamente.', 'error', 4000);
+                } finally {
+                    installButton.disabled = false;
+                    installButton.classList.remove('opacity-80');
+                    installButton.classList.add('hidden');
+                    deferredInstallPrompt = null;
+                }
+            });
+
+            window.addEventListener('appinstalled', () => {
+                deferredInstallPrompt = null;
+                installButton.classList.add('hidden');
+                showNotification('La aplicación ya está instalada en este dispositivo.', 'success', 4000);
+            });
+        }
+
         // Initialize the application
         function initApp() {
             renderModuleCards();
@@ -1052,6 +1635,8 @@
             setupTestPanel();
             enhanceInteractiveElements();
             setupPerformanceOptimizations();
+            initHomePractices();
+            setupInstallPrompt();
             
             // Show welcome notification
             setTimeout(() => {
@@ -1304,18 +1889,18 @@
                 
                 // Show success notification
                 showNotification(`Contenido de ${currentTab} cargado`, 'success', 2000);
-                
-            }, 200);
 
-            // Initialize interactive elements based on current module and tab
-            setTimeout(() => {
-                try {
-                    initializeModuleContent(currentModule, currentTab);
-                } catch (error) {
-                    console.error(`❌ Error initializing ${currentModule} - ${currentTab}:`, error);
-                    showNotification(`Error al cargar el contenido interactivo`, 'error', 3000);
-                }
-            }, 100);
+                // Initialize interactive elements once content is ready
+                setTimeout(() => {
+                    try {
+                        initializeModuleContent(currentModule, currentTab);
+                    } catch (error) {
+                        console.error(`❌ Error initializing ${currentModule} - ${currentTab}:`, error);
+                        showNotification(`Error al cargar el contenido interactivo`, 'error', 3000);
+                    }
+                }, 50);
+
+            }, 200);
         }
 
         // Centralized module initialization with error handling
@@ -1697,20 +2282,24 @@
 
         // Loading state management
         function showLoadingState(element, text = 'Cargando...') {
-            const originalContent = element.innerHTML;
-            element.dataset.originalContent = originalContent;
-            
-            element.innerHTML = `
+            const placeholder = `
                 <div class="flex items-center justify-center space-x-2">
                     <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
                     <span>${text}</span>
                 </div>
             `;
+
+            element.dataset.loadingPlaceholder = placeholder;
+            element.dataset.originalContent = element.innerHTML;
+            element.innerHTML = placeholder;
             element.classList.add('loading');
             
             return () => {
-                element.innerHTML = originalContent;
                 element.classList.remove('loading');
+                if (element.innerHTML === element.dataset.loadingPlaceholder) {
+                    element.innerHTML = element.dataset.originalContent || '';
+                }
+                delete element.dataset.loadingPlaceholder;
                 delete element.dataset.originalContent;
             };
         }
