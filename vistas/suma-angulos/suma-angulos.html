@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suma de Ángulos - Figuras Planas</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fuentes de Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../core/animations.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            },
+            darkMode: 'class'
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors duration-300">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center text-2xl">
+                        📏
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-900 dark:text-white">Suma de Ángulos</h1>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Figuras Planas</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <a href="../../index.html" class="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                        Volver
+                    </a>
+
+                    <button id="darkModeToggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                        <svg class="w-6 h-6 text-gray-700 dark:text-gray-300 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                        <svg class="w-6 h-6 text-gray-700 dark:text-gray-300 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Tabs -->
+    <div class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex gap-8">
+                <a href="suma-angulos.html" class="py-4 px-2 border-b-2 border-orange-500 text-orange-600 dark:text-orange-400 font-medium flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                    Aprender
+                </a>
+                <a href="practica.html" class="py-4 px-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 font-medium flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                    </svg>
+                    Practicar
+                </a>
+                <a href="evaluacion.html" class="py-4 px-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 font-medium flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Evaluar
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenido -->
+    <main class="max-w-7xl mx-auto px-6 py-8">
+        <div class="mb-8">
+            <p class="text-gray-700 dark:text-gray-300 text-lg">
+                ¿Sabías que los ángulos de un triángulo siempre suman 180°? ¡Descubre este y otros secretos de los ángulos!
+            </p>
+        </div>
+
+        <!-- Concepto principal -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 mb-8 border border-gray-200 dark:border-gray-700">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                <span>🤔</span>
+                ¿Qué es un ángulo?
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <p class="text-gray-700 dark:text-gray-300 mb-4">
+                        Un <strong>ángulo</strong> es la abertura que se forma cuando dos líneas se encuentran en un punto. 
+                        Se mide en <strong>grados (°)</strong>.
+                    </p>
+                    
+                    <div class="bg-orange-50 dark:bg-orange-900/20 rounded-xl p-4">
+                        <h4 class="text-lg font-bold text-orange-700 dark:text-orange-400 mb-3">📐 Tipos de ángulos:</h4>
+                        <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                            <li><strong>Agudo:</strong> Menor que 90°</li>
+                            <li><strong>Recto:</strong> Exactamente 90°</li>
+                            <li><strong>Obtuso:</strong> Mayor que 90° pero menor que 180°</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-4 border-l-4 border-amber-500">
+                    <h5 class="text-lg font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
+                        <span>💡</span>
+                        ¡Dato increíble!
+                    </h5>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        ¡Los ángulos de un triángulo SIEMPRE suman 180°! 
+                        No importa si es grande, pequeño, o de qué forma sea. 
+                        ¡Es una regla matemática que nunca falla!
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botón de acción -->
+        <div class="flex justify-center mt-8">
+            <button onclick="window.location.href='../../index.html'" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-gray-900 font-bold py-4 px-8 rounded-xl transition-all hover:shadow-lg flex items-center gap-2">
+                ¿Listo para practicar?
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+            </button>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="suma-angulos.js"></script>
+    
+    <script>
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const htmlElement = document.documentElement;
+        
+        const darkMode = localStorage.getItem('darkMode');
+        if (darkMode === 'enabled') {
+            htmlElement.classList.add('dark');
+        }
+        
+        darkModeToggle.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+            
+            if (htmlElement.classList.contains('dark')) {
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        });
+    </script>
+</body>
+
+</html>

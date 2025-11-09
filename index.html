@@ -13,150 +13,245 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Figuras Planas">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Fuentes de Google -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Estilos personalizados -->
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="core/animations.css">
+
+    <!-- Configuración de Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2196F3',
+                        secondary: '#FFC107',
+                        accent: '#8BC34A',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            },
+            darkMode: 'class'
+        }
+    </script>
 </head>
 
-<body>
-    <!-- Indicador de modo offline -->
-    <div class="offline-indicator">
-        📱 ¡Puedes usar esta app sin internet!
-    </div>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors duration-300">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo y Título -->
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <h1 class="text-xl font-bold text-gray-900 dark:text-white">Figuras Planas</h1>
+                </div>
 
-    <div class="main-container">
-        <!-- Header -->
-        <div class="header">
-            <h1>🔺 Figuras Planas 🔴</h1>
-            <p class="mb-0 fs-4">¡Aprende geometría de forma divertida!</p>
-            <p class="mb-0">6º de Primaria</p>
+                <!-- Botones de acción -->
+                <div class="flex items-center gap-3">
+                    <!-- Botón de modo oscuro -->
+                    <button id="darkModeToggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                        <svg class="w-6 h-6 text-gray-700 dark:text-gray-300 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                        <svg class="w-6 h-6 text-gray-700 dark:text-gray-300 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- Contenido principal -->
+    <main class="max-w-7xl mx-auto px-6 py-8">
+        <!-- Bienvenida -->
+        <div class="mb-8">
+            <div class="flex items-center gap-4 mb-4">
+                <div class="text-6xl">👋</div>
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-1">¡Bienvenido, Explorador!</h2>
+                    <p class="text-gray-600 dark:text-gray-400">¿Qué aventura de geometría elegirás hoy?</p>
+                </div>
+            </div>
         </div>
 
         <!-- Progreso -->
-        <div class="progress-section">
-            <h3>Tu Progreso</h3>
-            <div class="progress-circle">
-                <div class="progress-text" id="progressText">0%</div>
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 mb-8 border border-gray-200 dark:border-gray-700 transition-colors duration-300">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Tu Progreso</h3>
+                <span class="text-2xl font-bold text-blue-600 dark:text-blue-400" id="progressText">0%</span>
             </div>
-            <p class="text-muted">¡Completa todos los temas para ser un experto en geometría!</p>
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
+                <div id="progressBar" class="bg-gradient-to-r from-blue-500 to-purple-500 h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">¡Completa todos los temas para ser un experto en geometría!</p>
         </div>
 
-        <!-- Temas -->
-        <div class="container-fluid p-4">
-            <div class="row">
-                <!-- Tema 1: Base y altura -->
-                <div class="col-lg-6 col-md-12">
-                    <div class="topic-card" onclick="goToTopic('base-altura.html')">
-                        <div class="text-center">
-                            <div class="topic-icon">📐</div>
-                            <div class="topic-title">Base y Altura</div>
-                            <div class="topic-description">
-                                Descubre cómo medir la base y altura de triángulos y paralelogramos.
-                                ¡Aprenderás a calcular áreas de forma fácil!
-                            </div>
-                            <a href="base-altura.html" class="btn-topic">¡Empezar!</a>
+        <!-- Grid de temas -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Tema 1: Base y Altura -->
+            <a href="vistas/base-altura/base-altura.html" class="group">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                    <div class="aspect-video bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-8xl">
+                        📐
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Base y Altura</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Aprende a medir triángulos y paralelogramos</p>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                            <div class="bg-blue-500 h-2 rounded-full" style="width: 0%"></div>
                         </div>
                     </div>
                 </div>
+            </a>
 
-                <!-- Tema 2: Suma de ángulos -->
-                <div class="col-lg-6 col-md-12">
-                    <div class="topic-card" onclick="goToTopic('suma-angulos.html')">
-                        <div class="text-center">
-                            <div class="topic-icon">📏</div>
-                            <div class="topic-title">Suma de Ángulos</div>
-                            <div class="topic-description">
-                                ¿Sabías que los ángulos de un triángulo siempre suman 180°?
-                                ¡Descubre este y otros secretos de los ángulos!
-                            </div>
-                            <a href="suma-angulos.html" class="btn-topic">¡Explorar!</a>
+            <!-- Tema 2: Suma de Ángulos -->
+            <a href="vistas/suma-angulos/suma-angulos.html" class="group">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                    <div class="aspect-video bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center text-8xl">
+                        📏
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">Suma de Ángulos</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Descubre los secretos de los ángulos</p>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                            <div class="bg-orange-500 h-2 rounded-full" style="width: 0%"></div>
                         </div>
                     </div>
                 </div>
+            </a>
 
-                <!-- Tema 3: La circunferencia -->
-                <div class="col-lg-6 col-md-12">
-                    <div class="topic-card" onclick="goToTopic('circunferencia.html')">
-                        <div class="text-center">
-                            <div class="topic-icon">⭕</div>
-                            <div class="topic-title">La Circunferencia</div>
-                            <div class="topic-description">
-                                Conoce todos los elementos de la circunferencia: centro, radio,
-                                diámetro y mucho más. ¡Es más fácil de lo que piensas!
-                            </div>
-                            <a href="circunferencia.html" class="btn-topic">¡Descubrir!</a>
+            <!-- Tema 3: La Circunferencia -->
+            <a href="vistas/circunferencia/circunferencia.html" class="group">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                    <div class="aspect-video bg-gradient-to-br from-cyan-400 to-cyan-600 flex items-center justify-center text-8xl">
+                        ⭕
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">La Circunferencia</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Explora círculos y sus elementos</p>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                            <div class="bg-cyan-500 h-2 rounded-full" style="width: 0%"></div>
                         </div>
                     </div>
                 </div>
+            </a>
 
-                <!-- Tema 4: El número π -->
-                <div class="col-lg-6 col-md-12">
-                    <div class="topic-card" onclick="goToTopic('numero-pi.html')">
-                        <div class="text-center">
-                            <div class="topic-icon">🥧</div>
-                            <div class="topic-title">El Número π (Pi)</div>
-                            <div class="topic-description">
-                                ¡Conoce el número más famoso de las matemáticas! Aprende qué es π
-                                y cómo usarlo para medir circunferencias.
-                            </div>
-                            <a href="numero-pi.html" class="btn-topic">¡Investigar!</a>
+            <!-- Tema 4: El Número π -->
+            <a href="vistas/numero-pi/numero-pi.html" class="group">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                    <div class="aspect-video bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center text-8xl">
+                        🥧
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">El Número π (Pi)</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">El número más famoso de las matemáticas</p>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                            <div class="bg-purple-500 h-2 rounded-full" style="width: 0%"></div>
                         </div>
                     </div>
                 </div>
+            </a>
 
-                <!-- Tema 5: Figuras circulares -->
-                <div class="col-lg-6 col-md-12">
-                    <div class="topic-card" onclick="goToTopic('figuras-circulares.html')">
-                        <div class="text-center">
-                            <div class="topic-icon">🍕</div>
-                            <div class="topic-title">Figuras Circulares</div>
-                            <div class="topic-description">
-                                ¿Qué diferencia hay entre círculo y circunferencia? Descubre sectores,
-                                segmentos y otras figuras circulares divertidas.
-                            </div>
-                            <a href="figuras-circulares.html" class="btn-topic">¡Jugar!</a>
+            <!-- Tema 5: Figuras Circulares -->
+            <a href="vistas/figuras-circulares/figuras-circulares.html" class="group">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                    <div class="aspect-video bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center text-8xl">
+                        🍕
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">Figuras Circulares</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Sectores, segmentos y más</p>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                            <div class="bg-pink-500 h-2 rounded-full" style="width: 0%"></div>
                         </div>
                     </div>
                 </div>
+            </a>
 
-                <!-- Tema 6: Posiciones de rectas -->
-                <div class="col-lg-6 col-md-12">
-                    <div class="topic-card" onclick="goToTopic('posiciones-rectas.html')">
-                        <div class="text-center">
-                            <div class="topic-icon">📍</div>
-                            <div class="topic-title">Posiciones de Rectas</div>
-                            <div class="topic-description">
-                                Aprende las diferentes formas en que una recta puede relacionarse
-                                con una circunferencia: exterior, tangente y secante.
-                            </div>
-                            <a href="posiciones-rectas.html" class="btn-topic">¡Experimentar!</a>
+            <!-- Tema 6: Posiciones de Rectas -->
+            <a href="vistas/posiciones-rectas/posiciones-rectas.html" class="group">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                    <div class="aspect-video bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-8xl">
+                        📍
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">Posiciones de Rectas</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Rectas y circunferencias</p>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                            <div class="bg-amber-500 h-2 rounded-full" style="width: 0%"></div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
 
         <!-- Dato curioso -->
-        <div class="fun-fact mx-4 mb-4">
-            <h4>🤔 ¿Sabías que...?</h4>
-            <p class="mb-0">
+        <div class="mt-8 bg-blue-50 dark:bg-blue-900/20 rounded-2xl p-6 border border-blue-200 dark:border-blue-800 transition-colors duration-300">
+            <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
+                <span>💡</span>
+                ¿Sabías que...?
+            </h4>
+            <p class="text-gray-700 dark:text-gray-300">
                 Los antiguos egipcios ya conocían las propiedades de los triángulos hace más de 4000 años.
                 ¡Los usaron para construir las pirámides! La geometría está en todas partes: en la naturaleza,
                 en los edificios, en el arte y hasta en los videojuegos.
             </p>
         </div>
-    </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-12 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-6">
+            <div class="flex justify-center gap-8 text-sm text-gray-600 dark:text-gray-400">
+                <a href="#" class="hover:text-gray-900 dark:hover:text-gray-200">Ayuda</a>
+                <a href="#" class="hover:text-gray-900 dark:hover:text-gray-200">Para Padres</a>
+                <a href="#" class="hover:text-gray-900 dark:hover:text-gray-200">Acerca de</a>
+            </div>
+            <p class="text-center text-sm text-gray-500 dark:text-gray-500 mt-4">
+                © 2025 Figuras Planas - 6º Primaria. Todos los derechos reservados.
+            </p>
+        </div>
+    </footer>
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="main.js"></script>
+    
+    <!-- Script del botón de modo oscuro -->
+    <script>
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const htmlElement = document.documentElement;
+        
+        // Cargar preferencia guardada
+        const darkMode = localStorage.getItem('darkMode');
+        if (darkMode === 'enabled') {
+            htmlElement.classList.add('dark');
+        }
+        
+        // Toggle al hacer click
+        darkModeToggle.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+            
+            if (htmlElement.classList.contains('dark')) {
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        });
+    </script>
 </body>
 
 </html>

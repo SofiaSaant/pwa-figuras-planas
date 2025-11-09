@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base y Altura - Figuras Planas</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fuentes de Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../core/animations.css">
+
+    <!-- Configuración de Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2196F3',
+                        accent: '#8BC34A',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            },
+            darkMode: 'class'
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors duration-300">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo y Título -->
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center text-2xl">
+                        📐
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-900 dark:text-white">Base y Altura</h1>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Figuras Planas</p>
+                    </div>
+                </div>
+
+                <!-- Botones de acción -->
+                <div class="flex items-center gap-3">
+                    <a href="../../index.html" class="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                        Volver
+                    </a>
+
+                    <!-- Botón de modo oscuro -->
+                    <button id="darkModeToggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                        <svg class="w-6 h-6 text-gray-700 dark:text-gray-300 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                        <svg class="w-6 h-6 text-gray-700 dark:text-gray-300 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Tabs de navegación -->
+    <div class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex gap-8">
+                <a href="base-altura.html" class="py-4 px-2 border-b-2 border-blue-500 text-blue-600 dark:text-blue-400 font-medium flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                    Aprender
+                </a>
+                <a href="practica.html" class="py-4 px-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 font-medium flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                    </svg>
+                    Practicar
+                </a>
+                <a href="evaluacion.html" class="py-4 px-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 font-medium flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Evaluar
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <main class="max-w-7xl mx-auto px-6 py-8">
+        <!-- Introducción -->
+        <div class="mb-8">
+            <p class="text-gray-700 dark:text-gray-300 text-lg">
+                ¡Aprende a identificar y medir la base y altura de triángulos y paralelogramos! 
+                Estos conceptos son fundamentales para calcular áreas.
+            </p>
+        </div>
+
+        <!-- Concepto principal -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 mb-8 border border-gray-200 dark:border-gray-700 transition-colors duration-300">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                <span>🤔</span>
+                ¿Qué son la base y la altura?
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <div class="bg-red-50 dark:bg-red-900/20 rounded-xl p-4 mb-4">
+                        <h4 class="text-lg font-bold text-red-700 dark:text-red-400 mb-2">📏 Base</h4>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            La <strong>base</strong> es cualquier lado de la figura que tomamos como referencia. 
+                            ¡Puedes elegir cualquier lado como base!
+                        </p>
+                    </div>
+                    
+                    <div class="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4">
+                        <h4 class="text-lg font-bold text-blue-700 dark:text-blue-400 mb-2">📐 Altura</h4>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            La <strong>altura</strong> es la distancia perpendicular (en ángulo recto) 
+                            desde la base hasta el punto más alejado de la figura.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-4 border-l-4 border-amber-500">
+                    <h5 class="text-lg font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
+                        <span>💡</span>
+                        ¡Dato curioso!
+                    </h5>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        La altura siempre forma un ángulo de 90° con la base. 
+                        ¡Es como si fuera una escalera perfectamente vertical!
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Triángulos interactivos -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 mb-8 border border-gray-200 dark:border-gray-700 transition-colors duration-300">
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                <span>🔺</span>
+                Triángulos
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-6">Haz clic en los triángulos para ver su base y altura:</p>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Triángulo Rectángulo -->
+                <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
+                    <h5 class="font-semibold text-gray-900 dark:text-white mb-3">Triángulo Rectángulo</h5>
+                    <div class="bg-white dark:bg-gray-800 rounded-lg p-4 cursor-pointer hover:shadow-lg transition-shadow" onclick="showTriangleInfo('rectangulo')">
+                        <svg class="w-full" height="200" viewBox="0 0 300 200">
+                            <polygon id="triangle1" points="50,150 200,150 200,50" 
+                                     fill="rgba(16, 185, 129, 0.3)" 
+                                     stroke="#10b981" 
+                                     stroke-width="3"/>
+                            
+                            <!-- Base -->
+                            <line id="base1" x1="50" y1="150" x2="200" y2="150" 
+                                  stroke="#ef4444" stroke-width="4" style="display: none;"/>
+                            <text id="baseLabel1" x="125" y="170" text-anchor="middle" 
+                                  fill="#ef4444" font-size="14" font-weight="bold" style="display: none;">Base: 15 cm</text>
+                            
+                            <!-- Altura -->
+                            <line id="height1" x1="200" y1="150" x2="200" y2="50" 
+                                  stroke="#3b82f6" stroke-width="4" stroke-dasharray="5,5" style="display: none;"/>
+                            <text id="heightLabel1" x="230" y="100" text-anchor="middle" 
+                                  fill="#3b82f6" font-size="14" font-weight="bold" style="display: none;">Altura: 10 cm</text>
+                        </svg>
+                    </div>
+                    <div id="triangleInfo" class="mt-4 hidden">
+                        <div id="triangleDetails" class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 text-sm text-gray-700 dark:text-gray-300"></div>
+                    </div>
+                </div>
+                
+                <!-- Triángulo Isósceles -->
+                <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
+                    <h5 class="font-semibold text-gray-900 dark:text-white mb-3">Triángulo Isósceles</h5>
+                    <div class="bg-white dark:bg-gray-800 rounded-lg p-4 cursor-pointer hover:shadow-lg transition-shadow" onclick="showTriangleInfo('isosceles')">
+                        <svg class="w-full" height="200" viewBox="0 0 300 200">
+                            <polygon id="triangle2" points="150,40 80,160 220,160" 
+                                     fill="rgba(16, 185, 129, 0.3)" 
+                                     stroke="#10b981" 
+                                     stroke-width="3"/>
+                            
+                            <!-- Base -->
+                            <line id="base2" x1="80" y1="160" x2="220" y2="160" 
+                                  stroke="#ef4444" stroke-width="4" style="display: none;"/>
+                            <text id="baseLabel2" x="150" y="180" text-anchor="middle" 
+                                  fill="#ef4444" font-size="14" font-weight="bold" style="display: none;">Base: 14 cm</text>
+                            
+                            <!-- Altura -->
+                            <line id="height2" x1="150" y1="40" x2="150" y2="160" 
+                                  stroke="#3b82f6" stroke-width="4" stroke-dasharray="5,5" style="display: none;"/>
+                            <text id="heightLabel2" x="180" y="100" text-anchor="middle" 
+                                  fill="#3b82f6" font-size="14" font-weight="bold" style="display: none;">Altura: 12 cm</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botón de completar -->
+        <div class="flex justify-center mt-8">
+            <button onclick="window.location.href='../../index.html'" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-gray-900 font-bold py-4 px-8 rounded-xl transition-all hover:shadow-lg flex items-center gap-2">
+                ¿Listo para practicar?
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+            </button>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="base-altura.js"></script>
+    
+    <!-- Script del botón de modo oscuro -->
+    <script>
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const htmlElement = document.documentElement;
+        
+        const darkMode = localStorage.getItem('darkMode');
+        if (darkMode === 'enabled') {
+            htmlElement.classList.add('dark');
+        }
+        
+        darkModeToggle.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+            
+            if (htmlElement.classList.contains('dark')) {
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        });
+
+        // Funciones para mostrar información de triángulos
+        function showTriangleInfo(type) {
+            hideAllMeasurements();
+            
+            if (type === 'rectangulo') {
+                showElements(['base1', 'baseLabel1', 'height1', 'heightLabel1']);
+                document.getElementById('triangleDetails').innerHTML = `
+                    <h5 class="font-bold mb-2">🔺 Triángulo Rectángulo</h5>
+                    <p><span class="text-red-600 dark:text-red-400 font-semibold">Base (roja):</span> 15 cm</p>
+                    <p><span class="text-blue-600 dark:text-blue-400 font-semibold">Altura (azul):</span> 10 cm</p>
+                    <p class="mt-2"><strong>Área = Base × Altura ÷ 2 = 15 × 10 ÷ 2 = 75 cm²</strong></p>
+                `;
+            } else if (type === 'isosceles') {
+                showElements(['base2', 'baseLabel2', 'height2', 'heightLabel2']);
+                document.getElementById('triangleDetails').innerHTML = `
+                    <h5 class="font-bold mb-2">🔺 Triángulo Isósceles</h5>
+                    <p><span class="text-red-600 dark:text-red-400 font-semibold">Base (roja):</span> 14 cm</p>
+                    <p><span class="text-blue-600 dark:text-blue-400 font-semibold">Altura (azul):</span> 12 cm</p>
+                    <p class="mt-2"><strong>Área = Base × Altura ÷ 2 = 14 × 12 ÷ 2 = 84 cm²</strong></p>
+                `;
+            }
+            
+            document.getElementById('triangleInfo').classList.remove('hidden');
+        }
+
+        function hideAllMeasurements() {
+            const elements = [
+                'base1', 'baseLabel1', 'height1', 'heightLabel1',
+                'base2', 'baseLabel2', 'height2', 'heightLabel2'
+            ];
+            
+            elements.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) element.style.display = 'none';
+            });
+        }
+
+        function showElements(elementIds) {
+            elementIds.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) element.style.display = 'block';
+            });
+        }
+    </script>
+</body>
+
+</html>
