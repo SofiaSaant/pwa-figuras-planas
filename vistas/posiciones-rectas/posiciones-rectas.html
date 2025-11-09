@@ -1,212 +1,162 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Posiciones de Rectas - Figuras Planas</title>
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fuentes de Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <!-- Estilos personalizados -->
-    <style>
-        body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            font-size: 18px;
-        }
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../core/animations.css">
 
-        .main-container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            margin: 1rem;
-            overflow: hidden;
+    <!-- Configuración de Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#06b6d4',
+                        accent: '#10b981',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            },
+            darkMode: 'class'
         }
-
-        .header {
-            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
-            color: white;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .content-section {
-            padding: 2rem;
-        }
-
-        .concept-box {
-            background: linear-gradient(135deg, #cffafe 0%, #a5f3fc 100%);
-            border-radius: 15px;
-            padding: 2rem;
-            margin: 1.5rem 0;
-            border-left: 5px solid #06b6d4;
-        }
-
-        .interactive-area {
-            background: #f8fafc;
-            border-radius: 15px;
-            padding: 2rem;
-            margin: 1.5rem 0;
-            border: 2px dashed #cbd5e1;
-        }
-
-        .position-svg {
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            background: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .position-svg:hover {
-            border-color: #06b6d4;
-            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.2);
-        }
-
-        .btn-fun {
-            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
-            border: none;
-            padding: 12px 24px;
-            border-radius: 25px;
-            color: white;
-            font-size: 1.1rem;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
-        }
-
-        .btn-fun:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(6, 182, 212, 0.4);
-            color: white;
-        }
-
-        .exercise-card {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            margin: 1rem 0;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            border-top: 4px solid #10b981;
-        }
-
-        .fun-fact {
-            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
-            border-radius: 15px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border-left: 5px solid #10b981;
-        }
-
-        .simulator-area {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-            border-radius: 15px;
-            padding: 2rem;
-            margin: 1.5rem 0;
-            border: 2px solid #0ea5e9;
-        }
-
-        .position-info {
-            background: #1e293b;
-            color: #06b6d4;
-            padding: 1rem;
-            border-radius: 10px;
-            font-family: 'Courier New', monospace;
-            font-size: 1.1rem;
-            text-align: center;
-            margin: 1rem 0;
-        }
-
-        .back-btn {
-            background: #6b7280;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 20px;
-            text-decoration: none;
-            display: inline-block;
-            margin-bottom: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .back-btn:hover {
-            background: #4b5563;
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .movable-line {
-            cursor: grab;
-            stroke-width: 4;
-        }
-
-        .movable-line:active {
-            cursor: grabbing;
-        }
-
-        .status-display {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: white;
-            padding: 1rem;
-            border-radius: 10px;
-            text-align: center;
-            font-weight: bold;
-            margin: 1rem 0;
-        }
-
-        @media (max-width: 768px) {
-            .content-section {
-                padding: 1rem;
-            }
-            
-            .concept-box, .interactive-area, .exercise-card, .simulator-area {
-                padding: 1.5rem;
-            }
-        }
-    </style>
+    </script>
 </head>
-<body>
-    <div class="main-container">
-        <!-- Header -->
-        <div class="header">
-            <a href="index.html" class="back-btn">← Volver al inicio</a>
-            <h1>📍 Posiciones de Rectas</h1>
-            <p class="mb-0 fs-4">¡Cómo se relacionan las rectas con las circunferencias!</p>
-        </div>
 
-        <div class="content-section">
-            <!-- Concepto principal -->
-            <div class="concept-box">
-                <h2>🤔 ¿Cómo puede estar una recta respecto a una circunferencia?</h2>
-                <div class="row">
-                    <div class="col-md-6">
-                        <p>Una <strong>recta</strong> (línea recta) puede tener diferentes posiciones cuando se encuentra 
-                        con una <strong>circunferencia</strong>.</p>
-                        
-                        <p>¡Es como cuando juegas con una pelota y un palo! El palo puede estar lejos de la pelota, 
-                        tocarla apenas, o atravesarla completamente.</p>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors duration-300">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo y Título -->
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-cyan-600 rounded-lg flex items-center justify-center text-2xl">
+                        📍
                     </div>
-                    <div class="col-md-6">
-                        <div class="fun-fact">
-                            <h5>💡 ¡Recuerda!</h5>
-                            <p>Todo depende de la <strong>distancia</strong> entre el centro de la circunferencia 
-                            y la recta. ¡Esta distancia nos dice qué tipo de posición tienen!</p>
-                        </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-900 dark:text-white">Posiciones de Rectas</h1>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Figuras Planas</p>
                     </div>
                 </div>
-            </div>
 
-            <!-- Tipos de posiciones -->
-            <div class="interactive-area">
-                <h3>🎯 Los tres tipos de posiciones</h3>
-                <p>Haz clic en cada ejemplo para ver cómo funciona:</p>
+                <!-- Botones de acción -->
+                <div class="flex items-center gap-3">
+                    <a href="../../index.html" class="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                        Volver
+                    </a>
+
+                    <!-- Botón de modo oscuro -->
+                    <button id="darkModeToggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                        <svg class="w-6 h-6 text-gray-700 dark:text-gray-300 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                        <svg class="w-6 h-6 text-gray-700 dark:text-gray-300 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Tabs de navegación -->
+    <div class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex gap-8">
+                <a href="posiciones-rectas.html" class="py-4 px-2 border-b-2 border-cyan-500 text-cyan-600 dark:text-cyan-400 font-medium flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                    Aprender
+                </a>
+                <a href="practica.html" class="py-4 px-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 font-medium flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                    </svg>
+                    Practicar
+                </a>
+                <a href="evaluacion.html" class="py-4 px-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 font-medium flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Evaluar
+                </a>
+            </div>
+        </div>
+    </div>
+""
+    <!
+-- Contenido principal -->
+    <main class="max-w-7xl mx-auto px-6 py-8">
+        <!-- Introducción -->
+        <div class="mb-8">
+            <p class="text-gray-700 dark:text-gray-300 text-lg">
+                ¡Descubre cómo se relacionan las rectas con las circunferencias! Es como cuando juegas con una pelota y un palo.
+            </p>
+        </div>
+
+        <!-- Concepto principal -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 mb-8 border border-gray-200 dark:border-gray-700 transition-colors duration-300">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                <span>🤔</span>
+                ¿Cómo puede estar una recta respecto a una circunferencia?
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <p class="text-gray-700 dark:text-gray-300 mb-4">
+                        Una <strong>recta</strong> (línea recta) puede tener diferentes posiciones cuando se encuentra 
+                        con una <strong>circunferencia</strong>.
+                    </p>
+                    
+                    <p class="text-gray-700 dark:text-gray-300">
+                        ¡Es como cuando juegas con una pelota y un palo! El palo puede estar lejos de la pelota, 
+                        tocarla apenas, o atravesarla completamente.
+                    </p>
+                </div>
                 
-                <div class="row">
-                    <div class="col-md-4">
-                        <h5 class="text-center text-danger">🚫 Recta Exterior</h5>
-                        <svg class="position-svg w-100" height="200" viewBox="0 0 200 200" onclick="showPositionInfo('exterior')">
+                <div class="bg-cyan-50 dark:bg-cyan-900/20 rounded-xl p-4 border-l-4 border-cyan-500">
+                    <h5 class="text-lg font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
+                        <span>💡</span>
+                        ¡Recuerda!
+                    </h5>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        Todo depende de la <strong>distancia</strong> entre el centro de la circunferencia 
+                        y la recta. ¡Esta distancia nos dice qué tipo de posición tienen!
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tipos de posiciones -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 mb-8 border border-gray-200 dark:border-gray-700 transition-colors duration-300">
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                <span>🎯</span>
+                Los tres tipos de posiciones
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-6">Haz clic en cada ejemplo para ver cómo funciona:</p>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Recta Exterior -->
+                <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
+                    <h5 class="font-semibold text-gray-900 dark:text-white mb-3 text-center">🚫 Recta Exterior</h5>
+                    <div class="bg-white dark:bg-gray-800 rounded-lg p-4 cursor-pointer hover:shadow-lg transition-shadow" onclick="showPositionInfo('exterior')">
+                        <svg class="w-full" height="200" viewBox="0 0 200 200">
                             <circle cx="100" cy="100" r="60" fill="rgba(239, 68, 68, 0.1)" stroke="#ef4444" stroke-width="2"/>
                             <line x1="20" y1="30" x2="180" y2="30" stroke="#ef4444" stroke-width="3"/>
                             <circle cx="100" cy="100" r="3" fill="#ef4444"/>
@@ -215,10 +165,13 @@
                             </text>
                         </svg>
                     </div>
-                    
-                    <div class="col-md-4">
-                        <h5 class="text-center text-warning">👆 Recta Tangente</h5>
-                        <svg class="position-svg w-100" height="200" viewBox="0 0 200 200" onclick="showPositionInfo('tangente')">
+                </div>
+                
+                <!-- Recta Tangente -->
+                <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
+                    <h5 class="font-semibold text-gray-900 dark:text-white mb-3 text-center">👆 Recta Tangente</h5>
+                    <div class="bg-white dark:bg-gray-800 rounded-lg p-4 cursor-pointer hover:shadow-lg transition-shadow" onclick="showPositionInfo('tangente')">
+                        <svg class="w-full" height="200" viewBox="0 0 200 200">
                             <circle cx="100" cy="100" r="60" fill="rgba(245, 158, 11, 0.1)" stroke="#f59e0b" stroke-width="2"/>
                             <line x1="20" y1="40" x2="180" y2="40" stroke="#f59e0b" stroke-width="3"/>
                             <circle cx="100" cy="40" r="4" fill="#f59e0b"/>
@@ -229,10 +182,13 @@
                             </text>
                         </svg>
                     </div>
-                    
-                    <div class="col-md-4">
-                        <h5 class="text-center text-success">✂️ Recta Secante</h5>
-                        <svg class="position-svg w-100" height="200" viewBox="0 0 200 200" onclick="showPositionInfo('secante')">
+                </div>
+                
+                <!-- Recta Secante -->
+                <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
+                    <h5 class="font-semibold text-gray-900 dark:text-white mb-3 text-center">✂️ Recta Secante</h5>
+                    <div class="bg-white dark:bg-gray-800 rounded-lg p-4 cursor-pointer hover:shadow-lg transition-shadow" onclick="showPositionInfo('secante')">
+                        <svg class="w-full" height="200" viewBox="0 0 200 200">
                             <circle cx="100" cy="100" r="60" fill="rgba(16, 185, 129, 0.1)" stroke="#10b981" stroke-width="2"/>
                             <line x1="20" y1="80" x2="180" y2="80" stroke="#10b981" stroke-width="3"/>
                             <circle cx="65" cy="80" r="4" fill="#10b981"/>
@@ -244,20 +200,25 @@
                         </svg>
                     </div>
                 </div>
-                
-                <div id="positionInfo" class="position-info mt-3" style="display: none;">
-                    <div id="positionDetails"></div>
-                </div>
             </div>
+            
+            <div id="positionInfo" class="mt-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 hidden">
+                <div id="positionDetails" class="text-gray-700 dark:text-gray-300"></div>
+            </div>
+        </div>
 
-            <!-- Simulador interactivo -->
-            <div class="simulator-area">
-                <h3>🎮 Simulador: ¡Mueve la recta!</h3>
-                <p>Arrastra la línea roja hacia arriba o abajo para ver cómo cambia su posición:</p>
-                
-                <div class="row">
-                    <div class="col-md-8">
-                        <svg id="simulator" class="position-svg w-100" height="350" viewBox="0 0 400 350">
+        <!-- Simulador interactivo -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 mb-8 border border-gray-200 dark:border-gray-700 transition-colors duration-300">
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                <span>🎮</span>
+                Simulador: ¡Mueve la recta!
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-6">Arrastra la línea roja hacia arriba o abajo para ver cómo cambia su posición:</p>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="md:col-span-2">
+                    <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
+                        <svg id="simulator" class="w-full" height="350" viewBox="0 0 400 350">
                             <!-- Circunferencia fija -->
                             <circle cx="200" cy="175" r="80" fill="rgba(6, 182, 212, 0.1)" stroke="#06b6d4" stroke-width="3"/>
                             <circle cx="200" cy="175" r="3" fill="#06b6d4"/>
@@ -265,193 +226,117 @@
                             
                             <!-- Recta móvil -->
                             <line id="movableLine" x1="50" y1="50" x2="350" y2="50" 
-                                  stroke="#ef4444" stroke-width="4" class="movable-line"/>
+                                  stroke="#ef4444" stroke-width="4" style="cursor: grab;"/>
                             
-                            <!-- Línea de distancia (oculta inicialmente) -->
+                            <!-- Línea de distancia -->
                             <line id="distanceLine" x1="200" y1="175" x2="200" y2="50" 
                                   stroke="#059669" stroke-width="2" stroke-dasharray="5,5" style="display: none;"/>
                             <text id="distanceText" x="220" y="112" font-size="12" fill="#059669" 
                                   font-weight="bold" style="display: none;">distancia</text>
                             
-                            <!-- Puntos de intersección (se mostrarán dinámicamente) -->
+                            <!-- Puntos de intersección -->
                             <circle id="point1" r="5" fill="#ef4444" style="display: none;"/>
                             <circle id="point2" r="5" fill="#ef4444" style="display: none;"/>
                         </svg>
                         
-                        <div class="text-center mt-3">
-                            <button class="btn btn-outline-secondary btn-sm" onclick="resetSimulator()">🔄 Reiniciar</button>
-                            <button class="btn btn-outline-info btn-sm" onclick="toggleDistance()">📏 Mostrar distancia</button>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-4">
-                        <div id="simulatorStatus" class="status-display">
-                            <h5>Posición Actual:</h5>
-                            <div id="currentPosition">Exterior</div>
-                            <div id="distanceInfo" class="mt-2 small">Distancia > Radio</div>
-                        </div>
-                        
-                        <div class="mt-3">
-                            <h6>📋 Instrucciones:</h6>
-                            <ul class="small">
-                                <li>Arrastra la línea roja</li>
-                                <li>Observa cómo cambia la posición</li>
-                                <li>Fíjate en los puntos de contacto</li>
-                                <li>Usa "Mostrar distancia" para ver la medida</li>
-                            </ul>
+                        <div class="flex justify-center gap-3 mt-4">
+                            <button onclick="resetSimulator()" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+                                🔄 Reiniciar
+                            </button>
+                            <button onclick="toggleDistance()" class="px-4 py-2 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 transition-colors">
+                                📏 Mostrar distancia
+                            </button>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Ejercicios prácticos -->
-            <div class="exercise-card">
-                <h3>🎯 ¡Practica las posiciones!</h3>
-                
-                <div class="row">
-                    <div class="col-md-6">
-                        <h5>Ejercicio 1: Identifica la posición</h5>
-                        <p>Una circunferencia tiene radio 6 cm. Si una recta está a 4 cm del centro, ¿cuál es su posición?</p>
-                        
-                        <div class="mb-3">
-                            <select id="exercise1" class="form-select">
-                                <option value="">Selecciona una opción</option>
-                                <option value="exterior">Exterior (no se tocan)</option>
-                                <option value="tangente">Tangente (se tocan en 1 punto)</option>
-                                <option value="secante">Secante (se cortan en 2 puntos)</option>
-                            </select>
-                        </div>
-                        
-                        <button class="btn btn-fun" onclick="checkExercise1()">Comprobar</button>
-                        <div id="result1" class="mt-2"></div>
+""   
+             
+                <div>
+                    <div id="simulatorStatus" class="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl p-4 mb-4">
+                        <h5 class="font-bold mb-2">Posición Actual:</h5>
+                        <div id="currentPosition" class="text-2xl font-bold">Exterior</div>
+                        <div id="distanceInfo" class="mt-2 text-sm">Distancia > Radio</div>
                     </div>
                     
-                    <div class="col-md-6">
-                        <h5>Ejercicio 2: Cuenta los puntos</h5>
-                        <p>¿En cuántos puntos una recta tangente toca a la circunferencia?</p>
-                        
-                        <div class="mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="q2" id="q2a" value="0">
-                                <label class="form-check-label" for="q2a">0 puntos</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="q2" id="q2b" value="1">
-                                <label class="form-check-label" for="q2b">1 punto</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="q2" id="q2c" value="2">
-                                <label class="form-check-label" for="q2c">2 puntos</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="q2" id="q2d" value="infinitos">
-                                <label class="form-check-label" for="q2d">Infinitos puntos</label>
-                            </div>
-                        </div>
-                        
-                        <button class="btn btn-fun" onclick="checkExercise2()">Comprobar</button>
-                        <div id="result2" class="mt-2"></div>
-                    </div>
-                </div>
-                
-                <div class="row mt-4">
-                    <div class="col-md-6">
-                        <h5>Ejercicio 3: Problema práctico</h5>
-                        <p>Un túnel circular tiene radio 5 metros. Si una carretera pasa a 5 metros exactos del centro del túnel, 
-                        ¿qué tipo de posición tiene la carretera respecto al túnel?</p>
-                        
-                        <div class="mb-3">
-                            <input type="text" id="exercise3" class="form-control" placeholder="Escribe tu respuesta">
-                        </div>
-                        
-                        <button class="btn btn-fun" onclick="checkExercise3()">Comprobar</button>
-                        <div id="result3" class="mt-2"></div>
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <h5>Ejercicio 4: Comparación</h5>
-                        <p>Ordena las posiciones de menor a mayor número de puntos de contacto:</p>
-                        
-                        <div class="mb-3">
-                            <select id="exercise4" class="form-select">
-                                <option value="">Selecciona el orden correcto</option>
-                                <option value="exterior-tangente-secante">Exterior → Tangente → Secante</option>
-                                <option value="tangente-exterior-secante">Tangente → Exterior → Secante</option>
-                                <option value="secante-tangente-exterior">Secante → Tangente → Exterior</option>
-                                <option value="exterior-secante-tangente">Exterior → Secante → Tangente</option>
-                            </select>
-                        </div>
-                        
-                        <button class="btn btn-fun" onclick="checkExercise4()">Comprobar</button>
-                        <div id="result4" class="mt-2"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Aplicaciones en la vida real -->
-            <div class="fun-fact">
-                <h4>🌍 ¡Posiciones de rectas en la vida real!</h4>
-                <div class="row">
-                    <div class="col-md-6">
-                        <h6>🚗 Rectas tangentes:</h6>
-                        <ul>
-                            <li>Carreteras que bordean rotondas</li>
-                            <li>Líneas de meta que tocan pistas circulares</li>
-                            <li>Rayos de luz que rozan esferas</li>
-                            <li>Cuerdas de guitarra que tocan clavijas redondas</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6">
-                        <h6>✂️ Rectas secantes:</h6>
-                        <ul>
-                            <li>Túneles que atraviesan colinas redondas</li>
-                            <li>Puentes que cruzan lagos circulares</li>
-                            <li>Cables que pasan por dentro de tubos</li>
-                            <li>Espadas que atraviesan escudos redondos</li>
+                    <div class="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-4">
+                        <h6 class="font-bold text-gray-900 dark:text-white mb-2">📋 Instrucciones:</h6>
+                        <ul class="text-sm text-gray-700 dark:text-gray-300 space-y-1">
+                            <li>• Arrastra la línea roja</li>
+                            <li>• Observa cómo cambia la posición</li>
+                            <li>• Fíjate en los puntos de contacto</li>
+                            <li>• Usa "Mostrar distancia" para ver la medida</li>
                         </ul>
                     </div>
                 </div>
-            </div>
-
-            <!-- Botón de completar -->
-            <div class="text-center mt-4">
-                <button class="btn btn-fun btn-lg" onclick="completeLesson()">
-                    🎉 ¡Domino las posiciones de rectas!
-                </button>
             </div>
         </div>
-    </div>
+
+        <!-- Aplicaciones en la vida real -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 mb-8 border border-gray-200 dark:border-gray-700 transition-colors duration-300">
+            <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                <span>🌍</span>
+                ¡Posiciones de rectas en la vida real!
+            </h4>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-4">
+                    <h6 class="font-bold text-gray-900 dark:text-white mb-2">👆 Rectas tangentes:</h6>
+                    <ul class="space-y-1 text-gray-700 dark:text-gray-300">
+                        <li>• Carreteras que bordean rotondas</li>
+                        <li>• Líneas de meta que tocan pistas circulares</li>
+                        <li>• Rayos de luz que rozan esferas</li>
+                        <li>• Cuerdas de guitarra que tocan clavijas redondas</li>
+                    </ul>
+                </div>
+                <div class="bg-green-50 dark:bg-green-900/20 rounded-xl p-4">
+                    <h6 class="font-bold text-gray-900 dark:text-white mb-2">✂️ Rectas secantes:</h6>
+                    <ul class="space-y-1 text-gray-700 dark:text-gray-300">
+                        <li>• Túneles que atraviesan colinas redondas</li>
+                        <li>• Puentes que cruzan lagos circulares</li>
+                        <li>• Cables que pasan por dentro de tubos</li>
+                        <li>• Espadas que atraviesan escudos redondos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botón de completar -->
+        <div class="flex justify-center mt-8">
+            <button onclick="window.location.href='../../index.html'" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-gray-900 font-bold py-4 px-8 rounded-xl transition-all hover:shadow-lg flex items-center gap-2">
+                ¿Listo para practicar?
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+            </button>
+        </div>
+    </main>
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    
     <script>
+        // Dark mode toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const htmlElement = document.documentElement;
+        
+        const darkMode = localStorage.getItem('darkMode');
+        if (darkMode === 'enabled') {
+            htmlElement.classList.add('dark');
+        }
+        
+        darkModeToggle.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+            
+            if (htmlElement.classList.contains('dark')) {
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        });
+
         // Variables del simulador
         let isDragging = false;
         let showingDistance = false;
-        let exercisesCompleted = 0;
         const centerX = 200;
         const centerY = 175;
         const radius = 80;
-
-        // Inicialización
-        document.addEventListener('DOMContentLoaded', function() {
-            setupSimulator();
-            updateSimulatorStatus(50);
-            
-            // Animaciones de entrada
-            const elements = document.querySelectorAll('.concept-box, .interactive-area, .exercise-card, .simulator-area');
-            elements.forEach((element, index) => {
-                element.style.opacity = '0';
-                element.style.transform = 'translateY(30px)';
-                
-                setTimeout(() => {
-                    element.style.transition = 'all 0.6s ease';
-                    element.style.opacity = '1';
-                    element.style.transform = 'translateY(0)';
-                }, index * 200);
-            });
-        });
 
         // Mostrar información de posiciones
         function showPositionInfo(positionType) {
@@ -479,17 +364,17 @@
             const positionData = info[positionType];
             if (positionData) {
                 document.getElementById('positionDetails').innerHTML = `
-                    <h5>${positionData.title}</h5>
-                    <p><strong>¿Qué es?</strong> ${positionData.description}</p>
-                    <p><strong>Condición:</strong> ${positionData.condition}</p>
+                    <h5 class="font-bold text-lg mb-2">${positionData.title}</h5>
+                    <p class="mb-2"><strong>¿Qué es?</strong> ${positionData.description}</p>
+                    <p class="mb-2"><strong>Condición:</strong> ${positionData.condition}</p>
                     <p><strong>Ejemplo:</strong> ${positionData.example}</p>
                 `;
-                document.getElementById('positionInfo').style.display = 'block';
+                document.getElementById('positionInfo').classList.remove('hidden');
             }
         }
 
         // Configurar simulador
-        function setupSimulator() {
+        document.addEventListener('DOMContentLoaded', function() {
             const line = document.getElementById('movableLine');
             
             line.addEventListener('mousedown', startDrag);
@@ -499,7 +384,9 @@
             document.addEventListener('touchmove', drag);
             document.addEventListener('mouseup', stopDrag);
             document.addEventListener('touchend', stopDrag);
-        }
+            
+            updateSimulatorStatus(50);
+        });
 
         function startDrag(e) {
             isDragging = true;
@@ -514,7 +401,6 @@
             const clientY = e.clientY || (e.touches && e.touches[0].clientY);
             const y = ((clientY - rect.top) / rect.height) * 350;
             
-            // Limitar el movimiento
             const constrainedY = Math.max(20, Math.min(330, y));
             
             const line = document.getElementById('movableLine');
@@ -533,7 +419,6 @@
             const distance = Math.abs(lineY - centerY);
             let position, info, color;
             
-            // Ocultar puntos por defecto
             document.getElementById('point1').style.display = 'none';
             document.getElementById('point2').style.display = 'none';
             
@@ -546,7 +431,6 @@
                 info = `Distancia (${Math.round(distance)}) ≈ Radio (${radius})`;
                 color = '#f59e0b';
                 
-                // Mostrar punto de tangencia
                 const point1 = document.getElementById('point1');
                 point1.setAttribute('cx', centerX);
                 point1.setAttribute('cy', lineY);
@@ -556,7 +440,6 @@
                 info = `Distancia (${Math.round(distance)}) < Radio (${radius})`;
                 color = '#10b981';
                 
-                // Calcular y mostrar puntos de intersección
                 const dx = Math.sqrt(radius * radius - distance * distance);
                 const point1 = document.getElementById('point1');
                 const point2 = document.getElementById('point2');
@@ -574,7 +457,6 @@
             document.getElementById('currentPosition').style.color = color;
             document.getElementById('distanceInfo').textContent = info;
             
-            // Actualizar línea de distancia si está visible
             if (showingDistance) {
                 const distanceLine = document.getElementById('distanceLine');
                 distanceLine.setAttribute('y2', lineY);
@@ -603,69 +485,6 @@
             } else {
                 distanceLine.style.display = 'none';
                 distanceText.style.display = 'none';
-            }
-        }
-
-        // Ejercicios
-        function checkExercise1() {
-            const answer = document.getElementById('exercise1').value;
-            const result = document.getElementById('result1');
-            
-            if (answer === 'secante') {
-                result.innerHTML = '<div class="alert alert-success">🎉 ¡Correcto! Si la distancia (4 cm) es menor que el radio (6 cm), la recta es secante</div>';
-                exercisesCompleted++;
-            } else {
-                result.innerHTML = '<div class="alert alert-danger">❌ Compara: distancia = 4 cm, radio = 6 cm. Como 4 < 6, la recta es secante</div>';
-            }
-        }
-
-        function checkExercise2() {
-            const answer = document.querySelector('input[name="q2"]:checked');
-            const result = document.getElementById('result2');
-            
-            if (answer && answer.value === '1') {
-                result.innerHTML = '<div class="alert alert-success">🎉 ¡Perfecto! Una recta tangente toca la circunferencia en exactamente 1 punto</div>';
-                exercisesCompleted++;
-            } else {
-                result.innerHTML = '<div class="alert alert-danger">❌ Recuerda: "tangente" significa que toca en un solo punto</div>';
-            }
-        }
-
-        function checkExercise3() {
-            const answer = document.getElementById('exercise3').value.toLowerCase().trim();
-            const result = document.getElementById('result3');
-            
-            if (answer.includes('tangente')) {
-                result.innerHTML = '<div class="alert alert-success">🎉 ¡Excelente! Si la distancia (5 m) es igual al radio (5 m), la carretera es tangente al túnel</div>';
-                exercisesCompleted++;
-            } else {
-                result.innerHTML = '<div class="alert alert-danger">❌ Cuando la distancia es igual al radio, la posición es tangente</div>';
-            }
-        }
-
-        function checkExercise4() {
-            const answer = document.getElementById('exercise4').value;
-            const result = document.getElementById('result4');
-            
-            if (answer === 'exterior-tangente-secante') {
-                result.innerHTML = '<div class="alert alert-success">🎉 ¡Correcto! Exterior (0 puntos) → Tangente (1 punto) → Secante (2 puntos)</div>';
-                exercisesCompleted++;
-            } else {
-                result.innerHTML = '<div class="alert alert-danger">❌ Piensa en cuántos puntos de contacto tiene cada posición: Exterior=0, Tangente=1, Secante=2</div>';
-            }
-        }
-
-        function completeLesson() {
-            if (exercisesCompleted >= 3) {
-                // Marcar como completado en el sistema principal
-                if (window.parent && window.parent.markTopicCompleted) {
-                    window.parent.markTopicCompleted('posiciones-rectas.html');
-                }
-                
-                alert('🎉 ¡Increíble! Has dominado las posiciones de rectas y circunferencias. ¡Ahora puedes identificar exterior, tangente y secante en cualquier situación!');
-                window.location.href = 'index.html';
-            } else {
-                alert('💪 ¡Casi lo tienes! Completa al menos 3 ejercicios antes de terminar la lección.');
             }
         }
     </script>

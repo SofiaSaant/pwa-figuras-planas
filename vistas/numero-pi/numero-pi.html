@@ -1,570 +1,175 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Número π - Figuras Planas</title>
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fuentes de Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <!-- Estilos personalizados -->
-    <style>
-        body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            font-size: 18px;
-        }
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../core/animations.css">
 
-        .main-container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            margin: 1rem;
-            overflow: hidden;
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            },
+            darkMode: 'class'
         }
-
-        .header {
-            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
-            color: white;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .content-section {
-            padding: 2rem;
-        }
-
-        .concept-box {
-            background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
-            border-radius: 15px;
-            padding: 2rem;
-            margin: 1.5rem 0;
-            border-left: 5px solid #8b5cf6;
-        }
-
-        .interactive-area {
-            background: #f8fafc;
-            border-radius: 15px;
-            padding: 2rem;
-            margin: 1.5rem 0;
-            border: 2px dashed #cbd5e1;
-        }
-
-        .pi-svg {
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            background: white;
-            transition: all 0.3s ease;
-        }
-
-        .btn-fun {
-            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
-            border: none;
-            padding: 12px 24px;
-            border-radius: 25px;
-            color: white;
-            font-size: 1.1rem;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
-        }
-
-        .btn-fun:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
-            color: white;
-        }
-
-        .exercise-card {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            margin: 1rem 0;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            border-top: 4px solid #f59e0b;
-        }
-
-        .fun-fact {
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            border-radius: 15px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border-left: 5px solid #f59e0b;
-        }
-
-        .pi-display {
-            background: #1e293b;
-            color: #8b5cf6;
-            padding: 1.5rem;
-            border-radius: 10px;
-            font-family: 'Courier New', monospace;
-            font-size: 1.3rem;
-            text-align: center;
-            margin: 1rem 0;
-        }
-
-        .calculator-area {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-            border-radius: 15px;
-            padding: 2rem;
-            margin: 1.5rem 0;
-            border: 2px solid #0ea5e9;
-        }
-
-        .back-btn {
-            background: #6b7280;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 20px;
-            text-decoration: none;
-            display: inline-block;
-            margin-bottom: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .back-btn:hover {
-            background: #4b5563;
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .pi-animation {
-            animation: rotate 10s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .pi-digits {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #8b5cf6;
-            text-align: center;
-            margin: 1rem 0;
-            letter-spacing: 2px;
-        }
-
-        @media (max-width: 768px) {
-            .content-section {
-                padding: 1rem;
-            }
-            
-            .concept-box, .interactive-area, .exercise-card {
-                padding: 1.5rem;
-            }
-            
-            .pi-digits {
-                font-size: 1.5rem;
-            }
-        }
-    </style>
+    </script>
 </head>
-<body>
-    <div class="main-container">
-        <!-- Header -->
-        <div class="header">
-            <a href="index.html" class="back-btn">← Volver al inicio</a>
-            <h1>🥧 El Número π (Pi)</h1>
-            <p class="mb-0 fs-4">¡El número más famoso de las matemáticas!</p>
-        </div>
 
-        <div class="content-section">
-            <!-- Concepto principal -->
-            <div class="concept-box">
-                <h2>🤔 ¿Qué es π (pi)?</h2>
-                <div class="row">
-                    <div class="col-md-6">
-                        <p>π (pi) es un <strong>número muy especial</strong>. Es la relación entre la longitud 
-                        de cualquier circunferencia y su diámetro.</p>
-                        
-                        <p>¡No importa si la circunferencia es grande como una rueda de bicicleta o pequeña como una moneda! 
-                        Siempre que dividas la longitud de la circunferencia entre su diámetro, obtienes π.</p>
-                        
-                        <div class="pi-digits">
-                            π ≈ 3.14159...
-                        </div>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors duration-300">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg flex items-center justify-center text-2xl">
+                        🥧
                     </div>
-                    <div class="col-md-6">
-                        <div class="fun-fact">
-                            <h5>💡 ¡Dato increíble!</h5>
-                            <p>π tiene infinitos decimales que nunca se repiten. ¡Los matemáticos han calculado 
-                            más de 31 billones de decimales y siguen descubriendo más!</p>
-                            <p>Para nuestros cálculos usaremos <strong>π ≈ 3.14</strong></p>
-                        </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-900 dark:text-white">El Número π (Pi)</h1>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Figuras Planas</p>
                     </div>
                 </div>
-            </div>
 
-            <!-- Visualización de π -->
-            <div class="interactive-area">
-                <h3>👀 ¡Veamos π en acción!</h3>
-                <p>Observa cómo π relaciona la circunferencia con el diámetro:</p>
-                
-                <div class="row">
-                    <div class="col-md-6">
-                        <svg class="pi-svg w-100" height="300" viewBox="0 0 400 300">
-                            <!-- Círculo -->
-                            <circle cx="200" cy="150" r="80" fill="rgba(139, 92, 246, 0.2)" stroke="#8b5cf6" stroke-width="3"/>
-                            
-                            <!-- Diámetro -->
-                            <line x1="120" y1="150" x2="280" y2="150" stroke="#ef4444" stroke-width="4"/>
-                            <text x="200" y="140" text-anchor="middle" font-size="14" fill="#ef4444" font-weight="bold">d</text>
-                            
-                            <!-- Centro -->
-                            <circle cx="200" cy="150" r="4" fill="#1e293b"/>
-                            <text x="210" y="145" font-size="12" fill="#1e293b">O</text>
-                            
-                            <!-- Flecha indicando circunferencia -->
-                            <path d="M 280,150 A 80,80 0 0,1 280,150" fill="none" stroke="#8b5cf6" stroke-width="3" 
-                                  marker-end="url(#arrowhead)" class="pi-animation"/>
-                            
-                            <!-- Definir flecha -->
-                            <defs>
-                                <marker id="arrowhead" markerWidth="10" markerHeight="7" 
-                                        refX="9" refY="3.5" orient="auto">
-                                    <polygon points="0 0, 10 3.5, 0 7" fill="#8b5cf6"/>
-                                </marker>
-                            </defs>
-                            
-                            <text x="200" y="50" text-anchor="middle" font-size="16" fill="#8b5cf6" font-weight="bold">
-                                Circunferencia = π × d
-                            </text>
+                <div class="flex items-center gap-3">
+                    <a href="../../index.html" class="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                         </svg>
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <div class="pi-display">
-                            <h5>🔢 La fórmula mágica</h5>
-                            <div class="mb-3">π = Circunferencia ÷ Diámetro</div>
-                            <div class="mb-3">Circunferencia = π × Diámetro</div>
-                            <div>Circunferencia = π × 2 × Radio</div>
-                        </div>
-                        
-                        <div class="text-center">
-                            <button class="btn btn-fun" onclick="showPiDemo()">
-                                🎬 Ver demostración
-                            </button>
-                        </div>
-                    </div>
+                        Volver
+                    </a>
+
+                    <button id="darkModeToggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                        <svg class="w-6 h-6 text-gray-700 dark:text-gray-300 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                        <svg class="w-6 h-6 text-gray-700 dark:text-gray-300 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                        </svg>
+                    </button>
                 </div>
             </div>
+        </div>
+    </header>
 
-            <!-- Demostración interactiva -->
-            <div class="interactive-area" id="piDemo" style="display: none;">
-                <h3>🎯 Demostración: "Desenrollando" la circunferencia</h3>
-                <p>¡Imagina que cortamos la circunferencia y la estiramos en línea recta!</p>
-                
-                <svg class="pi-svg w-100" height="250" viewBox="0 0 600 250">
-                    <!-- Círculo original -->
-                    <circle cx="100" cy="125" r="60" fill="none" stroke="#8b5cf6" stroke-width="3"/>
-                    <line x1="40" y1="125" x2="160" y2="125" stroke="#ef4444" stroke-width="3"/>
-                    <text x="100" y="200" text-anchor="middle" font-size="14" fill="#ef4444">d = 120 unidades</text>
-                    
-                    <!-- Flecha -->
-                    <path d="M 180,125 L 220,125" stroke="#6b7280" stroke-width="2" marker-end="url(#arrow)"/>
-                    <text x="200" y="115" text-anchor="middle" font-size="12" fill="#6b7280">desenrollar</text>
-                    
-                    <!-- Línea desenrollada -->
-                    <line x1="250" y1="125" x2="550" y2="125" stroke="#8b5cf6" stroke-width="4"/>
-                    <text x="400" y="145" text-anchor="middle" font-size="14" fill="#8b5cf6">
-                        Circunferencia ≈ 377 unidades
-                    </text>
-                    <text x="400" y="165" text-anchor="middle" font-size="12" fill="#6b7280">
-                        377 ÷ 120 ≈ 3.14 = π
-                    </text>
-                    
-                    <!-- Marcas de medida -->
-                    <line x1="250" y1="120" x2="250" y2="130" stroke="#6b7280" stroke-width="1"/>
-                    <line x1="370" y1="120" x2="370" y2="130" stroke="#6b7280" stroke-width="1"/>
-                    <line x1="490" y1="120" x2="490" y2="130" stroke="#6b7280" stroke-width="1"/>
-                    <line x1="550" y1="120" x2="550" y2="130" stroke="#6b7280" stroke-width="1"/>
-                    
-                    <text x="310" y="115" text-anchor="middle" font-size="10" fill="#ef4444">d</text>
-                    <text x="430" y="115" text-anchor="middle" font-size="10" fill="#ef4444">d</text>
-                    <text x="520" y="115" text-anchor="middle" font-size="10" fill="#ef4444">d</text>
-                    <text x="400" y="100" text-anchor="middle" font-size="12" fill="#059669" font-weight="bold">
-                        ¡Caben π diámetros!
-                    </text>
-                    
-                    <defs>
-                        <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#6b7280"/>
-                        </marker>
-                    </defs>
-                </svg>
-            </div>
-
-            <!-- Calculadora de circunferencias -->
-            <div class="calculator-area">
-                <h3>🧮 Calculadora de Circunferencias</h3>
-                <p>¡Usa π = 3.14 para calcular circunferencias!</p>
-                
-                <div class="row">
-                    <div class="col-md-6">
-                        <h5>Opción 1: Conoces el radio</h5>
-                        <div class="mb-3">
-                            <label class="form-label">Radio (cm):</label>
-                            <input type="number" id="radiusInput" class="form-control" placeholder="Ej: 5" min="0" step="0.1">
-                        </div>
-                        <button class="btn btn-fun" onclick="calculateFromRadius()">Calcular</button>
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <h5>Opción 2: Conoces el diámetro</h5>
-                        <div class="mb-3">
-                            <label class="form-label">Diámetro (cm):</label>
-                            <input type="number" id="diameterInput" class="form-control" placeholder="Ej: 10" min="0" step="0.1">
-                        </div>
-                        <button class="btn btn-fun" onclick="calculateFromDiameter()">Calcular</button>
-                    </div>
-                </div>
-                
-                <div id="calculatorResult" class="pi-display mt-3" style="display: none;">
-                    <div id="calculationSteps"></div>
-                </div>
-            </div>
-
-            <!-- Ejercicios prácticos -->
-            <div class="exercise-card">
-                <h3>🎯 ¡Practica con π!</h3>
-                
-                <div class="row">
-                    <div class="col-md-6">
-                        <h5>Ejercicio 1: Rueda de bicicleta</h5>
-                        <p>Una rueda de bicicleta tiene un radio de 30 cm. ¿Cuál es la longitud de su circunferencia?</p>
-                        <p class="text-muted">Usa π = 3.14</p>
-                        
-                        <div class="mb-3">
-                            <input type="number" id="exercise1" class="form-control" placeholder="Respuesta en cm" step="0.1">
-                        </div>
-                        <button class="btn btn-fun" onclick="checkExercise1()">Comprobar</button>
-                        <div id="result1" class="mt-2"></div>
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <h5>Ejercicio 2: Pizza circular</h5>
-                        <p>Una pizza tiene un diámetro de 40 cm. ¿Cuánto mide el borde (circunferencia) de la pizza?</p>
-                        <p class="text-muted">Usa π = 3.14</p>
-                        
-                        <div class="mb-3">
-                            <input type="number" id="exercise2" class="form-control" placeholder="Respuesta en cm" step="0.1">
-                        </div>
-                        <button class="btn btn-fun" onclick="checkExercise2()">Comprobar</button>
-                        <div id="result2" class="mt-2"></div>
-                    </div>
-                </div>
-                
-                <div class="row mt-4">
-                    <div class="col-md-6">
-                        <h5>Ejercicio 3: Problema inverso</h5>
-                        <p>Si una circunferencia mide 31.4 cm, ¿cuál es su radio?</p>
-                        <p class="text-muted">Pista: Circunferencia = 2 × π × radio</p>
-                        
-                        <div class="mb-3">
-                            <input type="number" id="exercise3" class="form-control" placeholder="Respuesta en cm" step="0.1">
-                        </div>
-                        <button class="btn btn-fun" onclick="checkExercise3()">Comprobar</button>
-                        <div id="result3" class="mt-2"></div>
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <h5>Ejercicio 4: Comparación</h5>
-                        <p>¿Cuántas veces cabe el diámetro en la circunferencia?</p>
-                        
-                        <div class="mb-3">
-                            <select id="exercise4" class="form-select">
-                                <option value="">Selecciona una opción</option>
-                                <option value="2">2 veces</option>
-                                <option value="3">3 veces</option>
-                                <option value="3.14">3.14 veces (π)</option>
-                                <option value="6">6 veces</option>
-                            </select>
-                        </div>
-                        <button class="btn btn-fun" onclick="checkExercise4()">Comprobar</button>
-                        <div id="result4" class="mt-2"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Historia de π -->
-            <div class="fun-fact">
-                <h4>📚 La increíble historia de π</h4>
-                <div class="row">
-                    <div class="col-md-6">
-                        <h6>🏺 Antiguos egipcios (2000 a.C.)</h6>
-                        <p>Usaban π ≈ 3.16 para construir las pirámides.</p>
-                        
-                        <h6>🏛️ Arquímedes (250 a.C.)</h6>
-                        <p>Calculó π con gran precisión usando polígonos. Descubrió que π está entre 3.14 y 3.15.</p>
-                    </div>
-                    <div class="col-md-6">
-                        <h6>🖥️ Era moderna</h6>
-                        <p>Las computadoras han calculado π con más de 31 billones de decimales.</p>
-                        
-                        <h6>🎉 Día de π</h6>
-                        <p>Se celebra el 14 de marzo (3/14) porque π ≈ 3.14.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Botón de completar -->
-            <div class="text-center mt-4">
-                <button class="btn btn-fun btn-lg" onclick="completeLesson()">
-                    🎉 ¡Soy un experto en π!
-                </button>
+    <!-- Tabs -->
+    <div class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex gap-8">
+                <a href="numero-pi.html" class="py-4 px-2 border-b-2 border-purple-500 text-purple-600 dark:text-purple-400 font-medium flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                    Aprender
+                </a>
+                <a href="practica.html" class="py-4 px-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 font-medium flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                    </svg>
+                    Practicar
+                </a>
+                <a href="evaluacion.html" class="py-4 px-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 font-medium flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Evaluar
+                </a>
             </div>
         </div>
     </div>
 
+    <!-- Contenido -->
+    <main class="max-w-7xl mx-auto px-6 py-8">
+        <div class="mb-8">
+            <p class="text-gray-700 dark:text-gray-300 text-lg">
+                ¡Conoce el número más famoso de las matemáticas! Aprende qué es π y cómo usarlo para medir circunferencias.
+            </p>
+        </div>
+
+        <!-- Concepto principal -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 mb-8 border border-gray-200 dark:border-gray-700">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                <span>🤔</span>
+                ¿Qué es π (Pi)?
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <p class="text-gray-700 dark:text-gray-300 mb-4">
+                        <strong>π (Pi)</strong> es un número especial que representa la relación entre el perímetro de una circunferencia y su diámetro.
+                    </p>
+                    
+                    <div class="bg-purple-50 dark:bg-purple-900/20 rounded-xl p-4">
+                        <h4 class="text-lg font-bold text-purple-700 dark:text-purple-400 mb-3">🥧 Valor de π:</h4>
+                        <p class="text-3xl font-mono font-bold text-purple-600 dark:text-purple-400 mb-2">π ≈ 3.14159...</p>
+                        <p class="text-sm text-gray-700 dark:text-gray-300">
+                            Es un número infinito que nunca termina ni se repite. 
+                            Para cálculos usamos <strong>3.14</strong> o <strong>3.1416</strong>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-4 border-l-4 border-amber-500">
+                    <h5 class="text-lg font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
+                        <span>💡</span>
+                        ¡Dato fascinante!
+                    </h5>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        ¡El número π tiene más de 31 billones de decimales calculados! 
+                        Los matemáticos llevan miles de años estudiándolo. 
+                        Incluso hay un día dedicado a π: el 14 de marzo (3/14).
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botón de acción -->
+        <div class="flex justify-center mt-8">
+            <button onclick="window.location.href='../../index.html'" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-gray-900 font-bold py-4 px-8 rounded-xl transition-all hover:shadow-lg flex items-center gap-2">
+                ¿Listo para practicar?
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+            </button>
+        </div>
+    </main>
+
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="numero-pi.js"></script>
     
     <script>
-        // Variables
-        let exercisesCompleted = 0;
-        const PI = 3.14;
-
-        // Inicialización
-        document.addEventListener('DOMContentLoaded', function() {
-            // Animaciones de entrada
-            const elements = document.querySelectorAll('.concept-box, .interactive-area, .exercise-card, .calculator-area');
-            elements.forEach((element, index) => {
-                element.style.opacity = '0';
-                element.style.transform = 'translateY(30px)';
-                
-                setTimeout(() => {
-                    element.style.transition = 'all 0.6s ease';
-                    element.style.opacity = '1';
-                    element.style.transform = 'translateY(0)';
-                }, index * 200);
-            });
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const htmlElement = document.documentElement;
+        
+        const darkMode = localStorage.getItem('darkMode');
+        if (darkMode === 'enabled') {
+            htmlElement.classList.add('dark');
+        }
+        
+        darkModeToggle.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+            
+            if (htmlElement.classList.contains('dark')) {
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+            }
         });
-
-        // Mostrar demostración de π
-        function showPiDemo() {
-            const demo = document.getElementById('piDemo');
-            if (demo.style.display === 'none') {
-                demo.style.display = 'block';
-                demo.scrollIntoView({ behavior: 'smooth' });
-            } else {
-                demo.style.display = 'none';
-            }
-        }
-
-        // Calculadora desde radio
-        function calculateFromRadius() {
-            const radius = parseFloat(document.getElementById('radiusInput').value);
-            const result = document.getElementById('calculatorResult');
-            const steps = document.getElementById('calculationSteps');
-            
-            if (radius > 0) {
-                const circumference = (2 * PI * radius).toFixed(2);
-                const diameter = (2 * radius).toFixed(1);
-                
-                steps.innerHTML = `
-                    <h5>📊 Resultados para radio = ${radius} cm</h5>
-                    <div class="mb-2"><strong>Diámetro:</strong> d = 2 × r = 2 × ${radius} = ${diameter} cm</div>
-                    <div class="mb-2"><strong>Circunferencia:</strong> C = 2 × π × r</div>
-                    <div class="mb-2">C = 2 × 3.14 × ${radius} = <strong>${circumference} cm</strong></div>
-                `;
-                result.style.display = 'block';
-            } else {
-                alert('Por favor, ingresa un radio válido mayor que 0.');
-            }
-        }
-
-        // Calculadora desde diámetro
-        function calculateFromDiameter() {
-            const diameter = parseFloat(document.getElementById('diameterInput').value);
-            const result = document.getElementById('calculatorResult');
-            const steps = document.getElementById('calculationSteps');
-            
-            if (diameter > 0) {
-                const circumference = (PI * diameter).toFixed(2);
-                const radius = (diameter / 2).toFixed(1);
-                
-                steps.innerHTML = `
-                    <h5>📊 Resultados para diámetro = ${diameter} cm</h5>
-                    <div class="mb-2"><strong>Radio:</strong> r = d ÷ 2 = ${diameter} ÷ 2 = ${radius} cm</div>
-                    <div class="mb-2"><strong>Circunferencia:</strong> C = π × d</div>
-                    <div class="mb-2">C = 3.14 × ${diameter} = <strong>${circumference} cm</strong></div>
-                `;
-                result.style.display = 'block';
-            } else {
-                alert('Por favor, ingresa un diámetro válido mayor que 0.');
-            }
-        }
-
-        // Ejercicios
-        function checkExercise1() {
-            const answer = parseFloat(document.getElementById('exercise1').value);
-            const result = document.getElementById('result1');
-            const expected = 2 * PI * 30; // 188.4
-            
-            if (Math.abs(answer - expected) < 1) {
-                result.innerHTML = '<div class="alert alert-success">🎉 ¡Correcto! C = 2 × 3.14 × 30 = 188.4 cm</div>';
-                exercisesCompleted++;
-            } else {
-                result.innerHTML = '<div class="alert alert-danger">❌ Usa la fórmula: C = 2 × π × r = 2 × 3.14 × 30</div>';
-            }
-        }
-
-        function checkExercise2() {
-            const answer = parseFloat(document.getElementById('exercise2').value);
-            const result = document.getElementById('result2');
-            const expected = PI * 40; // 125.6
-            
-            if (Math.abs(answer - expected) < 1) {
-                result.innerHTML = '<div class="alert alert-success">🎉 ¡Perfecto! C = π × d = 3.14 × 40 = 125.6 cm</div>';
-                exercisesCompleted++;
-            } else {
-                result.innerHTML = '<div class="alert alert-danger">❌ Usa la fórmula: C = π × d = 3.14 × 40</div>';
-            }
-        }
-
-        function checkExercise3() {
-            const answer = parseFloat(document.getElementById('exercise3').value);
-            const result = document.getElementById('result3');
-            const expected = 31.4 / (2 * PI); // 5
-            
-            if (Math.abs(answer - expected) < 0.5) {
-                result.innerHTML = '<div class="alert alert-success">🎉 ¡Excelente! Si C = 31.4, entonces r = C ÷ (2π) = 31.4 ÷ 6.28 = 5 cm</div>';
-                exercisesCompleted++;
-            } else {
-                result.innerHTML = '<div class="alert alert-danger">❌ Despeja r de la fórmula: C = 2 × π × r, entonces r = C ÷ (2 × π)</div>';
-            }
-        }
-
-        function checkExercise4() {
-            const answer = document.getElementById('exercise4').value;
-            const result = document.getElementById('result4');
-            
-            if (answer === '3.14') {
-                result.innerHTML = '<div class="alert alert-success">🎉 ¡Correcto! El diámetro cabe exactamente π veces (3.14 veces) en la circunferencia</div>';
-                exercisesCompleted++;
-            } else {
-                result.innerHTML = '<div class="alert alert-danger">❌ Recuerda que π = Circunferencia ÷ Diámetro, por lo que el diámetro cabe π veces</div>';
-            }
-        }
-
-        function completeLesson() {
-            if (exercisesCompleted >= 3) {
-                // Marcar como completado en el sistema principal
-                if (window.parent && window.parent.markTopicCompleted) {
-                    window.parent.markTopicCompleted('numero-pi.html');
-                }
-                
-                alert('🎉 ¡Increíble! Has dominado el número π. ¡Ahora puedes calcular cualquier circunferencia!');
-                window.location.href = 'index.html';
-            } else {
-                alert('💪 ¡Casi lo tienes! Completa al menos 3 ejercicios antes de terminar la lección.');
-            }
-        }
     </script>
 </body>
+
 </html>
