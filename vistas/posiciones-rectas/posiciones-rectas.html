@@ -99,9 +99,8 @@
             </div>
         </div>
     </div>
-""
-    <!
--- Contenido principal -->
+
+    <!-- Contenido principal -->
     <main class="max-w-7xl mx-auto px-6 py-8">
         <!-- Introducción -->
         <div class="mb-8">
@@ -165,8 +164,8 @@
                             </text>
                         </svg>
                     </div>
-                </div>
-                
+                </div>        
+      
                 <!-- Recta Tangente -->
                 <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
                     <h5 class="font-semibold text-gray-900 dark:text-white mb-3 text-center">👆 Recta Tangente</h5>
@@ -204,70 +203,6 @@
             
             <div id="positionInfo" class="mt-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 hidden">
                 <div id="positionDetails" class="text-gray-700 dark:text-gray-300"></div>
-            </div>
-        </div>
-
-        <!-- Simulador interactivo -->
-        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 mb-8 border border-gray-200 dark:border-gray-700 transition-colors duration-300">
-            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                <span>🎮</span>
-                Simulador: ¡Mueve la recta!
-            </h3>
-            <p class="text-gray-600 dark:text-gray-400 mb-6">Arrastra la línea roja hacia arriba o abajo para ver cómo cambia su posición:</p>
-            
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="md:col-span-2">
-                    <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
-                        <svg id="simulator" class="w-full" height="350" viewBox="0 0 400 350">
-                            <!-- Circunferencia fija -->
-                            <circle cx="200" cy="175" r="80" fill="rgba(6, 182, 212, 0.1)" stroke="#06b6d4" stroke-width="3"/>
-                            <circle cx="200" cy="175" r="3" fill="#06b6d4"/>
-                            <text x="210" y="170" font-size="14" fill="#06b6d4" font-weight="bold">O</text>
-                            
-                            <!-- Recta móvil -->
-                            <line id="movableLine" x1="50" y1="50" x2="350" y2="50" 
-                                  stroke="#ef4444" stroke-width="4" style="cursor: grab;"/>
-                            
-                            <!-- Línea de distancia -->
-                            <line id="distanceLine" x1="200" y1="175" x2="200" y2="50" 
-                                  stroke="#059669" stroke-width="2" stroke-dasharray="5,5" style="display: none;"/>
-                            <text id="distanceText" x="220" y="112" font-size="12" fill="#059669" 
-                                  font-weight="bold" style="display: none;">distancia</text>
-                            
-                            <!-- Puntos de intersección -->
-                            <circle id="point1" r="5" fill="#ef4444" style="display: none;"/>
-                            <circle id="point2" r="5" fill="#ef4444" style="display: none;"/>
-                        </svg>
-                        
-                        <div class="flex justify-center gap-3 mt-4">
-                            <button onclick="resetSimulator()" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
-                                🔄 Reiniciar
-                            </button>
-                            <button onclick="toggleDistance()" class="px-4 py-2 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 transition-colors">
-                                📏 Mostrar distancia
-                            </button>
-                        </div>
-                    </div>
-                </div>
-""   
-             
-                <div>
-                    <div id="simulatorStatus" class="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl p-4 mb-4">
-                        <h5 class="font-bold mb-2">Posición Actual:</h5>
-                        <div id="currentPosition" class="text-2xl font-bold">Exterior</div>
-                        <div id="distanceInfo" class="mt-2 text-sm">Distancia > Radio</div>
-                    </div>
-                    
-                    <div class="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-4">
-                        <h6 class="font-bold text-gray-900 dark:text-white mb-2">📋 Instrucciones:</h6>
-                        <ul class="text-sm text-gray-700 dark:text-gray-300 space-y-1">
-                            <li>• Arrastra la línea roja</li>
-                            <li>• Observa cómo cambia la posición</li>
-                            <li>• Fíjate en los puntos de contacto</li>
-                            <li>• Usa "Mostrar distancia" para ver la medida</li>
-                        </ul>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -331,13 +266,6 @@
             }
         });
 
-        // Variables del simulador
-        let isDragging = false;
-        let showingDistance = false;
-        const centerX = 200;
-        const centerY = 175;
-        const radius = 80;
-
         // Mostrar información de posiciones
         function showPositionInfo(positionType) {
             const info = {
@@ -370,121 +298,6 @@
                     <p><strong>Ejemplo:</strong> ${positionData.example}</p>
                 `;
                 document.getElementById('positionInfo').classList.remove('hidden');
-            }
-        }
-
-        // Configurar simulador
-        document.addEventListener('DOMContentLoaded', function() {
-            const line = document.getElementById('movableLine');
-            
-            line.addEventListener('mousedown', startDrag);
-            line.addEventListener('touchstart', startDrag);
-            
-            document.addEventListener('mousemove', drag);
-            document.addEventListener('touchmove', drag);
-            document.addEventListener('mouseup', stopDrag);
-            document.addEventListener('touchend', stopDrag);
-            
-            updateSimulatorStatus(50);
-        });
-
-        function startDrag(e) {
-            isDragging = true;
-            e.preventDefault();
-        }
-
-        function drag(e) {
-            if (!isDragging) return;
-            
-            const simulator = document.getElementById('simulator');
-            const rect = simulator.getBoundingClientRect();
-            const clientY = e.clientY || (e.touches && e.touches[0].clientY);
-            const y = ((clientY - rect.top) / rect.height) * 350;
-            
-            const constrainedY = Math.max(20, Math.min(330, y));
-            
-            const line = document.getElementById('movableLine');
-            line.setAttribute('y1', constrainedY);
-            line.setAttribute('y2', constrainedY);
-            
-            updateSimulatorStatus(constrainedY);
-        }
-
-        function stopDrag() {
-            isDragging = false;
-        }
-
-        // Actualizar estado del simulador
-        function updateSimulatorStatus(lineY) {
-            const distance = Math.abs(lineY - centerY);
-            let position, info, color;
-            
-            document.getElementById('point1').style.display = 'none';
-            document.getElementById('point2').style.display = 'none';
-            
-            if (distance > radius + 5) {
-                position = 'Exterior';
-                info = `Distancia (${Math.round(distance)}) > Radio (${radius})`;
-                color = '#ef4444';
-            } else if (Math.abs(distance - radius) <= 5) {
-                position = 'Tangente';
-                info = `Distancia (${Math.round(distance)}) ≈ Radio (${radius})`;
-                color = '#f59e0b';
-                
-                const point1 = document.getElementById('point1');
-                point1.setAttribute('cx', centerX);
-                point1.setAttribute('cy', lineY);
-                point1.style.display = 'block';
-            } else {
-                position = 'Secante';
-                info = `Distancia (${Math.round(distance)}) < Radio (${radius})`;
-                color = '#10b981';
-                
-                const dx = Math.sqrt(radius * radius - distance * distance);
-                const point1 = document.getElementById('point1');
-                const point2 = document.getElementById('point2');
-                
-                point1.setAttribute('cx', centerX - dx);
-                point1.setAttribute('cy', lineY);
-                point1.style.display = 'block';
-                
-                point2.setAttribute('cx', centerX + dx);
-                point2.setAttribute('cy', lineY);
-                point2.style.display = 'block';
-            }
-            
-            document.getElementById('currentPosition').textContent = position;
-            document.getElementById('currentPosition').style.color = color;
-            document.getElementById('distanceInfo').textContent = info;
-            
-            if (showingDistance) {
-                const distanceLine = document.getElementById('distanceLine');
-                distanceLine.setAttribute('y2', lineY);
-                document.getElementById('distanceText').setAttribute('y', (centerY + lineY) / 2);
-            }
-        }
-
-        function resetSimulator() {
-            const line = document.getElementById('movableLine');
-            line.setAttribute('y1', '50');
-            line.setAttribute('y2', '50');
-            updateSimulatorStatus(50);
-        }
-
-        function toggleDistance() {
-            showingDistance = !showingDistance;
-            const distanceLine = document.getElementById('distanceLine');
-            const distanceText = document.getElementById('distanceText');
-            
-            if (showingDistance) {
-                distanceLine.style.display = 'block';
-                distanceText.style.display = 'block';
-                const lineY = parseFloat(document.getElementById('movableLine').getAttribute('y1'));
-                distanceLine.setAttribute('y2', lineY);
-                distanceText.setAttribute('y', (centerY + lineY) / 2);
-            } else {
-                distanceLine.style.display = 'none';
-                distanceText.style.display = 'none';
             }
         }
     </script>
