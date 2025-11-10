@@ -1,7 +1,3 @@
-// === BASE CLASS: Topic Module ===
-// Clase base para todos los módulos de temas
-// SOLID: Open/Closed - Abierta para extensión, cerrada para modificación
-// SOLID: Liskov Substitution - Cualquier módulo puede sustituir a esta clase base
 
 class BaseTopicModule {
     constructor(topicId, topicName, topicUrl, topicIcon) {

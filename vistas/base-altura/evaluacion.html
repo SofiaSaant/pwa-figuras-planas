@@ -1,73 +1,464 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Evaluación - Base y Altura</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Fuentes de Google -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="../../styles.css" />
+    <link rel="stylesheet" href="../../core/animations.css" />
 
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif']
-                    }
-                }
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#2196F3",
+              accent: "#8BC34A",
             },
-            darkMode: 'class'
-        }
+            fontFamily: {
+              sans: ["Inter", "system-ui", "sans-serif"],
+            },
+          },
+        },
+        darkMode: "class",
+      };
     </script>
-</head>
+  </head>
 
-<body class="bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors duration-300">
+  <body
+    class="bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors duration-300"
+  >
     <!-- Header -->
-    <header class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
-        <div class="max-w-7xl mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center text-2xl">
-                        📐
-                    </div>
-                    <div>
-                        <h1 class="text-xl font-bold text-gray-900 dark:text-white">Base y Altura - Evaluación</h1>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">Figuras Planas</p>
-                    </div>
-                </div>
-
-                <a href="base-altura.html" class="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors flex items-center gap-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                    </svg>
-                    Volver
-                </a>
+    <header
+      class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700"
+    >
+      <div class="max-w-7xl mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <!-- Logo y Título -->
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center text-2xl"
+            >
+              📐
             </div>
+            <div>
+              <h1 class="text-xl font-bold text-gray-900 dark:text-white">
+                Base y Altura
+              </h1>
+              <p class="text-sm text-gray-600 dark:text-gray-400">
+                Figuras Planas
+              </p>
+            </div>
+          </div>
+
+          <!-- Botones de acción -->
+          <div class="flex items-center gap-3">
+            <a
+              href="../../index.html"
+              class="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors flex items-center gap-2"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                />
+              </svg>
+              Volver
+            </a>
+
+            <!-- Botón de modo oscuro -->
+            <button
+              id="darkModeToggle"
+              class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+            >
+              <svg
+                class="w-6 h-6 text-gray-700 dark:text-gray-300 hidden dark:block"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                />
+              </svg>
+              <svg
+                class="w-6 h-6 text-gray-700 dark:text-gray-300 block dark:hidden"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
+      </div>
     </header>
 
-    <!-- Contenido -->
-    <main class="max-w-4xl mx-auto px-6 py-16 flex items-center justify-center min-h-[calc(100vh-200px)]">
-        <div class="text-center">
-            <div class="text-8xl mb-6">🚧</div>
-            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Página en Construcción</h2>
-            <p class="text-xl text-gray-600 dark:text-gray-400 mb-8">¡Vuelve pronto! Estamos preparando evaluaciones increíbles para ti.</p>
-            
-            <div class="flex gap-4 justify-center">
-                <a href="base-altura.html" class="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-semibold transition-colors">
-                    Volver a Aprender
-                </a>
-                <a href="../../index.html" class="px-6 py-3 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-white rounded-lg font-semibold transition-colors">
-                    Ir al Inicio
-                </a>
-            </div>
+    <!-- Tabs de navegación -->
+    <div
+      class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 transition-colors duration-300"
+    >
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex gap-8">
+          <a
+            href="base-altura.html"
+            class="py-4 px-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 font-medium flex items-center gap-2"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+              />
+            </svg>
+            Aprender
+          </a>
+          <a
+            href="practica.html"
+            class="py-4 px-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 font-medium flex items-center gap-2"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+              />
+            </svg>
+            Practicar
+          </a>
+          <!-- Pestaña de Evaluar activa -->
+          <a
+            href="evaluacion.html"
+            class="py-4 px-2 border-b-2 border-blue-500 text-blue-600 dark:text-blue-400 font-medium flex items-center gap-2"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            Evaluar
+          </a>
         </div>
-    </main>
-</body>
+      </div>
+    </div>
 
+    <!-- TAREA 4: Contenido de Evaluación (Nuevo) -->
+    <main class="max-w-7xl mx-auto px-6 py-8">
+      <h2
+        class="text-3xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2"
+      >
+        <span>🎓</span>
+        Evaluación: Base y Altura
+      </h2>
+      <p class="text-gray-700 dark:text-gray-300 text-lg mb-8">
+        Demuestra lo que sabes. Los resultados de esta sección se guardarán (en
+        un futuro).
+      </p>
+
+      <div class="space-y-8">
+        <!-- Evaluación 1 (Nueva) -->
+        <div
+          class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700"
+        >
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+            Pregunta 1: Triángulo Obtuso
+          </h3>
+          <div class="grid md:grid-cols-2 gap-6 items-center">
+            <div>
+              <p class="text-gray-600 dark:text-gray-400 mb-4">
+                En un triángulo obtuso, la altura (azul) a veces cae ¡fuera de
+                la base (roja)!
+              </p>
+              <svg class="w-full" height="200" viewBox="0 0 300 200">
+                <polygon
+                  points="50,150 200,150 100,50"
+                  fill="rgba(22, 163, 74, 0.3)"
+                  stroke="#16A34A"
+                  stroke-width="3"
+                />
+                <!-- Base -->
+                <line
+                  x1="50"
+                  y1="150"
+                  x2="200"
+                  y2="150"
+                  stroke="#ef4444"
+                  stroke-width="4"
+                />
+                <text
+                  x="125"
+                  y="170"
+                  text-anchor="middle"
+                  fill="#ef4444"
+                  font-size="14"
+                  font-weight="bold"
+                >
+                  Base: 10 cm
+                </text>
+                <!-- Extensión de la base -->
+                <line
+                  x1="200"
+                  y1="150"
+                  x2="100"
+                  y2="150"
+                  stroke="#ef4444"
+                  stroke-width="2"
+                  stroke-dasharray="3,3"
+                />
+                <!-- Altura -->
+                <line
+                  x1="100"
+                  y1="50"
+                  x2="100"
+                  y2="150"
+                  stroke="#3b82f6"
+                  stroke-width="4"
+                  stroke-dasharray="5,5"
+                />
+                <text
+                  x="75"
+                  y="100"
+                  text-anchor="middle"
+                  fill="#3b82f6"
+                  font-size="14"
+                  font-weight="bold"
+                >
+                  Altura: 7 cm
+                </text>
+              </svg>
+            </div>
+            <div class="space-y-4">
+              <div>
+                <label
+                  for="eval1Area"
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >Calcula el área del triángulo (cm²):</label
+                >
+                <input
+                  type="number"
+                  id="eval1Area"
+                  class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white"
+                  placeholder="Área = (Base × Altura) / 2"
+                />
+              </div>
+              <button
+                id="checkEval1"
+                class="w-full px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-lg font-semibold transition-colors"
+              >
+                Comprobar Pregunta 1
+              </button>
+              <div id="resultEval1" class="mt-4 text-center"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Evaluación 2 (Nueva) -->
+        <div
+          class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700"
+        >
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+            Pregunta 2: Área del Rombo
+          </h3>
+          <div class="grid md:grid-cols-2 gap-6 items-center">
+            <div>
+              <p class="text-gray-600 dark:text-gray-400 mb-4">
+                La fórmula de área de un rombo (que es un paralelogramo) sigue
+                siendo Base × Altura.
+              </p>
+              <svg class="w-full" height="150" viewBox="0 0 300 150">
+                <polygon
+                  points="100,25 250,25 200,125 50,125"
+                  fill="rgba(217, 70, 239, 0.3)"
+                  stroke="#D946EF"
+                  stroke-width="3"
+                />
+                <!-- Base -->
+                <line
+                  x1="50"
+                  y1="125"
+                  x2="200"
+                  y2="125"
+                  stroke="#ef4444"
+                  stroke-width="4"
+                />
+                <text
+                  x="125"
+                  y="145"
+                  text-anchor="middle"
+                  fill="#ef4444"
+                  font-size="14"
+                  font-weight="bold"
+                >
+                  Base: 15 cm
+                </text>
+                <!-- Altura -->
+                <line
+                  x1="100"
+                  y1="25"
+                  x2="100"
+                  y2="125"
+                  stroke="#3b82f6"
+                  stroke-width="4"
+                  stroke-dasharray="5,5"
+                />
+                <text
+                  x="75"
+                  y="75"
+                  text-anchor="middle"
+                  fill="#3b82f6"
+                  font-size="14"
+                  font-weight="bold"
+                >
+                  Altura: 11 cm
+                </text>
+              </svg>
+            </div>
+            <div class="space-y-4">
+              <div>
+                <label
+                  for="eval2Area"
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >Área del rombo (cm²):</label
+                >
+                <input
+                  type="number"
+                  id="eval2Area"
+                  class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white"
+                  placeholder="Calcula el área del rombo"
+                />
+              </div>
+              <button
+                id="checkEval2"
+                class="w-full px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-lg font-semibold transition-colors"
+              >
+                Comprobar Pregunta 2
+              </button>
+              <div id="resultEval2" class="mt-4 text-center"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Evaluación 3 (Nueva) -->
+        <div
+          class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700"
+        >
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+            Pregunta 3: Problema de la Vela
+          </h3>
+          <p class="text-gray-600 dark:text-gray-400 mb-4">
+            La vela de un barco tiene forma de triángulo. Si su base mide 4
+            metros y su altura mide 6 metros, ¿cuál es el área total de la vela
+            en metros cuadrados (m²)?
+          </p>
+          <div class="space-y-4 max-w-md mx-auto">
+            <div>
+              <label
+                for="eval3Area"
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >Área de la vela (m²):</label
+              >
+              <input
+                type="number"
+                id="eval3Area"
+                class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white"
+                placeholder="Área = (Base × Altura) / 2"
+              />
+            </div>
+            <button
+              id="checkEval3"
+              class="w-full px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-lg font-semibold transition-colors"
+            >
+              Comprobar Pregunta 3
+            </button>
+            <div id="resultEval3" class="mt-4 text-center"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    
+    <!-- 1. Modelos -->
+    <script src="../../core/models/Topic.js"></script>
+    <script src="../../core/models/Exercise.js"></script>
+    <script src="../../core/models/Progress.js"></script>
+
+    <!-- 2. Servicios -->
+    <script src="../../core/services/StorageService.js"></script>
+    <script src="../../core/services/NotificationService.js"></script>
+    <script src="../../core/services/AnimationService.js"></script>
+
+    <!-- 3. Controladores -->
+    <script src="../../core/controllers/ExerciseController.js"></script>
+    <script src="../../core/controllers/ProgressController.js"></script>
+
+    <!-- 4. Clase Base -->
+    <script src="../../core/BaseTopicModule.js"></script>
+    
+    <!-- 5. Script Específico de la Página (el de evaluación) -->
+    <script src="evaluacion.js"></script>
+
+    <!-- Script del modo oscuro -->
+    <script>
+      const darkModeToggle = document.getElementById("darkModeToggle");
+      const htmlElement = document.documentElement;
+
+      const darkMode = localStorage.getItem("darkMode");
+      if (darkMode === "enabled") {
+        htmlElement.classList.add("dark");
+      }
+
+      darkModeToggle.addEventListener("click", () => {
+        htmlElement.classList.toggle("dark");
+        const isDarkMode = htmlElement.classList.contains("dark");
+        localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
+      });
+    </script>
+  </body>
 </html>
