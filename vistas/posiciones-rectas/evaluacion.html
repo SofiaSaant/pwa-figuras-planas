@@ -2,72 +2,191 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evaluación - Posiciones de Rectas</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evaluación - Posiciones de Rectas</title>
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Fuentes de Google -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Fuentes -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif']
-                    }
-                }
-            },
-            darkMode: 'class'
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
         }
-    </script>
+      },
+      darkMode: 'class'
+    }
+  </script>
 </head>
 
 <body class="bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors duration-300">
-    <!-- Header -->
-    <header class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
-        <div class="max-w-7xl mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-cyan-600 rounded-lg flex items-center justify-center text-2xl">
-                        📍
-                    </div>
-                    <div>
-                        <h1 class="text-xl font-bold text-gray-900 dark:text-white">Posiciones de Rectas - Evaluación</h1>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">Figuras Planas</p>
-                    </div>
-                </div>
-
-                <a href="posiciones-rectas.html" class="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors flex items-center gap-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                    </svg>
-                    Volver
-                </a>
-            </div>
+  <!-- Header -->
+  <header class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+    <div class="max-w-7xl mx-auto px-6 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div
+            class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-cyan-600 rounded-lg flex items-center justify-center text-2xl">
+            📍
+          </div>
+          <div>
+            <h1 class="text-xl font-bold text-gray-900 dark:text-white">Evaluación - Posiciones de Rectas</h1>
+            <p class="text-sm text-gray-600 dark:text-gray-400">Figuras Planas</p>
+          </div>
         </div>
-    </header>
 
-    <!-- Contenido -->
-    <main class="max-w-4xl mx-auto px-6 py-16 flex items-center justify-center min-h-[calc(100vh-200px)]">
-        <div class="text-center">
-            <div class="text-8xl mb-6">🚧</div>
-            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Página en Construcción</h2>
-            <p class="text-xl text-gray-600 dark:text-gray-400 mb-8">¡Vuelve pronto! Estamos preparando evaluaciones increíbles para ti.</p>
-            
-            <div class="flex gap-4 justify-center">
-                <a href="posiciones-rectas.html" class="px-6 py-3 bg-cyan-500 hover:bg-cyan-600 text-white rounded-lg font-semibold transition-colors">
-                    Volver a Aprender
-                </a>
-                <a href="../../index.html" class="px-6 py-3 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-white rounded-lg font-semibold transition-colors">
-                    Ir al Inicio
-                </a>
-            </div>
+        <a href="posiciones-rectas.html"
+          class="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Volver
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenido principal -->
+  <main class="max-w-4xl mx-auto px-6 py-12">
+    <section class="text-center mb-10">
+      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">🧮 ¡Evalúa lo que aprendiste!</h2>
+      <p class="text-gray-700 dark:text-gray-300 text-lg">
+        Responde las siguientes preguntas sobre las <strong>posiciones de las rectas</strong> con respecto a la
+        <strong>circunferencia</strong>.  
+        Al final verás tu resultado. ¡Tú puedes!
+      </p>
+    </section>
+
+    <!-- Preguntas -->
+    <form id="quizForm" class="space-y-10">
+      <!-- Pregunta 1 -->
+      <div
+        class="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 transition-colors">
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+          1️⃣ ¿Qué pasa cuando una recta toca la circunferencia en un solo punto?
+        </h3>
+        <div class="space-y-3">
+          <label class="block"><input type="radio" name="q1" value="tangente" class="mr-2"> Es una recta <strong>tangente</strong></label>
+          <label class="block"><input type="radio" name="q1" value="secante" class="mr-2"> Es una recta <strong>secante</strong></label>
+          <label class="block"><input type="radio" name="q1" value="exterior" class="mr-2"> Es una recta <strong>exterior</strong></label>
         </div>
-    </main>
+      </div>
+
+      <!-- Pregunta 2 -->
+      <div
+        class="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 transition-colors">
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+          2️⃣ ¿Cómo se llama la recta que corta a la circunferencia en dos puntos?
+        </h3>
+        <div class="space-y-3">
+          <label class="block"><input type="radio" name="q2" value="secante" class="mr-2"> Recta <strong>secante</strong></label>
+          <label class="block"><input type="radio" name="q2" value="tangente" class="mr-2"> Recta <strong>tangente</strong></label>
+          <label class="block"><input type="radio" name="q2" value="exterior" class="mr-2"> Recta <strong>exterior</strong></label>
+        </div>
+      </div>
+
+      <!-- Pregunta 3 -->
+      <div
+        class="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 transition-colors">
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+          3️⃣ Si la recta está lejos y no toca la circunferencia, se llama:
+        </h3>
+        <div class="space-y-3">
+          <label class="block"><input type="radio" name="q3" value="exterior" class="mr-2"> Recta <strong>exterior</strong></label>
+          <label class="block"><input type="radio" name="q3" value="tangente" class="mr-2"> Recta <strong>tangente</strong></label>
+          <label class="block"><input type="radio" name="q3" value="secante" class="mr-2"> Recta <strong>secante</strong></label>
+        </div>
+      </div>
+
+      <!-- Pregunta 4 -->
+      <div
+        class="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 transition-colors">
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+          4️⃣ Si la distancia del centro de la circunferencia a la recta es igual al radio, la recta es:
+        </h3>
+        <div class="space-y-3">
+          <label class="block"><input type="radio" name="q4" value="tangente" class="mr-2"> Tangente</label>
+          <label class="block"><input type="radio" name="q4" value="secante" class="mr-2"> Secante</label>
+          <label class="block"><input type="radio" name="q4" value="exterior" class="mr-2"> Exterior</label>
+        </div>
+      </div>
+
+      <!-- Pregunta 5 -->
+      <div
+        class="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 transition-colors">
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+          5️⃣ Si la distancia del centro a la recta es menor que el radio, entonces:
+        </h3>
+        <div class="space-y-3">
+          <label class="block"><input type="radio" name="q5" value="secante" class="mr-2"> La recta es <strong>secante</strong></label>
+          <label class="block"><input type="radio" name="q5" value="tangente" class="mr-2"> La recta es <strong>tangente</strong></label>
+          <label class="block"><input type="radio" name="q5" value="exterior" class="mr-2"> La recta es <strong>exterior</strong></label>
+        </div>
+      </div>
+
+      <!-- Botón de enviar -->
+      <div class="text-center">
+        <button type="button" onclick="checkQuiz()"
+          class="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-semibold py-3 px-6 rounded-xl transition-all">
+          Enviar respuestas 📝
+        </button>
+      </div>
+    </form>
+
+    <!-- Resultado -->
+    <div id="resultBox"
+      class="hidden mt-10 text-center bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700">
+      <h3 id="resultText" class="text-2xl font-bold mb-3 text-gray-900 dark:text-white"></h3>
+      <p id="resultFeedback" class="text-gray-700 dark:text-gray-300 mb-6"></p>
+      <a href="../../index.html"
+        class="px-6 py-3 bg-amber-400 hover:bg-amber-500 text-gray-900 font-semibold rounded-lg transition-all">
+        Volver al inicio
+      </a>
+    </div>
+  </main>
+
+  <!-- Script -->
+  <script>
+    function checkQuiz() {
+      const answers = {
+        q1: 'tangente',
+        q2: 'secante',
+        q3: 'exterior',
+        q4: 'tangente',
+        q5: 'secante'
+      };
+
+      let score = 0;
+      for (const [key, correct] of Object.entries(answers)) {
+        const selected = document.querySelector(`input[name="${key}"]:checked`);
+        if (selected && selected.value === correct) score++;
+      }
+
+      const resultBox = document.getElementById('resultBox');
+      const resultText = document.getElementById('resultText');
+      const resultFeedback = document.getElementById('resultFeedback');
+      resultBox.classList.remove('hidden');
+
+      if (score === 5) {
+        resultText.textContent = `🌟 ¡Excelente! Obtuviste ${score}/5`;
+        resultFeedback.textContent = "Sabes perfectamente cómo se comportan las rectas y las circunferencias.";
+      } else if (score >= 3) {
+        resultText.textContent = `👍 Buen trabajo. Tu puntuación es ${score}/5`;
+        resultFeedback.textContent = "Solo repasa un poco los conceptos y lo harás perfecto.";
+      } else {
+        resultText.textContent = `💪 No te rindas. Tu puntuación es ${score}/5`;
+        resultFeedback.textContent = "Te recomiendo volver a la sección de práctica antes de intentarlo otra vez.";
+      }
+
+      window.scrollTo({ top: resultBox.offsetTop, behavior: 'smooth' });
+    }
+  </script>
 </body>
 
 </html>

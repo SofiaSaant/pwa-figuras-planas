@@ -101,149 +101,169 @@
     </div>
 
     <!-- Contenido principal -->
-    <main class="max-w-7xl mx-auto px-6 py-8">
-        <!-- Introducción -->
-        <div class="mb-8">
-            <p class="text-gray-700 dark:text-gray-300 text-lg">
-                ¡Descubre cómo se relacionan las rectas con las circunferencias! Es como cuando juegas con una pelota y un palo.
-            </p>
-        </div>
+<!-- Contenido principal -->
+<main class="max-w-7xl mx-auto px-6 py-8">
+    <div class="grid lg:grid-cols-[2fr_1fr] gap-8">
+        <div>
+            <!-- Introducción -->
+            <div class="mb-8">
+                <p class="text-gray-700 dark:text-gray-300 text-lg">
+                    ¡Descubre cómo se relacionan las rectas con las circunferencias! Es como cuando juegas con una pelota y un palo.
+                </p>
+            </div>
 
-        <!-- Concepto principal -->
-        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 mb-8 border border-gray-200 dark:border-gray-700 transition-colors duration-300">
-            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-                <span>🤔</span>
-                ¿Cómo puede estar una recta respecto a una circunferencia?
-            </h2>
-            
-            <div class="grid md:grid-cols-2 gap-6">
-                <div>
-                    <p class="text-gray-700 dark:text-gray-300 mb-4">
-                        Una <strong>recta</strong> (línea recta) puede tener diferentes posiciones cuando se encuentra 
-                        con una <strong>circunferencia</strong>.
-                    </p>
+            <!-- Concepto principal -->
+            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 mb-8 border border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                    <span>🤔</span>
+                    ¿Cómo puede estar una recta respecto a una circunferencia?
+                </h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">
+                            Una <strong>recta</strong> (línea recta) puede tener diferentes posiciones cuando se encuentra 
+                            con una <strong>circunferencia</strong>.
+                        </p>
+                        
+                        <p class="text-gray-700 dark:text-gray-300">
+                            ¡Es como cuando juegas con una pelota y un palo! El palo puede estar lejos de la pelota, 
+                            tocarla apenas, o atravesarla completamente.
+                        </p>
+                    </div>
                     
-                    <p class="text-gray-700 dark:text-gray-300">
-                        ¡Es como cuando juegas con una pelota y un palo! El palo puede estar lejos de la pelota, 
-                        tocarla apenas, o atravesarla completamente.
-                    </p>
+                    <div class="bg-cyan-50 dark:bg-cyan-900/20 rounded-xl p-4 border-l-4 border-cyan-500">
+                        <h5 class="text-lg font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
+                            <span>💡</span>
+                            ¡Recuerda!
+                        </h5>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            Todo depende de la <strong>distancia</strong> entre el centro de la circunferencia 
+                            y la recta. ¡Esta distancia nos dice qué tipo de posición tienen!
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tipos de posiciones -->
+            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 mb-8 border border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                    <span>🎯</span>
+                    Los tres tipos de posiciones
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-6">Haz clic en cada ejemplo para ver cómo funciona:</p>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Recta Exterior -->
+                    <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
+                        <h5 class="font-semibold text-gray-900 dark:text-white mb-3 text-center">🚫 Recta Exterior</h5>
+                        <div class="bg-white dark:bg-gray-800 rounded-lg p-4 cursor-pointer hover:shadow-lg transition-shadow" onclick="showPositionInfo('exterior')">
+                            <svg class="w-full" height="200" viewBox="0 0 200 200">
+                                <circle cx="100" cy="100" r="60" fill="rgba(239, 68, 68, 0.1)" stroke="#ef4444" stroke-width="2"/>
+                                <line x1="20" y1="30" x2="180" y2="30" stroke="#ef4444" stroke-width="3"/>
+                                <circle cx="100" cy="100" r="3" fill="#ef4444"/>
+                                <text x="100" y="180" text-anchor="middle" font-size="12" fill="#ef4444" font-weight="bold">
+                                    No se tocan
+                                </text>
+                            </svg>
+                        </div>
+                    </div>        
+
+                    <!-- Recta Tangente -->
+                    <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
+                        <h5 class="font-semibold text-gray-900 dark:text-white mb-3 text-center">👆 Recta Tangente</h5>
+                        <div class="bg-white dark:bg-gray-800 rounded-lg p-4 cursor-pointer hover:shadow-lg transition-shadow" onclick="showPositionInfo('tangente')">
+                            <svg class="w-full" height="200" viewBox="0 0 200 200">
+                                <circle cx="100" cy="100" r="60" fill="rgba(245, 158, 11, 0.1)" stroke="#f59e0b" stroke-width="2"/>
+                                <line x1="20" y1="40" x2="180" y2="40" stroke="#f59e0b" stroke-width="3"/>
+                                <circle cx="100" cy="40" r="4" fill="#f59e0b"/>
+                                <circle cx="100" cy="100" r="3" fill="#f59e0b"/>
+                                <line x1="100" y1="40" x2="100" y2="100" stroke="#f59e0b" stroke-width="1" stroke-dasharray="3,3"/>
+                                <text x="100" y="180" text-anchor="middle" font-size="12" fill="#f59e0b" font-weight="bold">
+                                    Se tocan en 1 punto
+                                </text>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <!-- Recta Secante -->
+                    <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
+                        <h5 class="font-semibold text-gray-900 dark:text-white mb-3 text-center">✂️ Recta Secante</h5>
+                        <div class="bg-white dark:bg-gray-800 rounded-lg p-4 cursor-pointer hover:shadow-lg transition-shadow" onclick="showPositionInfo('secante')">
+                            <svg class="w-full" height="200" viewBox="0 0 200 200">
+                                <circle cx="100" cy="100" r="60" fill="rgba(16, 185, 129, 0.1)" stroke="#10b981" stroke-width="2"/>
+                                <line x1="20" y1="80" x2="180" y2="80" stroke="#10b981" stroke-width="3"/>
+                                <circle cx="65" cy="80" r="4" fill="#10b981"/>
+                                <circle cx="135" cy="80" r="4" fill="#10b981"/>
+                                <circle cx="100" cy="100" r="3" fill="#10b981"/>
+                                <text x="100" y="180" text-anchor="middle" font-size="12" fill="#10b981" font-weight="bold">
+                                    Se cortan en 2 puntos
+                                </text>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="bg-cyan-50 dark:bg-cyan-900/20 rounded-xl p-4 border-l-4 border-cyan-500">
-                    <h5 class="text-lg font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
-                        <span>💡</span>
-                        ¡Recuerda!
-                    </h5>
-                    <p class="text-gray-700 dark:text-gray-300">
-                        Todo depende de la <strong>distancia</strong> entre el centro de la circunferencia 
-                        y la recta. ¡Esta distancia nos dice qué tipo de posición tienen!
-                    </p>
+                <div id="positionInfo" class="mt-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 hidden">
+                    <div id="positionDetails" class="text-gray-700 dark:text-gray-300"></div>
                 </div>
+            </div>
+
+            <!-- Aplicaciones en la vida real -->
+            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 mb-8 border border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                    <span>🌍</span>
+                    ¡Posiciones de rectas en la vida real!
+                </h4>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-4">
+                        <h6 class="font-bold text-gray-900 dark:text-white mb-2">👆 Rectas tangentes:</h6>
+                        <ul class="space-y-1 text-gray-700 dark:text-gray-300">
+                            <li>• Carreteras que bordean rotondas</li>
+                            <li>• Líneas de meta que tocan pistas circulares</li>
+                            <li>• Rayos de luz que rozan esferas</li>
+                            <li>• Cuerdas de guitarra que tocan clavijas redondas</li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-50 dark:bg-green-900/20 rounded-xl p-4">
+                        <h6 class="font-bold text-gray-900 dark:text-white mb-2">✂️ Rectas secantes:</h6>
+                        <ul class="space-y-1 text-gray-700 dark:text-gray-300">
+                            <li>• Túneles que atraviesan colinas redondas</li>
+                            <li>• Puentes que cruzan lagos circulares</li>
+                            <li>• Cables que pasan por dentro de tubos</li>
+                            <li>• Espadas que atraviesan escudos redondos</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botón de completar -->
+            <div class="flex justify-center mt-8">
+                <button onclick="window.location.href='practica.html' " class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-gray-900 font-bold py-4 px-8 rounded-xl transition-all hover:shadow-lg flex items-center gap-2">
+                    ¿Listo para practicar?
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                </button>
             </div>
         </div>
 
-        <!-- Tipos de posiciones -->
-        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 mb-8 border border-gray-200 dark:border-gray-700 transition-colors duration-300">
-            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                <span>🎯</span>
-                Los tres tipos de posiciones
+        <!-- 📚 Fuentes de consulta -->
+        <aside class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 transition-colors duration-300 h-fit self-start">
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                <span>📚</span>
+                Fuentes de consulta
             </h3>
-            <p class="text-gray-600 dark:text-gray-400 mb-6">Haz clic en cada ejemplo para ver cómo funciona:</p>
-            
-            <div class="grid md:grid-cols-3 gap-6">
-                <!-- Recta Exterior -->
-                <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
-                    <h5 class="font-semibold text-gray-900 dark:text-white mb-3 text-center">🚫 Recta Exterior</h5>
-                    <div class="bg-white dark:bg-gray-800 rounded-lg p-4 cursor-pointer hover:shadow-lg transition-shadow" onclick="showPositionInfo('exterior')">
-                        <svg class="w-full" height="200" viewBox="0 0 200 200">
-                            <circle cx="100" cy="100" r="60" fill="rgba(239, 68, 68, 0.1)" stroke="#ef4444" stroke-width="2"/>
-                            <line x1="20" y1="30" x2="180" y2="30" stroke="#ef4444" stroke-width="3"/>
-                            <circle cx="100" cy="100" r="3" fill="#ef4444"/>
-                            <text x="100" y="180" text-anchor="middle" font-size="12" fill="#ef4444" font-weight="bold">
-                                No se tocan
-                            </text>
-                        </svg>
-                    </div>
-                </div>        
-      
-                <!-- Recta Tangente -->
-                <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
-                    <h5 class="font-semibold text-gray-900 dark:text-white mb-3 text-center">👆 Recta Tangente</h5>
-                    <div class="bg-white dark:bg-gray-800 rounded-lg p-4 cursor-pointer hover:shadow-lg transition-shadow" onclick="showPositionInfo('tangente')">
-                        <svg class="w-full" height="200" viewBox="0 0 200 200">
-                            <circle cx="100" cy="100" r="60" fill="rgba(245, 158, 11, 0.1)" stroke="#f59e0b" stroke-width="2"/>
-                            <line x1="20" y1="40" x2="180" y2="40" stroke="#f59e0b" stroke-width="3"/>
-                            <circle cx="100" cy="40" r="4" fill="#f59e0b"/>
-                            <circle cx="100" cy="100" r="3" fill="#f59e0b"/>
-                            <line x1="100" y1="40" x2="100" y2="100" stroke="#f59e0b" stroke-width="1" stroke-dasharray="3,3"/>
-                            <text x="100" y="180" text-anchor="middle" font-size="12" fill="#f59e0b" font-weight="bold">
-                                Se tocan en 1 punto
-                            </text>
-                        </svg>
-                    </div>
-                </div>
-                
-                <!-- Recta Secante -->
-                <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
-                    <h5 class="font-semibold text-gray-900 dark:text-white mb-3 text-center">✂️ Recta Secante</h5>
-                    <div class="bg-white dark:bg-gray-800 rounded-lg p-4 cursor-pointer hover:shadow-lg transition-shadow" onclick="showPositionInfo('secante')">
-                        <svg class="w-full" height="200" viewBox="0 0 200 200">
-                            <circle cx="100" cy="100" r="60" fill="rgba(16, 185, 129, 0.1)" stroke="#10b981" stroke-width="2"/>
-                            <line x1="20" y1="80" x2="180" y2="80" stroke="#10b981" stroke-width="3"/>
-                            <circle cx="65" cy="80" r="4" fill="#10b981"/>
-                            <circle cx="135" cy="80" r="4" fill="#10b981"/>
-                            <circle cx="100" cy="100" r="3" fill="#10b981"/>
-                            <text x="100" y="180" text-anchor="middle" font-size="12" fill="#10b981" font-weight="bold">
-                                Se cortan en 2 puntos
-                            </text>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="positionInfo" class="mt-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 hidden">
-                <div id="positionDetails" class="text-gray-700 dark:text-gray-300"></div>
-            </div>
-        </div>
+            <ul class="space-y-3 text-gray-700 dark:text-gray-300 text-sm">
+                <li>🔹 Baldor, A. <em>Álgebra y Geometría</em>. Editorial Cultural, 2010.</li>
+                <li>🔹 Ministerio de Educación de México. <em>Matemáticas 2° Secundaria</em>, SEP, 2022.</li>
+                <li>🔹 Khan Academy. <a href="https://es.khanacademy.org/math/geometry" target="_blank" class="text-cyan-600 dark:text-cyan-400 hover:underline">Geometría: rectas y circunferencias</a>.</li>
+                <li>🔹 GeoGebra. <a href="https://www.geogebra.org/m/Cx3Uf6x8" target="_blank" class="text-cyan-600 dark:text-cyan-400 hover:underline">Simulador interactivo</a>.</li>
+            </ul>
+        </aside>
+    </div>
+</main>
 
-        <!-- Aplicaciones en la vida real -->
-        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 mb-8 border border-gray-200 dark:border-gray-700 transition-colors duration-300">
-            <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                <span>🌍</span>
-                ¡Posiciones de rectas en la vida real!
-            </h4>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-4">
-                    <h6 class="font-bold text-gray-900 dark:text-white mb-2">👆 Rectas tangentes:</h6>
-                    <ul class="space-y-1 text-gray-700 dark:text-gray-300">
-                        <li>• Carreteras que bordean rotondas</li>
-                        <li>• Líneas de meta que tocan pistas circulares</li>
-                        <li>• Rayos de luz que rozan esferas</li>
-                        <li>• Cuerdas de guitarra que tocan clavijas redondas</li>
-                    </ul>
-                </div>
-                <div class="bg-green-50 dark:bg-green-900/20 rounded-xl p-4">
-                    <h6 class="font-bold text-gray-900 dark:text-white mb-2">✂️ Rectas secantes:</h6>
-                    <ul class="space-y-1 text-gray-700 dark:text-gray-300">
-                        <li>• Túneles que atraviesan colinas redondas</li>
-                        <li>• Puentes que cruzan lagos circulares</li>
-                        <li>• Cables que pasan por dentro de tubos</li>
-                        <li>• Espadas que atraviesan escudos redondos</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Botón de completar -->
-        <div class="flex justify-center mt-8">
-            <button onclick="window.location.href='../../index.html'" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-gray-900 font-bold py-4 px-8 rounded-xl transition-all hover:shadow-lg flex items-center gap-2">
-                ¿Listo para practicar?
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-            </button>
-        </div>
-    </main>
 
     <!-- Scripts -->
     <script>
