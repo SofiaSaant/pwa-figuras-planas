@@ -1,73 +1,468 @@
 ﻿<!DOCTYPE html>
 <html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Evaluación - Figuras Circulares</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Fuentes de Google -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="../../styles.css" />
+    <link rel="stylesheet" href="../../core/animations.css" />
 
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif']
-                    }
-                }
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#2196F3",
+              accent: "#8BC34A",
             },
-            darkMode: 'class'
-        }
+            fontFamily: {
+              sans: ["Inter", "system-ui", "sans-serif"],
+            },
+          },
+        },
+        darkMode: "class",
+      };
     </script>
-</head>
+  </head>
 
-<body class="bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors duration-300">
+  <body
+    class="bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors duration-300"
+  >
     <!-- Header -->
-    <header class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
-        <div class="max-w-7xl mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center text-2xl">
-                        🍕
-                    </div>
-                    <div>
-                        <h1 class="text-xl font-bold text-gray-900 dark:text-white">Figuras Circulares - Evaluación</h1>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">Figuras Planas</p>
-                    </div>
-                </div>
-
-                <a href="figuras-circulares.html" class="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors flex items-center gap-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                    </svg>
-                    Volver
-                </a>
+    <header
+      class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700"
+    >
+      <div class="max-w-7xl mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <!-- Logo y Título -->
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center text-2xl"
+            >
+              🍕
             </div>
+            <div>
+              <h1 class="text-xl font-bold text-gray-900 dark:text-white">
+                Figuras Circulares
+              </h1>
+              <p class="text-sm text-gray-600 dark:text-gray-400">
+                Círculos, sectores y mucho más
+              </p>
+            </div>
+          </div>
+
+          <!-- Botones de acción -->
+          <div class="flex items-center gap-3">
+            <a
+              href="../../index.html"
+              class="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors flex items-center gap-2"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                />
+              </svg>
+              Volver
+            </a>
+
+            <!-- Botón de modo oscuro -->
+            <button
+              id="darkModeToggle"
+              class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+            >
+              <svg
+                class="w-6 h-6 text-gray-700 dark:text-gray-300 hidden dark:block"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                />
+              </svg>
+              <svg
+                class="w-6 h-6 text-gray-700 dark:text-gray-300 block dark:hidden"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
+      </div>
     </header>
 
-    <!-- Contenido -->
-    <main class="max-w-4xl mx-auto px-6 py-16 flex items-center justify-center min-h-[calc(100vh-200px)]">
-        <div class="text-center">
-            <div class="text-8xl mb-6">🚧</div>
-            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Página en Construcción</h2>
-            <p class="text-xl text-gray-600 dark:text-gray-400 mb-8">¡Vuelve pronto! Estamos preparando evaluaciones increíbles para ti.</p>
-            
-            <div class="flex gap-4 justify-center">
-                <a href="figuras-circulares.html" class="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-semibold transition-colors">
-                    Volver a Aprender
-                </a>
-                <a href="../../index.html" class="px-6 py-3 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-white rounded-lg font-semibold transition-colors">
-                    Ir al Inicio
-                </a>
-            </div>
+    <!-- Tabs de navegación -->
+    <div
+      class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 transition-colors duration-300"
+    >
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex gap-8">
+          <a
+            href="figuras-circulares.html"
+            class="py-4 px-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 font-medium flex items-center gap-2"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+              />
+            </svg>
+            Aprender
+          </a>
+          <a
+            href="practica.html"
+            class="py-4 px-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 font-medium flex items-center gap-2"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+              />
+            </svg>
+            Practicar
+          </a>
+          <!-- Pestaña de Evaluar activa -->
+          <a
+            href="evaluacion.html"
+            class="py-4 px-2 border-b-2 border-orange-500 text-orange-600 dark:text-orange-400 font-medium flex items-center gap-2"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            Evaluar
+          </a>
         </div>
-    </main>
-</body>
+      </div>
+    </div>
 
+    <!-- Contenido de Evaluación -->
+    <main class="max-w-7xl mx-auto px-6 py-8">
+      <h2
+        class="text-3xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2"
+      >
+        <span>🎓</span>
+        Evaluación: Figuras Circulares
+      </h2>
+      <p class="text-gray-700 dark:text-gray-300 text-lg mb-8">
+        Demuestra lo que sabes. Los resultados de esta sección se guardarán (en
+        un futuro).
+      </p>
+
+      <div class="space-y-8">
+        <!-- Evaluación 1 -->
+        <div
+          class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700"
+        >
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+            Pregunta 1: Área de un Semicírculo
+          </h3>
+          <div class="grid md:grid-cols-2 gap-6 items-center">
+            <div>
+              <p class="text-gray-600 dark:text-gray-400 mb-4">
+                Un semicírculo es la mitad de un círculo. Su área es: Área = (π × r²) ÷ 2
+              </p>
+              <svg class="w-full" height="200" viewBox="0 0 200 200">
+                <circle cx="100" cy="100" r="70" fill="none" stroke="#e5e7eb" stroke-width="1"/>
+                <path d="M 30 100 A 70 70 0 0 1 170 100 Z" 
+                      fill="rgba(168, 85, 247, 0.3)" stroke="#a855f7" stroke-width="3"/>
+                <line x1="30" y1="100" x2="170" y2="100" stroke="#a855f7" stroke-width="3"/>
+                <line x1="100" y1="100" x2="170" y2="100" stroke="#ef4444" stroke-width="3"/>
+                <text x="135" y="95" text-anchor="middle" fill="#ef4444" font-size="14" font-weight="bold">
+                  r = <tspan id="eval1-radio-value">6</tspan> cm
+                </text>
+              </svg>
+            </div>
+            <div class="space-y-4">
+              <div>
+                <label
+                  for="eval1Area"
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >Calcula el área del semicírculo (cm²):</label
+                >
+                <input
+                  type="number"
+                  step="0.01"
+                  id="eval1Area"
+                  class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white"
+                  placeholder="Área = (π × r²) ÷ 2, usa π = 3.14"
+                />
+              </div>
+              <button
+                id="checkEval1"
+                class="w-full px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-lg font-semibold transition-colors"
+              >
+                Comprobar Pregunta 1
+              </button>
+              <div id="resultEval1" class="mt-4 text-center"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Evaluación 2 -->
+        <div
+          class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700"
+        >
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+            Pregunta 2: Área de una Corona Circular
+          </h3>
+          <div class="grid md:grid-cols-2 gap-6 items-center">
+            <div>
+              <p class="text-gray-600 dark:text-gray-400 mb-4">
+                El área de una corona circular es: Área = π × (R² - r²), donde R es el radio mayor y r el radio menor.
+              </p>
+              <svg class="w-full" height="200" viewBox="0 0 200 200">
+                <circle cx="100" cy="100" r="70" fill="rgba(16, 185, 129, 0.3)" stroke="#10b981" stroke-width="3"/>
+                <circle cx="100" cy="100" r="40" fill="white" stroke="#10b981" stroke-width="3"/>
+                <circle cx="100" cy="100" r="3" fill="#10b981"/>
+                <line x1="100" y1="100" x2="170" y2="100" stroke="#ef4444" stroke-width="3"/>
+                <line x1="100" y1="100" x2="140" y2="100" stroke="#3b82f6" stroke-width="3"/>
+                <text x="135" y="95" text-anchor="middle" fill="#ef4444" font-size="12" font-weight="bold">
+                  R = <tspan id="eval2-radio-mayor-value">8</tspan>
+                </text>
+                <text x="120" y="115" text-anchor="middle" fill="#3b82f6" font-size="12" font-weight="bold">
+                  r = <tspan id="eval2-radio-menor-value">5</tspan>
+                </text>
+              </svg>
+            </div>
+            <div class="space-y-4">
+              <div>
+                <label
+                  for="eval2Area"
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >Área de la corona (cm²):</label
+                >
+                <input
+                  type="number"
+                  step="0.01"
+                  id="eval2Area"
+                  class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white"
+                  placeholder="Área = π × (R² - r²), usa π = 3.14"
+                />
+              </div>
+              <button
+                id="checkEval2"
+                class="w-full px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-lg font-semibold transition-colors"
+              >
+                Comprobar Pregunta 2
+              </button>
+              <div id="resultEval2" class="mt-4 text-center"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Evaluación 3 -->
+        <div
+          class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700"
+        >
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+            Pregunta 3: Problema de la Piscina
+          </h3>
+          <p id="eval3-problem-text" class="text-gray-600 dark:text-gray-400 mb-4">
+            Una piscina circular tiene un radio de 4 metros. ¿Cuál es el área de la superficie del agua? (Área = π × r², usa π = 3.14)
+          </p>
+          <div class="space-y-4 max-w-md mx-auto">
+            <div>
+              <label
+                for="eval3Area"
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >Área de la piscina (m²):</label
+              >
+              <input
+                type="number"
+                step="0.01"
+                id="eval3Area"
+                class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white"
+                placeholder="Área = π × r²"
+              />
+            </div>
+            <button
+              id="checkEval3"
+              class="w-full px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-lg font-semibold transition-colors"
+            >
+              Comprobar Pregunta 3
+            </button>
+            <div id="resultEval3" class="mt-4 text-center"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      // === ALEATORIZACIÓN DE EVALUACIÓN ===
+      const evaluacionPool = {
+        pregunta1: [
+          { radio: 6 },
+          { radio: 8 },
+          { radio: 10 },
+          { radio: 5 },
+          { radio: 7 },
+          { radio: 9 }
+        ],
+        pregunta2: [
+          { radioMayor: 8, radioMenor: 5 },
+          { radioMayor: 10, radioMenor: 6 },
+          { radioMayor: 12, radioMenor: 7 },
+          { radioMayor: 9, radioMenor: 4 },
+          { radioMayor: 15, radioMenor: 10 },
+          { radioMayor: 11, radioMenor: 8 }
+        ],
+        pregunta3: [
+          { 
+            texto: "Una piscina circular tiene un radio de 4 metros. ¿Cuál es el área de la superficie del agua? (Área = π × r², usa π = 3.14)",
+            radio: 4
+          },
+          { 
+            texto: "Un CD tiene un diámetro de 12 cm. ¿Cuál es su área? (Recuerda: radio = diámetro ÷ 2, Área = π × r², usa π = 3.14)",
+            diametro: 12
+          },
+          { 
+            texto: "Una rueda de bicicleta tiene un radio de 35 cm. ¿Cuál es el área de la rueda? (Área = π × r², usa π = 3.14)",
+            radio: 35
+          },
+          { 
+            texto: "Un plato circular tiene un diámetro de 24 cm. ¿Cuál es su área? (radio = diámetro ÷ 2, Área = π × r², usa π = 3.14)",
+            diametro: 24
+          },
+          { 
+            texto: "Una fuente circular en un parque tiene un radio de 3 metros. ¿Cuál es su área? (Área = π × r², usa π = 3.14)",
+            radio: 3
+          },
+          { 
+            texto: "Un reloj de pared circular tiene un diámetro de 30 cm. ¿Cuál es el área de su carátula? (radio = diámetro ÷ 2, Área = π × r², usa π = 3.14)",
+            diametro: 30
+          }
+        ]
+      };
+
+      // Seleccionar preguntas aleatorias
+      const eval1 = evaluacionPool.pregunta1[Math.floor(Math.random() * evaluacionPool.pregunta1.length)];
+      const eval2 = evaluacionPool.pregunta2[Math.floor(Math.random() * evaluacionPool.pregunta2.length)];
+      const eval3 = evaluacionPool.pregunta3[Math.floor(Math.random() * evaluacionPool.pregunta3.length)];
+
+      // Calcular áreas correctas
+      eval1.area = parseFloat(((3.14 * eval1.radio * eval1.radio) / 2).toFixed(2));
+      eval2.area = parseFloat((3.14 * (eval2.radioMayor * eval2.radioMayor - eval2.radioMenor * eval2.radioMenor)).toFixed(2));
+      
+      if (eval3.diametro) {
+        eval3.radio = eval3.diametro / 2;
+      }
+      eval3.area = parseFloat((3.14 * eval3.radio * eval3.radio).toFixed(2));
+
+      // Actualizar DOM cuando esté listo
+      document.addEventListener('DOMContentLoaded', function() {
+        // Pregunta 1
+        document.getElementById('eval1-radio-value').textContent = eval1.radio;
+
+        // Pregunta 2
+        document.getElementById('eval2-radio-mayor-value').textContent = eval2.radioMayor;
+        document.getElementById('eval2-radio-menor-value').textContent = eval2.radioMenor;
+
+        // Pregunta 3
+        document.getElementById('eval3-problem-text').textContent = eval3.texto;
+
+        // Event listeners
+        document.getElementById('checkEval1').addEventListener('click', function() {
+          const areaInput = parseFloat(document.getElementById('eval1Area').value);
+          const result = document.getElementById('resultEval1');
+          
+          if (Math.abs(areaInput - eval1.area) < 1) {
+            result.innerHTML = '<div class="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 p-3 rounded-lg">¡Correcto! El área es ' + eval1.area + ' cm² 🎉</div>';
+          } else {
+            result.innerHTML = '<div class="bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 p-3 rounded-lg">Intenta de nuevo. Usa la fórmula: (π × r²) ÷ 2</div>';
+          }
+        });
+
+        document.getElementById('checkEval2').addEventListener('click', function() {
+          const areaInput = parseFloat(document.getElementById('eval2Area').value);
+          const result = document.getElementById('resultEval2');
+          
+          if (Math.abs(areaInput - eval2.area) < 1) {
+            result.innerHTML = '<div class="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 p-3 rounded-lg">¡Correcto! El área es ' + eval2.area + ' cm² 🎉</div>';
+          } else {
+            result.innerHTML = '<div class="bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 p-3 rounded-lg">Intenta de nuevo. Usa la fórmula: π × (R² - r²)</div>';
+          }
+        });
+
+        document.getElementById('checkEval3').addEventListener('click', function() {
+          const areaInput = parseFloat(document.getElementById('eval3Area').value);
+          const result = document.getElementById('resultEval3');
+          
+          if (Math.abs(areaInput - eval3.area) < 1) {
+            result.innerHTML = '<div class="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 p-3 rounded-lg">¡Correcto! El área es ' + eval3.area + ' 🎉</div>';
+          } else {
+            result.innerHTML = '<div class="bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 p-3 rounded-lg">Intenta de nuevo. Recuerda: Área = π × r²</div>';
+          }
+        });
+      });
+
+      // === MODO OSCURO ===
+      const darkModeToggle = document.getElementById("darkModeToggle");
+      const htmlElement = document.documentElement;
+
+      const darkMode = localStorage.getItem("darkMode");
+      if (darkMode === "enabled") {
+        htmlElement.classList.add("dark");
+      }
+
+      darkModeToggle.addEventListener("click", () => {
+        htmlElement.classList.toggle("dark");
+        const isDarkMode = htmlElement.classList.contains("dark");
+        localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
+      });
+    </script>
+  </body>
 </html>

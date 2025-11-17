@@ -94,137 +94,313 @@
 
     <!-- Contenido -->
     <main class="max-w-7xl mx-auto px-6 py-8">
-        <div class="mb-8">
+      <div class="grid lg:grid-cols-[2fr_1fr] gap-8">
+        <div>
+          <!-- Introducción -->
+          <div class="mb-8">
             <p class="text-gray-700 dark:text-gray-300 text-lg">
-                ¿Sabías que una pizza es un sector circular? ¡Descubre las diferentes figuras que se forman con círculos!
+              ¿Sabías que una pizza es un sector circular? ¡Descubre las diferentes figuras que se forman con círculos!
             </p>
-        </div>
+          </div>
 
-        <!-- Concepto principal -->
-        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 mb-8 border border-gray-200 dark:border-gray-700">
+          <!-- Concepto principal -->
+          <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 mb-8 border border-gray-200 dark:border-gray-700 transition-colors duration-300">
             <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-                <span>🤔</span>
-                ¿Círculo o Circunferencia?
+              <span>🤔</span>
+              ¿Círculo o Circunferencia?
             </h2>
             
             <div class="grid md:grid-cols-2 gap-6">
-                <div>
-                    <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2">⭕ Circunferencia</h4>
-                    <p class="text-gray-700 dark:text-gray-300 mb-4">
-                        Es solo la <strong>línea curva</strong> que forma el borde. ¡Como el aro de una rueda!
-                    </p>
-                    
-                    <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2">🔴 Círculo</h4>
-                    <p class="text-gray-700 dark:text-gray-300">
-                        Es toda la <strong>superficie</strong> incluyendo el interior. ¡Como una pizza completa!
-                    </p>
+              <div>
+                <div class="bg-red-50 dark:bg-red-900/20 rounded-xl p-4 mb-4">
+                  <h4 class="text-lg font-bold text-red-700 dark:text-red-400 mb-2">⭕ Circunferencia</h4>
+                  <p class="text-gray-700 dark:text-gray-300">
+                    Es solo la <strong>línea curva</strong> que forma el borde. ¡Como el aro de una rueda!
+                  </p>
                 </div>
                 
-                <div class="bg-orange-50 dark:bg-orange-900/20 rounded-xl p-4 border-l-4 border-orange-500">
-                    <svg width="100%" height="150" viewBox="0 0 200 150" class="mx-auto">
-                        <!-- Circunferencia -->
-                        <circle cx="60" cy="75" r="40" fill="none" stroke="#ef4444" stroke-width="3"/>
-                        <text x="60" y="125" text-anchor="middle" font-size="12" fill="#ef4444" font-weight="bold">Circunferencia</text>
-                        
-                        <!-- Círculo -->
-                        <circle cx="140" cy="75" r="40" fill="rgba(59, 130, 246, 0.3)" stroke="#3b82f6" stroke-width="3"/>
-                        <text x="140" y="125" text-anchor="middle" font-size="12" fill="#3b82f6" font-weight="bold">Círculo</text>
-                    </svg>
+                <div class="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4">
+                  <h4 class="text-lg font-bold text-blue-700 dark:text-blue-400 mb-2">🔴 Círculo</h4>
+                  <p class="text-gray-700 dark:text-gray-300">
+                    Es toda la <strong>superficie</strong> incluyendo el interior. ¡Como una pizza completa!
+                  </p>
                 </div>
+              </div>
+              
+              <div class="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-4 border-l-4 border-amber-500">
+                <h5 class="text-lg font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
+                  <span>💡</span>
+                  ¡Dato curioso!
+                </h5>
+                <p class="text-gray-700 dark:text-gray-300">
+                  El círculo es la figura con mayor área para un perímetro dado. ¡Por eso las pizzas son redondas!<sup class="text-amber-600 dark:text-amber-400">1</sup>
+                </p>
+              </div>
             </div>
-        </div>
+          </div>
 
-        <!-- Tipos de figuras circulares -->
-        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 mb-8 border border-gray-200 dark:border-gray-700">
-            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">🎯 Tipos de figuras circulares</h3>
-            <p class="text-gray-700 dark:text-gray-300 mb-6">Haz clic en cada figura para conocerla mejor:</p>
-            
+          <!-- Figuras circulares interactivas -->
+          <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 mb-8 border border-gray-200 dark:border-gray-700 transition-colors duration-300">
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+              <span>🎯</span>
+              Tipos de Figuras Circulares
+            </h3>
+            <div class="bg-orange-50 dark:bg-orange-900/20 rounded-xl p-4 mb-6 border-l-4 border-orange-600">
+              <p class="text-gray-700 dark:text-gray-300">
+                <strong>¿Qué son las figuras circulares?</strong> Son figuras geométricas que se forman a partir de un círculo o circunferencia. Pueden ser partes del círculo o combinaciones de círculos.<sup class="text-orange-600 dark:text-orange-400">2</sup>
+              </p>
+            </div>
+            <p class="text-gray-600 dark:text-gray-400 mb-6">
+              Haz clic en las figuras para ver sus características:
+            </p>
+
             <div class="grid md:grid-cols-3 gap-6">
-                <div class="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 cursor-pointer hover:shadow-lg transition-all" onclick="showFigureInfo('sector')">
-                    <h5 class="text-center font-bold text-gray-900 dark:text-white mb-3">🍕 Sector Circular</h5>
-                    <svg class="w-full" height="200" viewBox="0 0 200 200">
-                        <circle cx="100" cy="100" r="70" fill="none" stroke="#e5e7eb" stroke-width="1"/>
-                        <path d="M 100 100 L 100 30 A 70 70 0 0 1 160.62 150 Z" 
-                              fill="rgba(245, 158, 11, 0.4)" stroke="#f59e0b" stroke-width="3"/>
-                        <circle cx="100" cy="100" r="3" fill="#f59e0b"/>
-                        <text x="100" y="180" text-anchor="middle" font-size="12" fill="#f59e0b" font-weight="bold">
-                            Como una rebanada de pizza
-                        </text>
-                    </svg>
+              <!-- Sector Circular -->
+              <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
+                <h5 class="font-semibold text-gray-900 dark:text-white mb-3">
+                  Sector Circular
+                </h5>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                  Como una rebanada de pizza
+                </p>
+                <div id="btnSector" class="bg-white dark:bg-gray-800 rounded-lg p-4 cursor-pointer hover:shadow-lg transition-shadow">
+                  <svg class="w-full" height="200" viewBox="0 0 200 200">
+                    <circle id="circle1" cx="100" cy="100" r="70" fill="none" stroke="#e5e7eb" stroke-width="1"/>
+                    <path id="sector1" d="M 100 100 L 100 30 A 70 70 0 0 1 160.62 150 Z" 
+                          fill="rgba(245, 158, 11, 0.3)" stroke="#f59e0b" stroke-width="3"/>
+                    <circle cx="100" cy="100" r="3" fill="#f59e0b"/>
+                    
+                    <line id="radio1-1" x1="100" y1="100" x2="100" y2="30" stroke="#f59e0b" stroke-width="3" style="display: none"/>
+                    <line id="radio1-2" x1="100" y1="100" x2="160.62" y2="150" stroke="#f59e0b" stroke-width="3" style="display: none"/>
+                    <text id="label1" x="100" y="180" text-anchor="middle" font-size="12" fill="#f59e0b" font-weight="bold" style="display: none">
+                      Radio: 7 cm | Ángulo: 120°
+                    </text>
+                  </svg>
                 </div>
-                
-                <div class="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 cursor-pointer hover:shadow-lg transition-all" onclick="showFigureInfo('segmento')">
-                    <h5 class="text-center font-bold text-gray-900 dark:text-white mb-3">🌙 Segmento Circular</h5>
-                    <svg class="w-full" height="200" viewBox="0 0 200 200">
-                        <circle cx="100" cy="100" r="70" fill="none" stroke="#e5e7eb" stroke-width="1"/>
-                        <path d="M 50 70 A 70 70 0 0 1 150 70 Z" 
-                              fill="rgba(59, 130, 246, 0.4)" stroke="#3b82f6" stroke-width="3"/>
-                        <line x1="50" y1="70" x2="150" y2="70" stroke="#3b82f6" stroke-width="3"/>
-                        <text x="100" y="180" text-anchor="middle" font-size="12" fill="#3b82f6" font-weight="bold">
-                            Parte cortada por una cuerda
-                        </text>
-                    </svg>
-                </div>
-                
-                <div class="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 cursor-pointer hover:shadow-lg transition-all" onclick="showFigureInfo('corona')">
-                    <h5 class="text-center font-bold text-gray-900 dark:text-white mb-3">💍 Corona Circular</h5>
-                    <svg class="w-full" height="200" viewBox="0 0 200 200">
-                        <circle cx="100" cy="100" r="70" fill="rgba(16, 185, 129, 0.4)" stroke="#10b981" stroke-width="3"/>
-                        <circle cx="100" cy="100" r="40" fill="white" stroke="#10b981" stroke-width="3"/>
-                        <circle cx="100" cy="100" r="3" fill="#10b981"/>
-                        <text x="100" y="180" text-anchor="middle" font-size="12" fill="#10b981" font-weight="bold">
-                            Como un anillo o dona
-                        </text>
-                    </svg>
-                </div>
-            </div>
-            
-            <div id="figureInfo" class="mt-6 bg-gray-900 dark:bg-gray-950 text-orange-400 p-4 rounded-xl hidden">
-                <div id="figureDetails"></div>
-            </div>
-        </div>
+              </div>
 
-        <!-- Aplicaciones en la vida real -->
-        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 mb-8 border border-gray-200 dark:border-gray-700">
+              <!-- Segmento Circular -->
+              <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
+                <h5 class="font-semibold text-gray-900 dark:text-white mb-3">
+                  Segmento Circular
+                </h5>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                  Parte cortada por una cuerda
+                </p>
+                <div id="btnSegmento" class="bg-white dark:bg-gray-800 rounded-lg p-4 cursor-pointer hover:shadow-lg transition-shadow">
+                  <svg class="w-full" height="200" viewBox="0 0 200 200">
+                    <circle id="circle2" cx="100" cy="100" r="70" fill="none" stroke="#e5e7eb" stroke-width="1"/>
+                    <path id="segmento2" d="M 50 70 A 70 70 0 0 1 150 70 Z" 
+                          fill="rgba(59, 130, 246, 0.3)" stroke="#3b82f6" stroke-width="3"/>
+                    <line id="cuerda2" x1="50" y1="70" x2="150" y2="70" stroke="#3b82f6" stroke-width="3" style="display: none"/>
+                    <text id="label2" x="100" y="180" text-anchor="middle" font-size="12" fill="#3b82f6" font-weight="bold" style="display: none">
+                      Cuerda: 10 cm
+                    </text>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Corona Circular -->
+              <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
+                <h5 class="font-semibold text-gray-900 dark:text-white mb-3">
+                  Corona Circular
+                </h5>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                  Como un anillo o dona
+                </p>
+                <div id="btnCorona" class="bg-white dark:bg-gray-800 rounded-lg p-4 cursor-pointer hover:shadow-lg transition-shadow">
+                  <svg class="w-full" height="200" viewBox="0 0 200 200">
+                    <circle id="circle3-outer" cx="100" cy="100" r="70" fill="rgba(16, 185, 129, 0.3)" stroke="#10b981" stroke-width="3"/>
+                    <circle id="circle3-inner" cx="100" cy="100" r="40" fill="white" stroke="#10b981" stroke-width="3"/>
+                    <circle cx="100" cy="100" r="3" fill="#10b981"/>
+                    
+                    <line id="radio3-1" x1="100" y1="100" x2="170" y2="100" stroke="#10b981" stroke-width="3" style="display: none"/>
+                    <line id="radio3-2" x1="100" y1="100" x2="140" y2="100" stroke="#ef4444" stroke-width="3" style="display: none"/>
+                    <text id="label3" x="100" y="180" text-anchor="middle" font-size="12" fill="#10b981" font-weight="bold" style="display: none">
+                      R: 7 cm | r: 4 cm
+                    </text>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Semicírculo -->
+              <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
+                <h5 class="font-semibold text-gray-900 dark:text-white mb-3">
+                  Semicírculo
+                </h5>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                  Mitad de un círculo
+                </p>
+                <div id="btnSemicirculo" class="bg-white dark:bg-gray-800 rounded-lg p-4 cursor-pointer hover:shadow-lg transition-shadow">
+                  <svg class="w-full" height="200" viewBox="0 0 200 200">
+                    <circle id="circle4" cx="100" cy="100" r="70" fill="none" stroke="#e5e7eb" stroke-width="1"/>
+                    <path id="semicirculo4" d="M 30 100 A 70 70 0 0 1 170 100 Z" 
+                          fill="rgba(168, 85, 247, 0.3)" stroke="#a855f7" stroke-width="3"/>
+                    <line id="diametro4" x1="30" y1="100" x2="170" y2="100" stroke="#a855f7" stroke-width="3" style="display: none"/>
+                    <text id="label4" x="100" y="180" text-anchor="middle" font-size="12" fill="#a855f7" font-weight="bold" style="display: none">
+                      Diámetro: 14 cm
+                    </text>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Cuarto de Círculo -->
+              <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
+                <h5 class="font-semibold text-gray-900 dark:text-white mb-3">
+                  Cuarto de Círculo
+                </h5>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                  Un cuarto del círculo (90°)
+                </p>
+                <div id="btnCuarto" class="bg-white dark:bg-gray-800 rounded-lg p-4 cursor-pointer hover:shadow-lg transition-shadow">
+                  <svg class="w-full" height="200" viewBox="0 0 200 200">
+                    <circle id="circle5" cx="100" cy="100" r="70" fill="none" stroke="#e5e7eb" stroke-width="1"/>
+                    <path id="cuarto5" d="M 100 100 L 170 100 A 70 70 0 0 1 100 170 Z" 
+                          fill="rgba(236, 72, 153, 0.3)" stroke="#ec4899" stroke-width="3"/>
+                    <circle cx="100" cy="100" r="3" fill="#ec4899"/>
+                    
+                    <line id="radio5-1" x1="100" y1="100" x2="170" y2="100" stroke="#ec4899" stroke-width="3" style="display: none"/>
+                    <line id="radio5-2" x1="100" y1="100" x2="100" y2="170" stroke="#ec4899" stroke-width="3" style="display: none"/>
+                    <text id="label5" x="100" y="180" text-anchor="middle" font-size="12" fill="#ec4899" font-weight="bold" style="display: none">
+                      Radio: 7 cm | Ángulo: 90°
+                    </text>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Arco -->
+              <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
+                <h5 class="font-semibold text-gray-900 dark:text-white mb-3">
+                  Arco
+                </h5>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                  Parte de la circunferencia
+                </p>
+                <div id="btnArco" class="bg-white dark:bg-gray-800 rounded-lg p-4 cursor-pointer hover:shadow-lg transition-shadow">
+                  <svg class="w-full" height="200" viewBox="0 0 200 200">
+                    <circle id="circle6" cx="100" cy="100" r="70" fill="none" stroke="#e5e7eb" stroke-width="1"/>
+                    <path id="arco6" d="M 50 70 A 70 70 0 0 1 150 70" 
+                          fill="none" stroke="#06b6d4" stroke-width="5"/>
+                    <circle cx="50" cy="70" r="4" fill="#06b6d4"/>
+                    <circle cx="150" cy="70" r="4" fill="#06b6d4"/>
+                    
+                    <line id="radio6-1" x1="100" y1="100" x2="50" y2="70" stroke="#06b6d4" stroke-width="2" stroke-dasharray="3,3" style="display: none"/>
+                    <line id="radio6-2" x1="100" y1="100" x2="150" y2="70" stroke="#06b6d4" stroke-width="2" stroke-dasharray="3,3" style="display: none"/>
+                    <text id="label6" x="100" y="180" text-anchor="middle" font-size="12" fill="#06b6d4" font-weight="bold" style="display: none">
+                      Longitud del arco: 11 cm
+                    </text>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Aplicaciones en la vida real -->
+          <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 mb-8 border border-gray-200 dark:border-gray-700 transition-colors duration-300">
             <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                <span>🌍</span>
-                ¡Figuras circulares en la vida real!
+              <span>🌍</span>
+              ¡Figuras circulares en la vida real!
             </h4>
             <div class="grid md:grid-cols-2 gap-6">
-                <div class="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-4">
-                    <h6 class="font-bold text-gray-900 dark:text-white mb-2">🍕 Sectores circulares:</h6>
-                    <ul class="space-y-1 text-gray-700 dark:text-gray-300">
-                        <li>• Rebanadas de pizza</li>
-                        <li>• Porciones de pastel</li>
-                        <li>• Gráficos de torta</li>
-                        <li>• Abanicos</li>
-                    </ul>
-                </div>
-                <div class="bg-green-50 dark:bg-green-900/20 rounded-xl p-4">
-                    <h6 class="font-bold text-gray-900 dark:text-white mb-2">💍 Coronas circulares:</h6>
-                    <ul class="space-y-1 text-gray-700 dark:text-gray-300">
-                        <li>• Anillos y pulseras</li>
-                        <li>• Donas y rosquillas</li>
-                        <li>• CDs y DVDs</li>
-                        <li>• Arandelas</li>
-                    </ul>
-                </div>
+              <div class="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-4">
+                <h6 class="font-bold text-gray-900 dark:text-white mb-2">🍕 Sectores circulares:</h6>
+                <ul class="space-y-1 text-gray-700 dark:text-gray-300">
+                  <li>• Rebanadas de pizza</li>
+                  <li>• Porciones de pastel</li>
+                  <li>• Gráficos de torta</li>
+                  <li>• Abanicos</li>
+                </ul>
+              </div>
+              <div class="bg-green-50 dark:bg-green-900/20 rounded-xl p-4">
+                <h6 class="font-bold text-gray-900 dark:text-white mb-2">💍 Coronas circulares:</h6>
+                <ul class="space-y-1 text-gray-700 dark:text-gray-300">
+                  <li>• Anillos y pulseras</li>
+                  <li>• Donas y rosquillas</li>
+                  <li>• CDs y DVDs</li>
+                  <li>• Arandelas</li>
+                </ul>
+              </div>
             </div>
+          </div>
+
+          <!-- Botón de acción -->
+          <div class="flex justify-center mt-8">
+            <button onclick="window.location.href='practica.html'" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-gray-900 font-bold py-4 px-8 rounded-xl transition-all hover:shadow-lg flex items-center gap-2">
+              ¿Listo para practicar?
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </button>
+          </div>
         </div>
 
-        <!-- Botón de acción -->
-        <div class="flex justify-center mt-8">
-            <button onclick="window.location.href='../../index.html'" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-gray-900 font-bold py-4 px-8 rounded-xl transition-all hover:shadow-lg flex items-center gap-2">
-                ¿Listo para practicar?
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-            </button>
-        </div>
+        <!-- 📚 Fuentes de consulta -->
+        <aside class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 transition-colors duration-300 h-fit self-start">
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+            <span>📚</span>
+            Fuentes de consulta
+          </h3>
+          <ul class="space-y-3 text-gray-700 dark:text-gray-300 text-sm">
+            <li>🔹 Baldor, A. <em>Geometría y Trigonometría</em>. Editorial Cultural, 2010.</li>
+            <li>🔹 Ministerio de Educación de México. <em>Matemáticas 2° Secundaria</em>, SEP, 2022.</li>
+            <li>🔹 Khan Academy. <a href="https://es.khanacademy.org/math/geometry" target="_blank" class="text-cyan-600 dark:text-cyan-400 hover:underline">Geometría: círculos</a>.</li>
+            <li>🔹 GeoGebra. <a href="https://www.geogebra.org/m/Cx3Uf6x8" target="_blank" class="text-cyan-600 dark:text-cyan-400 hover:underline">Simulador interactivo</a>.</li>
+          </ul>
+        </aside>
+      </div>
     </main>
 
     <!-- Scripts -->
     <script>
+        // Funcionalidad de figuras circulares
+        function hideAllLabels() {
+          document.querySelectorAll('[id^="radio"], [id^="cuerda"], [id^="diametro"], [id^="label"]').forEach(el => {
+            el.style.display = 'none';
+          });
+        }
+
+        function showFigure(num) {
+          hideAllLabels();
+          
+          switch(num) {
+            case 1: // Sector
+              document.getElementById('radio1-1').style.display = 'block';
+              document.getElementById('radio1-2').style.display = 'block';
+              document.getElementById('label1').style.display = 'block';
+              break;
+            case 2: // Segmento
+              document.getElementById('cuerda2').style.display = 'block';
+              document.getElementById('label2').style.display = 'block';
+              break;
+            case 3: // Corona
+              document.getElementById('radio3-1').style.display = 'block';
+              document.getElementById('radio3-2').style.display = 'block';
+              document.getElementById('label3').style.display = 'block';
+              break;
+            case 4: // Semicírculo
+              document.getElementById('diametro4').style.display = 'block';
+              document.getElementById('label4').style.display = 'block';
+              break;
+            case 5: // Cuarto
+              document.getElementById('radio5-1').style.display = 'block';
+              document.getElementById('radio5-2').style.display = 'block';
+              document.getElementById('label5').style.display = 'block';
+              break;
+            case 6: // Arco
+              document.getElementById('radio6-1').style.display = 'block';
+              document.getElementById('radio6-2').style.display = 'block';
+              document.getElementById('label6').style.display = 'block';
+              break;
+          }
+        }
+
+        document.getElementById('btnSector').addEventListener('click', () => showFigure(1));
+        document.getElementById('btnSegmento').addEventListener('click', () => showFigure(2));
+        document.getElementById('btnCorona').addEventListener('click', () => showFigure(3));
+        document.getElementById('btnSemicirculo').addEventListener('click', () => showFigure(4));
+        document.getElementById('btnCuarto').addEventListener('click', () => showFigure(5));
+        document.getElementById('btnArco').addEventListener('click', () => showFigure(6));
+
         // Dark mode toggle
         const darkModeToggle = document.getElementById('darkModeToggle');
         const htmlElement = document.documentElement;
@@ -236,44 +412,9 @@
         
         darkModeToggle.addEventListener('click', () => {
             htmlElement.classList.toggle('dark');
-            
-            if (htmlElement.classList.contains('dark')) {
-                localStorage.setItem('darkMode', 'enabled');
-            } else {
-                localStorage.setItem('darkMode', 'disabled');
-            }
+            const isDarkMode = htmlElement.classList.contains('dark');
+            localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
         });
-
-        // Mostrar información de figuras
-        function showFigureInfo(figureType) {
-            const info = {
-                sector: {
-                    title: '🍕 Sector Circular',
-                    description: 'Es una porción del círculo limitada por dos radios y un arco. ¡Como una rebanada de pizza! Se forma desde el centro hacia afuera.',
-                    examples: 'Ejemplos: rebanadas de pizza, porciones de pastel, gráficos de torta.'
-                },
-                segmento: {
-                    title: '🌙 Segmento Circular',
-                    description: 'Es la parte del círculo que queda entre una cuerda y el arco correspondiente. ¡Como si cortaras un trozo con una línea recta!',
-                    examples: 'Ejemplos: la parte superior de una ventana arqueada, un trozo cortado de una galleta redonda.'
-                },
-                corona: {
-                    title: '💍 Corona Circular',
-                    description: 'Es la región entre dos círculos concéntricos (que tienen el mismo centro). ¡Como una dona o un anillo!',
-                    examples: 'Ejemplos: donas, anillos, CDs, arandelas, marcos circulares.'
-                }
-            };
-            
-            const figureData = info[figureType];
-            if (figureData) {
-                document.getElementById('figureDetails').innerHTML = `
-                    <h5 class="font-bold text-lg mb-2">${figureData.title}</h5>
-                    <p class="mb-2">${figureData.description}</p>
-                    <p><strong>${figureData.examples}</strong></p>
-                `;
-                document.getElementById('figureInfo').classList.remove('hidden');
-            }
-        }
     </script>
 </body>
 
