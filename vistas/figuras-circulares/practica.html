@@ -1,73 +1,476 @@
 ﻿<!DOCTYPE html>
 <html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Práctica - Figuras Circulares</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Fuentes de Google -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="../../styles.css" />
+    <link rel="stylesheet" href="../../core/animations.css" />
 
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif']
-                    }
-                }
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#2196F3",
+              accent: "#8BC34A",
             },
-            darkMode: 'class'
-        }
+            fontFamily: {
+              sans: ["Inter", "system-ui", "sans-serif"],
+            },
+          },
+        },
+        darkMode: "class",
+      };
     </script>
-</head>
+  </head>
 
-<body class="bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors duration-300">
+  <body
+    class="bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors duration-300"
+  >
     <!-- Header -->
-    <header class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
-        <div class="max-w-7xl mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center text-2xl">
-                        🍕
-                    </div>
-                    <div>
-                        <h1 class="text-xl font-bold text-gray-900 dark:text-white">Figuras Circulares - Práctica</h1>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">Figuras Planas</p>
-                    </div>
-                </div>
-
-                <a href="figuras-circulares.html" class="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors flex items-center gap-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                    </svg>
-                    Volver
-                </a>
+    <header
+      class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700"
+    >
+      <div class="max-w-7xl mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <!-- Logo y Título -->
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center text-2xl"
+            >
+              🍕
             </div>
+            <div>
+              <h1 class="text-xl font-bold text-gray-900 dark:text-white">
+                Figuras Circulares
+              </h1>
+              <p class="text-sm text-gray-600 dark:text-gray-400">
+                Círculos, sectores y mucho más
+              </p>
+            </div>
+          </div>
+
+          <!-- Botones de acción -->
+          <div class="flex items-center gap-3">
+            <a
+              href="../../index.html"
+              class="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors flex items-center gap-2"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                />
+              </svg>
+              Volver
+            </a>
+
+            <!-- Botón de modo oscuro -->
+            <button
+              id="darkModeToggle"
+              class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+            >
+              <svg
+                class="w-6 h-6 text-gray-700 dark:text-gray-300 hidden dark:block"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                />
+              </svg>
+              <svg
+                class="w-6 h-6 text-gray-700 dark:text-gray-300 block dark:hidden"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
+      </div>
     </header>
 
-    <!-- Contenido -->
-    <main class="max-w-4xl mx-auto px-6 py-16 flex items-center justify-center min-h-[calc(100vh-200px)]">
-        <div class="text-center">
-            <div class="text-8xl mb-6">🚧</div>
-            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Página en Construcción</h2>
-            <p class="text-xl text-gray-600 dark:text-gray-400 mb-8">¡Vuelve pronto! Estamos preparando ejercicios increíbles para ti.</p>
-            
-            <div class="flex gap-4 justify-center">
-                <a href="figuras-circulares.html" class="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-semibold transition-colors">
-                    Volver a Aprender
-                </a>
-                <a href="../../index.html" class="px-6 py-3 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-white rounded-lg font-semibold transition-colors">
-                    Ir al Inicio
-                </a>
-            </div>
+    <!-- Tabs de navegación -->
+    <div
+      class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 transition-colors duration-300"
+    >
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex gap-8">
+          <a
+            href="figuras-circulares.html"
+            class="py-4 px-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 font-medium flex items-center gap-2"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+              />
+            </svg>
+            Aprender
+          </a>
+          <!-- Pestaña de Práctica activa -->
+          <a
+            href="practica.html"
+            class="py-4 px-2 border-b-2 border-orange-500 text-orange-600 dark:text-orange-400 font-medium flex items-center gap-2"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+              />
+            </svg>
+            Practicar
+          </a>
+          <a
+            href="evaluacion.html"
+            class="py-4 px-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 font-medium flex items-center gap-2"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            Evaluar
+          </a>
         </div>
-    </main>
-</body>
+      </div>
+    </div>
 
+    <!-- Contenido de Práctica -->
+    <main class="max-w-7xl mx-auto px-6 py-8">
+      <h2
+        class="text-3xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2"
+      >
+        <span>✏️</span>
+        Ejercicios de Práctica
+      </h2>
+      <p class="text-gray-700 dark:text-gray-300 text-lg mb-8">
+        ¡Es hora de poner a prueba lo que aprendiste! Estos ejercicios no tienen
+        calificación, son solo para ti.
+      </p>
+
+      <div class="space-y-8">
+        <!-- Ejercicio 1 -->
+        <div
+          class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700"
+        >
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+            Ejercicio 1: Identifica el Sector Circular
+          </h3>
+          <div class="grid md:grid-cols-2 gap-6 items-center">
+            <div>
+              <p class="text-gray-600 dark:text-gray-400 mb-4">
+                Observa el sector circular. El radio es la línea naranja y el ángulo central está marcado.
+              </p>
+              <svg class="w-full" height="200" viewBox="0 0 200 200">
+                <circle cx="100" cy="100" r="70" fill="none" stroke="#e5e7eb" stroke-width="1"/>
+                <path d="M 100 100 L 100 30 A 70 70 0 0 1 160.62 150 Z" 
+                      fill="rgba(245, 158, 11, 0.3)" stroke="#f59e0b" stroke-width="3"/>
+                <circle cx="100" cy="100" r="3" fill="#f59e0b"/>
+                <line x1="100" y1="100" x2="100" y2="30" stroke="#f59e0b" stroke-width="3"/>
+                <line x1="100" y1="100" x2="160.62" y2="150" stroke="#f59e0b" stroke-width="3"/>
+                <text x="100" y="180" text-anchor="middle" font-size="14" fill="#f59e0b" font-weight="bold">
+                  Radio: <tspan id="ex1-radio-value">5</tspan> cm | Ángulo: <tspan id="ex1-angulo-value">90</tspan>°
+                </text>
+              </svg>
+            </div>
+            <div class="space-y-4">
+              <div>
+                <label
+                  for="exercise1Radio"
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >Radio (cm):</label
+                >
+                <input
+                  type="number"
+                  id="exercise1Radio"
+                  class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white"
+                  placeholder="¿Cuál es el radio?"
+                />
+              </div>
+              <div>
+                <label
+                  for="exercise1Angulo"
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >Ángulo (grados):</label
+                >
+                <input
+                  type="number"
+                  id="exercise1Angulo"
+                  class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white"
+                  placeholder="¿Cuál es el ángulo?"
+                />
+              </div>
+              <button
+                id="checkExercise1"
+                class="w-full px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-semibold transition-colors"
+              >
+                Comprobar Ejercicio 1
+              </button>
+              <div id="result1" class="mt-4 text-center"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ejercicio 2 -->
+        <div
+          class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700"
+        >
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+            Ejercicio 2: Calcula el Área del Círculo
+          </h3>
+          <div class="grid md:grid-cols-2 gap-6 items-center">
+            <div>
+              <p class="text-gray-600 dark:text-gray-400 mb-4">
+                Usa la fórmula: Área = π × r² (usa π = 3.14).
+              </p>
+              <svg class="w-full" height="200" viewBox="0 0 200 200">
+                <circle cx="100" cy="100" r="60" fill="rgba(59, 130, 246, 0.3)" stroke="#3b82f6" stroke-width="3"/>
+                <circle cx="100" cy="100" r="3" fill="#3b82f6"/>
+                <line x1="100" y1="100" x2="160" y2="100" stroke="#ef4444" stroke-width="3"/>
+                <text x="130" y="95" text-anchor="middle" fill="#ef4444" font-size="14" font-weight="bold">
+                  r = <tspan id="ex2-radio-value">4</tspan> cm
+                </text>
+              </svg>
+            </div>
+            <div class="space-y-4">
+              <div>
+                <label
+                  for="exercise2Area"
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >Área (cm²):</label
+                >
+                <input
+                  type="number"
+                  step="0.01"
+                  id="exercise2Area"
+                  class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white"
+                  placeholder="Calcula el área del círculo"
+                />
+              </div>
+              <button
+                id="checkExercise2"
+                class="w-full px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-semibold transition-colors"
+              >
+                Comprobar Ejercicio 2
+              </button>
+              <div id="result2" class="mt-4 text-center"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ejercicio 3 -->
+        <div
+          class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700"
+        >
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+            Ejercicio 3: Problema de la Vida Real
+          </h3>
+          <p id="ex3-problem-text" class="text-gray-600 dark:text-gray-400 mb-4">
+            María quiere hacer una pizza circular de 30 cm de diámetro. ¿Cuál es el área de la pizza? (Recuerda: radio = diámetro ÷ 2, y Área = π × r², usa π = 3.14)
+          </p>
+          <div class="space-y-4 max-w-md mx-auto">
+            <div>
+              <label
+                for="exercise3Area"
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >Área de la pizza (cm²):</label
+              >
+              <input
+                type="number"
+                step="0.01"
+                id="exercise3Area"
+                class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white"
+                placeholder="Calcula el área"
+              />
+            </div>
+            <button
+              id="checkExercise3"
+              class="w-full px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-semibold transition-colors"
+            >
+              Comprobar Ejercicio 3
+            </button>
+            <div id="result3" class="mt-4 text-center"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      // === ALEATORIZACIÓN DE EJERCICIOS ===
+      const ejerciciosPool = {
+        ejercicio1: [
+          { radio: 5, angulo: 90 },
+          { radio: 6, angulo: 120 },
+          { radio: 7, angulo: 60 },
+          { radio: 8, angulo: 45 },
+          { radio: 4, angulo: 180 },
+          { radio: 10, angulo: 30 }
+        ],
+        ejercicio2: [
+          { radio: 4 },
+          { radio: 5 },
+          { radio: 6 },
+          { radio: 7 },
+          { radio: 3 },
+          { radio: 8 }
+        ],
+        ejercicio3: [
+          { 
+            texto: "María quiere hacer una pizza circular de 30 cm de diámetro. ¿Cuál es el área de la pizza? (Recuerda: radio = diámetro ÷ 2, y Área = π × r², usa π = 3.14)",
+            diametro: 30
+          },
+          { 
+            texto: "Juan tiene un jardín circular con un radio de 5 metros. ¿Cuál es el área del jardín? (Área = π × r², usa π = 3.14)",
+            radio: 5
+          },
+          { 
+            texto: "Una mesa circular tiene un diámetro de 120 cm. ¿Cuál es su área? (radio = diámetro ÷ 2, Área = π × r², usa π = 3.14)",
+            diametro: 120
+          },
+          { 
+            texto: "Un reloj circular tiene un radio de 15 cm. ¿Cuál es el área de su carátula? (Área = π × r², usa π = 3.14)",
+            radio: 15
+          },
+          { 
+            texto: "Una piscina circular tiene un diámetro de 8 metros. ¿Cuál es su área? (radio = diámetro ÷ 2, Área = π × r², usa π = 3.14)",
+            diametro: 8
+          },
+          { 
+            texto: "Un plato circular tiene un radio de 12 cm. ¿Cuál es su área? (Área = π × r², usa π = 3.14)",
+            radio: 12
+          }
+        ]
+      };
+
+      // Seleccionar ejercicios aleatorios
+      const ex1 = ejerciciosPool.ejercicio1[Math.floor(Math.random() * ejerciciosPool.ejercicio1.length)];
+      const ex2 = ejerciciosPool.ejercicio2[Math.floor(Math.random() * ejerciciosPool.ejercicio2.length)];
+      const ex3 = ejerciciosPool.ejercicio3[Math.floor(Math.random() * ejerciciosPool.ejercicio3.length)];
+
+      // Calcular áreas correctas
+      ex2.area = parseFloat((3.14 * ex2.radio * ex2.radio).toFixed(2));
+      
+      if (ex3.diametro) {
+        ex3.radio = ex3.diametro / 2;
+      }
+      ex3.area = parseFloat((3.14 * ex3.radio * ex3.radio).toFixed(2));
+
+      // Actualizar DOM cuando esté listo
+      document.addEventListener('DOMContentLoaded', function() {
+        // Ejercicio 1
+        document.getElementById('ex1-radio-value').textContent = ex1.radio;
+        document.getElementById('ex1-angulo-value').textContent = ex1.angulo;
+
+        // Ejercicio 2
+        document.getElementById('ex2-radio-value').textContent = ex2.radio;
+
+        // Ejercicio 3
+        document.getElementById('ex3-problem-text').textContent = ex3.texto;
+
+        // Event listeners
+        document.getElementById('checkExercise1').addEventListener('click', function() {
+          const radioInput = parseFloat(document.getElementById('exercise1Radio').value);
+          const anguloInput = parseFloat(document.getElementById('exercise1Angulo').value);
+          const result = document.getElementById('result1');
+          
+          if (radioInput === ex1.radio && anguloInput === ex1.angulo) {
+            result.innerHTML = '<div class="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 p-3 rounded-lg">¡Correcto! 🎉</div>';
+          } else {
+            result.innerHTML = '<div class="bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 p-3 rounded-lg">Intenta de nuevo. Revisa los valores en la figura.</div>';
+          }
+        });
+
+        document.getElementById('checkExercise2').addEventListener('click', function() {
+          const areaInput = parseFloat(document.getElementById('exercise2Area').value);
+          const result = document.getElementById('result2');
+          
+          if (Math.abs(areaInput - ex2.area) < 0.5) {
+            result.innerHTML = '<div class="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 p-3 rounded-lg">¡Correcto! El área es ' + ex2.area + ' cm² 🎉</div>';
+          } else {
+            result.innerHTML = '<div class="bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 p-3 rounded-lg">Intenta de nuevo. Usa la fórmula: π × r²</div>';
+          }
+        });
+
+        document.getElementById('checkExercise3').addEventListener('click', function() {
+          const areaInput = parseFloat(document.getElementById('exercise3Area').value);
+          const result = document.getElementById('result3');
+          
+          if (Math.abs(areaInput - ex3.area) < 1) {
+            result.innerHTML = '<div class="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 p-3 rounded-lg">¡Correcto! El área es ' + ex3.area + ' 🎉</div>';
+          } else {
+            result.innerHTML = '<div class="bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 p-3 rounded-lg">Intenta de nuevo. Recuerda calcular el radio primero si te dan el diámetro.</div>';
+          }
+        });
+      });
+
+      // === MODO OSCURO ===
+      const darkModeToggle = document.getElementById("darkModeToggle");
+      const htmlElement = document.documentElement;
+
+      const darkMode = localStorage.getItem("darkMode");
+      if (darkMode === "enabled") {
+        htmlElement.classList.add("dark");
+      }
+
+      darkModeToggle.addEventListener("click", () => {
+        htmlElement.classList.toggle("dark");
+        const isDarkMode = htmlElement.classList.contains("dark");
+        localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
+      });
+    </script>
+  </body>
 </html>
