@@ -442,6 +442,97 @@
     <!-- 5. Script Específico de la Página (el de evaluación) -->
     <script src="evaluacion.js"></script>
 
+    <script>
+      // === ALEATORIZACIÓN DE EVALUACIÓN ===
+      const evaluacionPool = {
+        pregunta1: [
+          { base: 14, altura: 9 },
+          { base: 16, altura: 11 },
+          { base: 18, altura: 13 },
+          { base: 20, altura: 15 },
+          { base: 12, altura: 10 },
+          { base: 22, altura: 14 }
+        ],
+        pregunta2: [
+          { base: 12, altura: 9 },
+          { base: 15, altura: 11 },
+          { base: 10, altura: 8 },
+          { base: 14, altura: 10 },
+          { base: 16, altura: 12 },
+          { base: 13, altura: 9 }
+        ],
+        pregunta3: [
+          { 
+            texto: "Pedro tiene una vela triangular para su barco. La vela mide 6 metros de base y 8 metros de altura. ¿Cuál es el área de la vela? (Recuerda: Área del triángulo = Base × Altura ÷ 2)",
+            base: 6,
+            altura: 8,
+            esTriangulo: true
+          },
+          { 
+            texto: "Ana quiere alfombrar su sala rectangular que mide 5 metros de base y 4 metros de altura. ¿Cuántos metros cuadrados de alfombra necesita?",
+            base: 5,
+            altura: 4,
+            esTriangulo: false
+          },
+          { 
+            texto: "Un letrero triangular de tránsito tiene una base de 10 metros y una altura de 12 metros. ¿Cuál es su área? (Área = Base × Altura ÷ 2)",
+            base: 10,
+            altura: 12,
+            esTriangulo: true
+          },
+          { 
+            texto: "Luis tiene un terreno rectangular de 8 metros de base y 6 metros de altura. ¿Cuál es el área total del terreno?",
+            base: 8,
+            altura: 6,
+            esTriangulo: false
+          },
+          { 
+            texto: "Una cometa triangular tiene una base de 4 metros y una altura de 5 metros. ¿Cuál es su área? (Área = Base × Altura ÷ 2)",
+            base: 4,
+            altura: 5,
+            esTriangulo: true
+          },
+          { 
+            texto: "Un piso rectangular mide 7 metros de base y 5 metros de altura. ¿Cuántos metros cuadrados tiene?",
+            base: 7,
+            altura: 5,
+            esTriangulo: false
+          }
+        ]
+      };
+
+      // Seleccionar preguntas aleatorias
+      const eval1 = evaluacionPool.pregunta1[Math.floor(Math.random() * evaluacionPool.pregunta1.length)];
+      const eval2 = evaluacionPool.pregunta2[Math.floor(Math.random() * evaluacionPool.pregunta2.length)];
+      const eval3 = evaluacionPool.pregunta3[Math.floor(Math.random() * evaluacionPool.pregunta3.length)];
+
+      // Calcular áreas correctas
+      eval1.area = (eval1.base * eval1.altura) / 2;
+      eval2.area = eval2.base * eval2.altura;
+      eval3.area = eval3.esTriangulo ? (eval3.base * eval3.altura) / 2 : eval3.base * eval3.altura;
+
+      // Actualizar DOM cuando esté listo
+      document.addEventListener('DOMContentLoaded', function() {
+        // Pregunta 1
+        const eval1BaseEl = document.getElementById('eval1-base-value');
+        const eval1AlturaEl = document.getElementById('eval1-altura-value');
+        if (eval1BaseEl) eval1BaseEl.textContent = eval1.base;
+        if (eval1AlturaEl) eval1AlturaEl.textContent = eval1.altura;
+
+        // Pregunta 2
+        const eval2BaseEl = document.getElementById('eval2-base-value');
+        const eval2AlturaEl = document.getElementById('eval2-altura-value');
+        if (eval2BaseEl) eval2BaseEl.textContent = eval2.base;
+        if (eval2AlturaEl) eval2AlturaEl.textContent = eval2.altura;
+
+        // Pregunta 3
+        const eval3TextEl = document.getElementById('eval3-problem-text');
+        if (eval3TextEl) eval3TextEl.textContent = eval3.texto;
+
+        console.log('Evaluación cargada:', { eval1, eval2, eval3 });
+      });
+    </script>
+
     <!-- Script del modo oscuro -->
     <script>
       const darkModeToggle = document.getElementById("darkModeToggle");

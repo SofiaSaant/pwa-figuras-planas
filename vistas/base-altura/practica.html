@@ -240,7 +240,7 @@
                   font-size="14"
                   font-weight="bold"
                 >
-                  Base: 12 cm
+                  Base: <tspan id="ex1-base-value">12</tspan> cm
                 </text>
                 <!-- Altura -->
                 <line
@@ -260,7 +260,7 @@
                   font-size="14"
                   font-weight="bold"
                 >
-                  Altura: 8 cm
+                  Altura: <tspan id="ex1-altura-value">8</tspan> cm
                 </text>
               </svg>
             </div>
@@ -445,11 +445,100 @@
     <!-- 4. Clase Base -->
     <script src="../../core/BaseTopicModule.js"></script>
     
-    <!-- 5. Script Específico de la Página (el de evaluación) -->
-    <script src="base-altura-refactored.js"></script>
-
+    <!-- 5. Script Específico de la Página (el de práctica) -->
+    <script src="base-altura-refactored.js?v=2"></script>
 
     <script>
+      // === ALEATORIZACIÓN DE EJERCICIOS ===
+      // Pool de ejercicios
+      const ejerciciosPool = {
+        ejercicio1: [
+          { base: 12, altura: 8 },
+          { base: 15, altura: 10 },
+          { base: 18, altura: 12 },
+          { base: 20, altura: 14 },
+          { base: 16, altura: 9 },
+          { base: 14, altura: 11 }
+        ],
+        ejercicio2: [
+          { base: 6, altura: 4 },
+          { base: 8, altura: 5 },
+          { base: 10, altura: 7 },
+          { base: 12, altura: 6 },
+          { base: 9, altura: 5 },
+          { base: 7, altura: 8 }
+        ],
+        ejercicio3: [
+          { 
+            texto: "María quiere pintar una pared rectangular. La pared mide 3 metros de base y 2.5 metros de altura. ¿Cuántos metros cuadrados debe pintar?",
+            base: 3,
+            altura: 2.5,
+            esTriangulo: false
+          },
+          { 
+            texto: "Juan tiene un jardín triangular con una base de 8 metros y una altura de 6 metros. ¿Cuál es el área del jardín? (Recuerda: Área = Base × Altura ÷ 2)",
+            base: 8,
+            altura: 6,
+            esTriangulo: true
+          },
+          { 
+            texto: "Una ventana rectangular mide 1.5 metros de base y 2 metros de altura. ¿Cuál es su área?",
+            base: 1.5,
+            altura: 2,
+            esTriangulo: false
+          },
+          { 
+            texto: "Un cartel triangular tiene una base de 10 metros y una altura de 8 metros. ¿Cuántos metros cuadrados de material se necesitan? (Área = Base × Altura ÷ 2)",
+            base: 10,
+            altura: 8,
+            esTriangulo: true
+          },
+          { 
+            texto: "Carlos construye una mesa rectangular de 2 metros de base y 1.2 metros de altura. ¿Cuál es el área de la mesa?",
+            base: 2,
+            altura: 1.2,
+            esTriangulo: false
+          },
+          { 
+            texto: "Una bandera triangular tiene una base de 12 metros y una altura de 9 metros. ¿Cuál es su área? (Área = Base × Altura ÷ 2)",
+            base: 12,
+            altura: 9,
+            esTriangulo: true
+          }
+        ]
+      };
+
+      // Seleccionar ejercicios aleatorios
+      const ex1 = ejerciciosPool.ejercicio1[Math.floor(Math.random() * ejerciciosPool.ejercicio1.length)];
+      const ex2 = ejerciciosPool.ejercicio2[Math.floor(Math.random() * ejerciciosPool.ejercicio2.length)];
+      const ex3 = ejerciciosPool.ejercicio3[Math.floor(Math.random() * ejerciciosPool.ejercicio3.length)];
+
+      // Calcular áreas correctas
+      ex2.area = ex2.base * ex2.altura;
+      ex3.area = ex3.esTriangulo ? (ex3.base * ex3.altura) / 2 : ex3.base * ex3.altura;
+
+      // Actualizar DOM cuando esté listo
+      document.addEventListener('DOMContentLoaded', function() {
+        // Ejercicio 1
+        const ex1BaseEl = document.getElementById('ex1-base-value');
+        const ex1AlturaEl = document.getElementById('ex1-altura-value');
+        if (ex1BaseEl) ex1BaseEl.textContent = ex1.base;
+        if (ex1AlturaEl) ex1AlturaEl.textContent = ex1.altura;
+
+        // Ejercicio 2
+        const ex2BaseEl = document.getElementById('ex2-base-value');
+        const ex2AlturaEl = document.getElementById('ex2-altura-value');
+        if (ex2BaseEl) ex2BaseEl.textContent = ex2.base;
+        if (ex2AlturaEl) ex2AlturaEl.textContent = ex2.altura;
+
+        // Ejercicio 3
+        const ex3TextEl = document.getElementById('ex3-problem-text');
+        if (ex3TextEl) ex3TextEl.textContent = ex3.texto;
+
+        console.log('Ejercicios cargados:', { ex1, ex2, ex3 });
+      });
+
+      // === MODO OSCURO ===
       const darkModeToggle = document.getElementById("darkModeToggle");
       const htmlElement = document.documentElement;
 
