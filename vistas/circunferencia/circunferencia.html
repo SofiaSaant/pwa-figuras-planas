@@ -1,175 +1,973 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>La Circunferencia - Figuras Planas</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Fuentes de Google -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="../../styles.css">
-    <link rel="stylesheet" href="../../core/animations.css">
+    <link rel="stylesheet" href="../../styles.css" />
+    <link rel="stylesheet" href="../../core/animations.css" />
 
+    <!-- Configuración de Tailwind -->
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif']
-                    }
-                }
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#06b6d4",
+              accent: "#8BC34A",
             },
-            darkMode: 'class'
-        }
+            fontFamily: {
+              sans: ["Inter", "system-ui", "sans-serif"],
+            },
+          },
+        },
+        darkMode: "class",
+      };
     </script>
-</head>
+  </head>
 
-<body class="bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors duration-300">
+  <body
+    class="bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors duration-300"
+  >
     <!-- Header -->
-    <header class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
-        <div class="max-w-7xl mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-cyan-600 rounded-lg flex items-center justify-center text-2xl">
-                        ⭕
-                    </div>
-                    <div>
-                        <h1 class="text-xl font-bold text-gray-900 dark:text-white">La Circunferencia</h1>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">Figuras Planas</p>
-                    </div>
-                </div>
-
-                <div class="flex items-center gap-3">
-                    <a href="../../index.html" class="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors flex items-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                        </svg>
-                        Volver
-                    </a>
-
-                    <button id="darkModeToggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-                        <svg class="w-6 h-6 text-gray-700 dark:text-gray-300 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg>
-                        <svg class="w-6 h-6 text-gray-700 dark:text-gray-300 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                        </svg>
-                    </button>
-                </div>
+    <header
+      class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 transition-colors duration-300"
+    >
+      <div class="max-w-7xl mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <!-- Logo y Título -->
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-cyan-600 rounded-lg flex items-center justify-center text-2xl"
+            >
+              ⭕
             </div>
+            <div>
+              <h1 class="text-xl font-bold text-gray-900 dark:text-white">
+                La Circunferencia
+              </h1>
+              <p class="text-sm text-gray-600 dark:text-gray-400">
+                Figuras Planas
+              </p>
+            </div>
+          </div>
+
+          <!-- Botones de acción -->
+          <div class="flex items-center gap-3">
+            <a
+              href="../../index.html"
+              class="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors flex items-center gap-2"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                />
+              </svg>
+              Volver
+            </a>
+
+            <!-- Botón de modo oscuro -->
+            <button
+              id="darkModeToggle"
+              class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+            >
+              <svg
+                class="w-6 h-6 text-gray-700 dark:text-gray-300 hidden dark:block"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                />
+              </svg>
+              <svg
+                class="w-6 h-6 text-gray-700 dark:text-gray-300 block dark:hidden"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
+      </div>
     </header>
 
-    <!-- Tabs -->
-    <div class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex gap-8">
-                <a href="circunferencia.html" class="py-4 px-2 border-b-2 border-cyan-500 text-cyan-600 dark:text-cyan-400 font-medium flex items-center gap-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                    </svg>
-                    Aprender
-                </a>
-                <a href="practica.html" class="py-4 px-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 font-medium flex items-center gap-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                    </svg>
-                    Practicar
-                </a>
-                <a href="evaluacion.html" class="py-4 px-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 font-medium flex items-center gap-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    Evaluar
-                </a>
-            </div>
+    <!-- Tabs de navegación -->
+    <div
+      class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 transition-colors duration-300"
+    >
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex gap-8">
+          <a
+            href="circunferencia.html"
+            class="py-4 px-2 border-b-2 border-cyan-500 text-cyan-600 dark:text-cyan-400 font-medium flex items-center gap-2"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+              />
+            </svg>
+            Aprender
+          </a>
+          <a
+            href="practica.html"
+            class="py-4 px-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 font-medium flex items-center gap-2"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+              />
+            </svg>
+            Practicar
+          </a>
+          <a
+            href="evaluacion.html"
+            class="py-4 px-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 font-medium flex items-center gap-2"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            Evaluar
+          </a>
         </div>
+      </div>
     </div>
 
-    <!-- Contenido -->
+    <!-- Contenido principal -->
     <main class="max-w-7xl mx-auto px-6 py-8">
-        <div class="mb-8">
+      <div class="grid lg:grid-cols-[2fr_1fr] gap-8">
+        <div>
+          <!-- Introducción -->
+          <div class="mb-8">
             <p class="text-gray-700 dark:text-gray-300 text-lg">
-                Conoce todos los elementos de la circunferencia: centro, radio, diámetro y mucho más. ¡Es más fácil de lo que piensas!
+              ¡Descubre todos los elementos de la circunferencia: centro, radio, diámetro, cuerda y mucho más! Es una de las figuras más perfectas de la geometría.
             </p>
-        </div>
+          </div>
 
-        <!-- Concepto principal -->
-        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 mb-8 border border-gray-200 dark:border-gray-700">
-            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-                <span>🤔</span>
-                ¿Qué es una circunferencia?
+          <!-- Concepto principal -->
+          <div
+            class="bg-white dark:bg-gray-800 rounded-2xl p-6 mb-8 border border-gray-200 dark:border-gray-700 transition-colors duration-300"
+          >
+            <h2
+              class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2"
+            >
+              <span>🤔</span>
+              ¿Qué es una circunferencia?
             </h2>
-            
+
             <div class="grid md:grid-cols-2 gap-6">
-                <div>
-                    <p class="text-gray-700 dark:text-gray-300 mb-4">
-                        Una <strong>circunferencia</strong> es una línea curva cerrada donde todos los puntos están a la misma distancia de un punto central.
-                    </p>
-                    
-                    <div class="bg-cyan-50 dark:bg-cyan-900/20 rounded-xl p-4">
-                        <h4 class="text-lg font-bold text-cyan-700 dark:text-cyan-400 mb-3">⭕ Elementos principales:</h4>
-                        <ul class="space-y-2 text-gray-700 dark:text-gray-300">
-                            <li><strong>Centro:</strong> Punto central de la circunferencia</li>
-                            <li><strong>Radio:</strong> Distancia del centro a cualquier punto</li>
-                            <li><strong>Diámetro:</strong> Línea que pasa por el centro (2 × radio)</li>
-                            <li><strong>Cuerda:</strong> Línea que une dos puntos</li>
-                        </ul>
-                    </div>
+              <div>
+                <div class="bg-cyan-50 dark:bg-cyan-900/20 rounded-xl p-4 mb-4">
+                  <h4 class="text-lg font-bold text-cyan-700 dark:text-cyan-400 mb-2">
+                    ⭕ Definición
+                  </h4>
+                  <p class="text-gray-700 dark:text-gray-300">
+                    Una <strong>circunferencia</strong> es una línea curva cerrada donde todos los puntos están a la misma distancia de un punto central llamado centro.<sup class="text-cyan-600 dark:text-cyan-400">1</sup>
+                  </p>
                 </div>
-                
-                <div class="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-4 border-l-4 border-amber-500">
-                    <h5 class="text-lg font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
-                        <span>💡</span>
-                        ¡Dato curioso!
-                    </h5>
-                    <p class="text-gray-700 dark:text-gray-300">
-                        La circunferencia es una de las formas más perfectas de la naturaleza. 
-                        ¡La encuentras en las ruedas, planetas, gotas de agua y hasta en tus ojos!
-                    </p>
+
+                <div class="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4">
+                  <h4
+                    class="text-lg font-bold text-blue-700 dark:text-blue-400 mb-2"
+                  >
+                    🔵 Círculo vs Circunferencia
+                  </h4>
+                  <p class="text-gray-700 dark:text-gray-300">
+                    La <strong>circunferencia</strong> es solo el borde, mientras que el <strong>círculo</strong> incluye todo el interior.<sup class="text-blue-600 dark:text-blue-400">2</sup>
+                  </p>
                 </div>
+              </div>
+
+              <div
+                class="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-4 border-l-4 border-amber-500"
+              >
+                <h5
+                  class="text-lg font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-2"
+                >
+                  <span>💡</span>
+                  ¡Dato curioso!
+                </h5>
+                <p class="text-gray-700 dark:text-gray-300">
+                  La circunferencia es una de las formas más perfectas de la naturaleza. ¡La encuentras en las ruedas, planetas, gotas de agua y hasta en tus ojos!<sup class="text-amber-600 dark:text-amber-400">3</sup>
+                </p>
+              </div>
             </div>
+          </div>
+
+          <!-- Elementos de la circunferencia -->
+          <div
+            class="bg-white dark:bg-gray-800 rounded-2xl p-6 mb-8 border border-gray-200 dark:border-gray-700 transition-colors duration-300"
+          >
+            <h3
+              class="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2"
+            >
+              <span>📐</span>
+              Elementos de la Circunferencia
+            </h3>
+            <div class="bg-green-50 dark:bg-green-900/20 rounded-xl p-4 mb-6 border-l-4 border-green-600">
+              <p class="text-gray-700 dark:text-gray-300">
+                <strong>Elementos principales:</strong> La circunferencia tiene varios elementos importantes que nos ayudan a entenderla y trabajar con ella. Haz clic en cada uno para verlo en acción.<sup class="text-green-600 dark:text-green-400">4</sup>
+              </p>
+            </div>
+            <p class="text-gray-600 dark:text-gray-400 mb-6">
+              Haz clic en cada elemento para verlo destacado en la circunferencia:
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-6">
+              <!-- Centro -->
+              <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
+                <h5 class="font-semibold text-gray-900 dark:text-white mb-3">
+                  🎯 Centro
+                </h5>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                  Punto central equidistante de todos los puntos de la circunferencia
+                </p>
+                <div
+                  id="btnCentro"
+                  class="bg-white dark:bg-gray-800 rounded-lg p-4 cursor-pointer hover:shadow-lg transition-shadow"
+                >
+                  <svg class="w-full" height="200" viewBox="0 0 300 200">
+                    <!-- Circunferencia base -->
+                    <circle
+                      id="circle1"
+                      cx="150"
+                      cy="100"
+                      r="70"
+                      fill="rgba(6, 182, 212, 0.2)"
+                      stroke="#06b6d4"
+                      stroke-width="3"
+                    />
+                    
+                    <!-- Centro -->
+                    <circle
+                      id="centro1"
+                      cx="150"
+                      cy="100"
+                      r="5"
+                      fill="#ef4444"
+                      style="display: none"
+                    />
+                    <text
+                      id="centroLabel1"
+                      x="150"
+                      y="85"
+                      text-anchor="middle"
+                      fill="#ef4444"
+                      font-size="14"
+                      font-weight="bold"
+                      style="display: none"
+                    >
+                      Centro (O)
+                    </text>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Radio -->
+              <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
+                <h5 class="font-semibold text-gray-900 dark:text-white mb-3">
+                  📏 Radio
+                </h5>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                  Distancia del centro a cualquier punto de la circunferencia
+                </p>
+                <div
+                  id="btnRadio"
+                  class="bg-white dark:bg-gray-800 rounded-lg p-4 cursor-pointer hover:shadow-lg transition-shadow"
+                >
+                  <svg class="w-full" height="200" viewBox="0 0 300 200">
+                    <circle
+                      id="circle2"
+                      cx="150"
+                      cy="100"
+                      r="70"
+                      fill="rgba(6, 182, 212, 0.2)"
+                      stroke="#06b6d4"
+                      stroke-width="3"
+                    />
+                    
+                    <circle cx="150" cy="100" r="3" fill="#666" />
+                    
+                    <!-- Radio -->
+                    <line
+                      id="radio2"
+                      x1="150"
+                      y1="100"
+                      x2="220"
+                      y2="100"
+                      stroke="#10b981"
+                      stroke-width="4"
+                      style="display: none"
+                    />
+                    <circle
+                      id="radioPoint2"
+                      cx="220"
+                      cy="100"
+                      r="4"
+                      fill="#10b981"
+                      style="display: none"
+                    />
+                    <text
+                      id="radioLabel2"
+                      x="185"
+                      y="90"
+                      text-anchor="middle"
+                      fill="#10b981"
+                      font-size="14"
+                      font-weight="bold"
+                      style="display: none"
+                    >
+                      Radio: 7 cm
+                    </text>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Diámetro -->
+              <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
+                <h5 class="font-semibold text-gray-900 dark:text-white mb-3">
+                  ↔️ Diámetro
+                </h5>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                  Línea que pasa por el centro y une dos puntos opuestos (2 × radio)
+                </p>
+                <div
+                  id="btnDiametro"
+                  class="bg-white dark:bg-gray-800 rounded-lg p-4 cursor-pointer hover:shadow-lg transition-shadow"
+                >
+                  <svg class="w-full" height="200" viewBox="0 0 300 200">
+                    <circle
+                      id="circle3"
+                      cx="150"
+                      cy="100"
+                      r="70"
+                      fill="rgba(6, 182, 212, 0.2)"
+                      stroke="#06b6d4"
+                      stroke-width="3"
+                    />
+                    
+                    <circle cx="150" cy="100" r="3" fill="#666" />
+                    
+                    <!-- Diámetro -->
+                    <line
+                      id="diametro3"
+                      x1="80"
+                      y1="100"
+                      x2="220"
+                      y2="100"
+                      stroke="#8b5cf6"
+                      stroke-width="4"
+                      style="display: none"
+                    />
+                    <circle
+                      id="diametroPoint3a"
+                      cx="80"
+                      cy="100"
+                      r="4"
+                      fill="#8b5cf6"
+                      style="display: none"
+                    />
+                    <circle
+                      id="diametroPoint3b"
+                      cx="220"
+                      cy="100"
+                      r="4"
+                      fill="#8b5cf6"
+                      style="display: none"
+                    />
+                    <text
+                      id="diametroLabel3"
+                      x="150"
+                      y="85"
+                      text-anchor="middle"
+                      fill="#8b5cf6"
+                      font-size="14"
+                      font-weight="bold"
+                      style="display: none"
+                    >
+                      Diámetro: 14 cm
+                    </text>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Cuerda -->
+              <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
+                <h5 class="font-semibold text-gray-900 dark:text-white mb-3">
+                  📐 Cuerda
+                </h5>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                  Segmento que une dos puntos de la circunferencia
+                </p>
+                <div
+                  id="btnCuerda"
+                  class="bg-white dark:bg-gray-800 rounded-lg p-4 cursor-pointer hover:shadow-lg transition-shadow"
+                >
+                  <svg class="w-full" height="200" viewBox="0 0 300 200">
+                    <circle
+                      id="circle4"
+                      cx="150"
+                      cy="100"
+                      r="70"
+                      fill="rgba(6, 182, 212, 0.2)"
+                      stroke="#06b6d4"
+                      stroke-width="3"
+                    />
+                    
+                    <circle cx="150" cy="100" r="3" fill="#666" />
+                    
+                    <!-- Cuerda -->
+                    <line
+                      id="cuerda4"
+                      x1="110"
+                      y1="50"
+                      x2="210"
+                      y2="130"
+                      stroke="#f59e0b"
+                      stroke-width="4"
+                      style="display: none"
+                    />
+                    <circle
+                      id="cuerdaPoint4a"
+                      cx="110"
+                      cy="50"
+                      r="4"
+                      fill="#f59e0b"
+                      style="display: none"
+                    />
+                    <circle
+                      id="cuerdaPoint4b"
+                      cx="210"
+                      cy="130"
+                      r="4"
+                      fill="#f59e0b"
+                      style="display: none"
+                    />
+                    <text
+                      id="cuerdaLabel4"
+                      x="160"
+                      y="85"
+                      text-anchor="middle"
+                      fill="#f59e0b"
+                      font-size="14"
+                      font-weight="bold"
+                      style="display: none"
+                    >
+                      Cuerda: 11.5 cm
+                    </text>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Arco -->
+              <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
+                <h5 class="font-semibold text-gray-900 dark:text-white mb-3">
+                  🌙 Arco
+                </h5>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                  Porción de la circunferencia entre dos puntos
+                </p>
+                <div
+                  id="btnArco"
+                  class="bg-white dark:bg-gray-800 rounded-lg p-4 cursor-pointer hover:shadow-lg transition-shadow"
+                >
+                  <svg class="w-full" height="200" viewBox="0 0 300 200">
+                    <circle
+                      id="circle5"
+                      cx="150"
+                      cy="100"
+                      r="70"
+                      fill="rgba(6, 182, 212, 0.2)"
+                      stroke="#06b6d4"
+                      stroke-width="3"
+                    />
+                    
+                    <circle cx="150" cy="100" r="3" fill="#666" />
+                    
+                    <!-- Arco -->
+                    <path
+                      id="arco5"
+                      d="M 150 30 A 70 70 0 0 1 220 100"
+                      fill="none"
+                      stroke="#ec4899"
+                      stroke-width="6"
+                      style="display: none"
+                    />
+                    <circle
+                      id="arcoPoint5a"
+                      cx="150"
+                      cy="30"
+                      r="4"
+                      fill="#ec4899"
+                      style="display: none"
+                    />
+                    <circle
+                      id="arcoPoint5b"
+                      cx="220"
+                      cy="100"
+                      r="4"
+                      fill="#ec4899"
+                      style="display: none"
+                    />
+                    <text
+                      id="arcoLabel5"
+                      x="200"
+                      y="50"
+                      text-anchor="middle"
+                      fill="#ec4899"
+                      font-size="14"
+                      font-weight="bold"
+                      style="display: none"
+                    >
+                      Arco
+                    </text>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Secante -->
+              <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
+                <h5 class="font-semibold text-gray-900 dark:text-white mb-3">
+                  ➗ Secante
+                </h5>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                  Recta que corta la circunferencia en dos puntos
+                </p>
+                <div
+                  id="btnSecante"
+                  class="bg-white dark:bg-gray-800 rounded-lg p-4 cursor-pointer hover:shadow-lg transition-shadow"
+                >
+                  <svg class="w-full" height="200" viewBox="0 0 300 200">
+                    <circle
+                      id="circle6"
+                      cx="150"
+                      cy="100"
+                      r="70"
+                      fill="rgba(6, 182, 212, 0.2)"
+                      stroke="#06b6d4"
+                      stroke-width="3"
+                    />
+                    
+                    <circle cx="150" cy="100" r="3" fill="#666" />
+                    
+                    <!-- Secante -->
+                    <line
+                      id="secante6"
+                      x1="80"
+                      y1="50"
+                      x2="240"
+                      y2="150"
+                      stroke="#14b8a6"
+                      stroke-width="3"
+                      stroke-dasharray="5,5"
+                      style="display: none"
+                    />
+                    <circle
+                      id="secantePoint6a"
+                      cx="110"
+                      cy="68"
+                      r="4"
+                      fill="#14b8a6"
+                      style="display: none"
+                    />
+                    <circle
+                      id="secantePoint6b"
+                      cx="210"
+                      cy="132"
+                      r="4"
+                      fill="#14b8a6"
+                      style="display: none"
+                    />
+                    <text
+                      id="secanteLabel6"
+                      x="160"
+                      y="90"
+                      text-anchor="middle"
+                      fill="#14b8a6"
+                      font-size="14"
+                      font-weight="bold"
+                      style="display: none"
+                    >
+                      Secante
+                    </text>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Tangente -->
+              <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
+                <h5 class="font-semibold text-gray-900 dark:text-white mb-3">
+                  📍 Tangente
+                </h5>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                  Recta que toca la circunferencia en un solo punto
+                </p>
+                <div
+                  id="btnTangente"
+                  class="bg-white dark:bg-gray-800 rounded-lg p-4 cursor-pointer hover:shadow-lg transition-shadow"
+                >
+                  <svg class="w-full" height="200" viewBox="0 0 300 200">
+                    <circle
+                      id="circle7"
+                      cx="150"
+                      cy="100"
+                      r="70"
+                      fill="rgba(6, 182, 212, 0.2)"
+                      stroke="#06b6d4"
+                      stroke-width="3"
+                    />
+                    
+                    <circle cx="150" cy="100" r="3" fill="#666" />
+                    
+                    <!-- Tangente -->
+                    <line
+                      id="tangente7"
+                      x1="80"
+                      y1="30"
+                      x2="220"
+                      y2="30"
+                      stroke="#f97316"
+                      stroke-width="3"
+                      stroke-dasharray="5,5"
+                      style="display: none"
+                    />
+                    <circle
+                      id="tangentePoint7"
+                      cx="150"
+                      cy="30"
+                      r="4"
+                      fill="#f97316"
+                      style="display: none"
+                    />
+                    <!-- Radio perpendicular -->
+                    <line
+                      id="tangenteRadio7"
+                      x1="150"
+                      y1="100"
+                      x2="150"
+                      y2="30"
+                      stroke="#f97316"
+                      stroke-width="2"
+                      stroke-dasharray="3,3"
+                      style="display: none"
+                    />
+                    <text
+                      id="tangenteLabel7"
+                      x="150"
+                      y="20"
+                      text-anchor="middle"
+                      fill="#f97316"
+                      font-size="14"
+                      font-weight="bold"
+                      style="display: none"
+                    >
+                      Tangente
+                    </text>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Sector Circular -->
+              <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
+                <h5 class="font-semibold text-gray-900 dark:text-white mb-3">
+                  🍕 Sector Circular
+                </h5>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                  Región limitada por dos radios y un arco (como una rebanada de pizza)
+                </p>
+                <div
+                  id="btnSector"
+                  class="bg-white dark:bg-gray-800 rounded-lg p-4 cursor-pointer hover:shadow-lg transition-shadow"
+                >
+                  <svg class="w-full" height="200" viewBox="0 0 300 200">
+                    <circle
+                      cx="150"
+                      cy="100"
+                      r="70"
+                      fill="rgba(6, 182, 212, 0.2)"
+                      stroke="#06b6d4"
+                      stroke-width="3"
+                    />
+                    
+                    <circle cx="150" cy="100" r="3" fill="#666" />
+                    
+                    <!-- Sector -->
+                    <path
+                      id="sector8"
+                      d="M 150 100 L 220 100 A 70 70 0 0 1 185 165 Z"
+                      fill="rgba(139, 92, 246, 0.5)"
+                      stroke="#8b5cf6"
+                      stroke-width="3"
+                      style="display: none"
+                    />
+                    <text
+                      id="sectorLabel8"
+                      x="180"
+                      y="120"
+                      text-anchor="middle"
+                      fill="#8b5cf6"
+                      font-size="14"
+                      font-weight="bold"
+                      style="display: none"
+                    >
+                      Sector
+                    </text>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fórmulas importantes -->
+          <div
+            class="bg-white dark:bg-gray-800 rounded-2xl p-6 mb-8 border border-gray-200 dark:border-gray-700 transition-colors duration-300"
+          >
+            <h3
+              class="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2"
+            >
+              <span>📊</span>
+              Fórmulas Importantes
+            </h3>
+            <div class="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-4 mb-6 border-l-4 border-indigo-600">
+              <p class="text-gray-700 dark:text-gray-300">
+                <strong>Fórmulas esenciales:</strong> Estas fórmulas te ayudarán a calcular la longitud de la circunferencia y el área del círculo.<sup class="text-indigo-600 dark:text-indigo-400">5</sup>
+              </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+              <div class="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 rounded-xl p-6">
+                <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-3">
+                  📏 Longitud de la Circunferencia
+                </h4>
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-4 mb-3">
+                  <p class="text-2xl font-bold text-center text-cyan-600 dark:text-cyan-400">
+                    L = 2πr
+                  </p>
+                </div>
+                <p class="text-sm text-gray-700 dark:text-gray-300">
+                  Donde <strong>r</strong> es el radio y <strong>π ≈ 3.14159</strong>
+                </p>
+                <div class="mt-3 p-3 bg-white dark:bg-gray-800 rounded-lg">
+                  <p class="text-sm text-gray-600 dark:text-gray-400">
+                    <strong>Ejemplo:</strong> Si r = 5 cm<br/>
+                    L = 2 × 3.14 × 5 = <strong class="text-cyan-600 dark:text-cyan-400">31.4 cm</strong>
+                  </p>
+                </div>
+              </div>
+
+              <div class="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-xl p-6">
+                <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-3">
+                  🔵 Área del Círculo
+                </h4>
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-4 mb-3">
+                  <p class="text-2xl font-bold text-center text-purple-600 dark:text-purple-400">
+                    A = πr²
+                  </p>
+                </div>
+                <p class="text-sm text-gray-700 dark:text-gray-300">
+                  Donde <strong>r</strong> es el radio elevado al cuadrado
+                </p>
+                <div class="mt-3 p-3 bg-white dark:bg-gray-800 rounded-lg">
+                  <p class="text-sm text-gray-600 dark:text-gray-400">
+                    <strong>Ejemplo:</strong> Si r = 5 cm<br/>
+                    A = 3.14 × 5² = 3.14 × 25 = <strong class="text-purple-600 dark:text-purple-400">78.5 cm²</strong>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Botón de completar -->
+          <div class="flex justify-center mt-8">
+            <button onclick="window.location.href='practica.html'" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-gray-900 font-bold py-4 px-8 rounded-xl transition-all hover:shadow-lg flex items-center gap-2">
+              ¿Listo para practicar?
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </button>
+          </div>
         </div>
 
-        <!-- Botón de acción -->
-        <div class="flex justify-center mt-8">
-            <button onclick="window.location.href='../../index.html'" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-gray-900 font-bold py-4 px-8 rounded-xl transition-all hover:shadow-lg flex items-center gap-2">
-                ¿Listo para practicar?
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-            </button>
-        </div>
+        <!-- 📚 Fuentes de consulta -->
+        <aside class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 transition-colors duration-300 h-fit self-start">
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+            <span>📚</span>
+            Fuentes de consulta
+          </h3>
+          <ul class="space-y-3 text-gray-700 dark:text-gray-300 text-sm">
+            <li>🔹 Baldor, A. <em>Geometría y Trigonometría</em>. Editorial Patria, 2015.</li>
+            <li>🔹 Ministerio de Educación de México. <em>Matemáticas 2° Secundaria</em>, SEP, 2022.</li>
+            <li>🔹 Khan Academy. <a href="https://es.khanacademy.org/math/geometry/hs-geo-circles" target="_blank" class="text-cyan-600 dark:text-cyan-400 hover:underline">Geometría: Círculos y Circunferencias</a>.</li>
+            <li>🔹 GeoGebra. <a href="https://www.geogebra.org/m/HVHRgPMz" target="_blank" class="text-cyan-600 dark:text-cyan-400 hover:underline">Elementos de la Circunferencia</a>.</li>
+            <li>🔹 Weisstein, E. W. <a href="https://mathworld.wolfram.com/Circle.html" target="_blank" class="text-cyan-600 dark:text-cyan-400 hover:underline">"Circle" en MathWorld</a>.</li>
+          </ul>
+        </aside>
+      </div>
     </main>
 
-    <!-- Scripts -->
-    <script src="circunferencia.js"></script>
-    
-    <script>
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        const htmlElement = document.documentElement;
-        
-        const darkMode = localStorage.getItem('darkMode');
-        if (darkMode === 'enabled') {
-            htmlElement.classList.add('dark');
-        }
-        
-        darkModeToggle.addEventListener('click', () => {
-            htmlElement.classList.toggle('dark');
-            
-            if (htmlElement.classList.contains('dark')) {
-                localStorage.setItem('darkMode', 'enabled');
-            } else {
-                localStorage.setItem('darkMode', 'disabled');
-            }
-        });
-    </script>
-</body>
+    <!-- 1. Modelos -->
+    <script src="../../core/models/Topic.js"></script>
+    <script src="../../core/models/Exercise.js"></script>
+    <script src="../../core/models/Progress.js"></script>
 
+    <!-- 2. Servicios -->
+    <script src="../../core/services/StorageService.js"></script>
+    <script src="../../core/services/NotificationService.js"></script>
+    <script src="../../core/services/AnimationService.js"></script>
+
+    <!-- 3. Controladores -->
+    <script src="../../core/controllers/ExerciseController.js"></script>
+    <script src="../../core/controllers/ProgressController.js"></script>
+
+    <!-- 4. Clase Base -->
+    <script src="../../core/BaseTopicModule.js"></script>
+
+    <!-- Script específico de la página -->
+    <script src="circunferencia.js"></script>
+
+    <!-- Script del modo oscuro y animaciones -->
+    <script>
+      // ---- Funcionalidad elementos de circunferencia ----
+      function hideAll() {
+        document.querySelectorAll("line, text, circle, path").forEach((el) => {
+          if (el.id.includes("centro") || el.id.includes("radio") || el.id.includes("diametro") || 
+              el.id.includes("cuerda") || el.id.includes("arco") || el.id.includes("secante") || 
+              el.id.includes("tangente") || el.id.includes("sector")) {
+            if (!el.id.includes("circle")) {
+              el.style.display = "none";
+            }
+          }
+        });
+      }
+
+      function showElement(num) {
+        hideAll();
+        
+        switch(num) {
+          case 1: // Centro
+            document.getElementById("centro1").style.display = "block";
+            document.getElementById("centroLabel1").style.display = "block";
+            break;
+          case 2: // Radio
+            document.getElementById("radio2").style.display = "block";
+            document.getElementById("radioPoint2").style.display = "block";
+            document.getElementById("radioLabel2").style.display = "block";
+            break;
+          case 3: // Diámetro
+            document.getElementById("diametro3").style.display = "block";
+            document.getElementById("diametroPoint3a").style.display = "block";
+            document.getElementById("diametroPoint3b").style.display = "block";
+            document.getElementById("diametroLabel3").style.display = "block";
+            break;
+          case 4: // Cuerda
+            document.getElementById("cuerda4").style.display = "block";
+            document.getElementById("cuerdaPoint4a").style.display = "block";
+            document.getElementById("cuerdaPoint4b").style.display = "block";
+            document.getElementById("cuerdaLabel4").style.display = "block";
+            break;
+          case 5: // Arco
+            document.getElementById("arco5").style.display = "block";
+            document.getElementById("arcoPoint5a").style.display = "block";
+            document.getElementById("arcoPoint5b").style.display = "block";
+            document.getElementById("arcoLabel5").style.display = "block";
+            break;
+          case 6: // Secante
+            document.getElementById("secante6").style.display = "block";
+            document.getElementById("secantePoint6a").style.display = "block";
+            document.getElementById("secantePoint6b").style.display = "block";
+            document.getElementById("secanteLabel6").style.display = "block";
+            break;
+          case 7: // Tangente
+            document.getElementById("tangente7").style.display = "block";
+            document.getElementById("tangentePoint7").style.display = "block";
+            document.getElementById("tangenteRadio7").style.display = "block";
+            document.getElementById("tangenteLabel7").style.display = "block";
+            break;
+          case 8: // Sector
+            document.getElementById("sector8").style.display = "block";
+            document.getElementById("sectorLabel8").style.display = "block";
+            break;
+        }
+      }
+
+      document.getElementById("btnCentro").addEventListener("click", () => showElement(1));
+      document.getElementById("btnRadio").addEventListener("click", () => showElement(2));
+      document.getElementById("btnDiametro").addEventListener("click", () => showElement(3));
+      document.getElementById("btnCuerda").addEventListener("click", () => showElement(4));
+      document.getElementById("btnArco").addEventListener("click", () => showElement(5));
+      document.getElementById("btnSecante").addEventListener("click", () => showElement(6));
+      document.getElementById("btnTangente").addEventListener("click", () => showElement(7));
+      document.getElementById("btnSector").addEventListener("click", () => showElement(8));
+      
+      const darkModeToggle = document.getElementById("darkModeToggle");
+      const htmlElement = document.documentElement;
+
+      const darkMode = localStorage.getItem("darkMode");
+      if (darkMode === "enabled") {
+        htmlElement.classList.add("dark");
+      }
+
+      darkModeToggle.addEventListener("click", () => {
+        htmlElement.classList.toggle("dark");
+        const isDarkMode = htmlElement.classList.contains("dark");
+        localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
+      });
+    </script>
+  </body>
 </html>
